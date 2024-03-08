@@ -1,7 +1,7 @@
-import { Order } from "./screens/order";
+import { Menu } from "./screens/menu";
 
 function App() {
-  return <Order />;
+  return <Menu />;
 }
 
 export { App };
