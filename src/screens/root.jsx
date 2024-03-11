@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet } from 'react-router-dom';
 
 function Root() {
   return (
@@ -21,7 +21,7 @@ function Root() {
           </ul>
         </nav>
       </header>
-      <div className="container grid grid-cols-12">
+      <div className="container grid grid-cols-12 gap-x-12">
         <Outlet />
       </div>
       <footer className="bg-slate-800 text-slate-400">
