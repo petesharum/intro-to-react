@@ -5,7 +5,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "concurrently -n server,vite -c green.inverse,magenta.inverse \"npm run server\" \"npm run dev\"",
+    "start": "concurrently -k -n server,vite -c \"#E1DF4C,#63CD90\" \"npm run server\" \"npm run dev\"",
     "dev": "vite",
     "server": "nodemon src/api/server.js",
     "build": "tsc && vite build",
