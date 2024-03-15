@@ -1,7 +1,7 @@
 export default {
   categories: [
     {
-      categoryID: '1',
+      categoryId: '1',
       name: 'Pizza',
       description: 'Delicious pizza made with fresh ingredients',
       image: {
@@ -10,7 +10,7 @@ export default {
       },
     },
     {
-      categoryID: '2',
+      categoryId: '2',
       name: 'Burgers',
       description: 'Juicy burgers made with 100% beef',
       image: {
@@ -19,7 +19,7 @@ export default {
       },
     },
     {
-      categoryID: '3',
+      categoryId: '3',
       name: 'Tacos',
       description: 'Spicy tacos made with authentic Mexican recipes',
       image: {
@@ -28,7 +28,7 @@ export default {
       },
     },
     {
-      categoryID: '4',
+      categoryId: '4',
       name: 'Fried Chicken',
       description:
         'Crispy fried chicken made with secret spices and a side of your choice',
@@ -39,7 +39,7 @@ export default {
       },
     },
     {
-      categoryID: '5',
+      categoryId: '5',
       name: 'Beverages',
       description: 'Refreshing beverages to quench your thirst',
       image: {
@@ -50,7 +50,7 @@ export default {
   ],
   items: [
     {
-      productID: '101',
+      productId: '101',
       categories: ['1'],
       name: 'Pepperoni Pizza',
       description: 'Regular pizza with pepperoni and mozzarella',
@@ -58,7 +58,7 @@ export default {
       quantityInStock: 20,
       customizableOptions: [
         {
-          optionID: '1',
+          optionId: '1',
           name: 'Toppings',
           limit: 0,
           choices: [
@@ -73,7 +73,7 @@ export default {
       },
     },
     {
-      productID: '102',
+      productId: '102',
       categories: ['2'],
       name: 'Cheeseburger',
       description: 'Classic cheeseburger with lettuce, tomato, and pickles',
@@ -81,7 +81,7 @@ export default {
       quantityInStock: 30,
       customizableOptions: [
         {
-          optionID: '1',
+          optionId: '1',
           name: 'Toppings',
           limit: 0,
           choices: [
@@ -91,7 +91,7 @@ export default {
           ],
         },
         {
-          optionID: '2',
+          optionId: '2',
           name: 'Size',
           limit: 1,
           choices: [
@@ -106,7 +106,7 @@ export default {
       },
     },
     {
-      productID: '103',
+      productId: '103',
       categories: ['3'],
       name: 'Cruncy Tacos',
       description: 'Cruncy beef tacos with salsa and guacamole',
@@ -114,7 +114,7 @@ export default {
       quantityInStock: 25,
       customizableOptions: [
         {
-          optionID: '1',
+          optionId: '1',
           name: 'Toppings',
           limit: 0,
           choices: [
@@ -130,7 +130,7 @@ export default {
       },
     },
     {
-      productID: '104',
+      productId: '104',
       categories: ['4'],
       name: 'Fried Chicken',
       description: 'Crispy fried chicken with your choice of sides',
@@ -138,7 +138,7 @@ export default {
       quantityInStock: 15,
       customizableOptions: [
         {
-          optionID: '1',
+          optionId: '1',
           name: 'Sides',
           limit: 2,
           choices: [
@@ -155,7 +155,7 @@ export default {
       },
     },
     {
-      productID: '105',
+      productId: '105',
       categories: ['5'],
       name: 'Soda',
       description: 'Refreshing carbonated beverage',
@@ -163,7 +163,7 @@ export default {
       quantityInStock: 50,
       customizableOptions: [
         {
-          optionID: '1',
+          optionId: '1',
           name: 'Flavor',
           limit: 1,
           choices: [
@@ -173,7 +173,7 @@ export default {
           ],
         },
         {
-          optionID: '2',
+          optionId: '2',
           name: 'Size',
           limit: 1,
           choices: [

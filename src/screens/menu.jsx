@@ -46,8 +46,8 @@ function Menu() {
             <Link to=".">All</Link>
           </li>
           {categories.map((category) => (
-            <li key={category.categoryID}>
-              <Link to={`?category=${category.categoryID}`}>
+            <li key={category.categoryId}>
+              <Link to={`?category=${category.categoryId}`}>
                 {category.name}
               </Link>
             </li>
@@ -58,7 +58,7 @@ function Menu() {
         <h1>Menu</h1>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {items.map((item) => (
-            <Link to={item.productID} key={item.productID}>
+            <Link to={item.productId} key={item.productId}>
               {item.name}
             </Link>
           ))}

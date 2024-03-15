@@ -25,7 +25,7 @@ app.get('/items', (req, res) => {
 });
 
 app.get('/items/:id', (req, res) => {
-  const item = menuData.items.find((item) => item.productID === req.params.id);
+  const item = menuData.items.find((item) => item.productId === req.params.id);
 
   if (item) {
     res.send(item);
@@ -36,6 +36,12 @@ app.get('/items/:id', (req, res) => {
 
 app.get('/categories', (req, res) => {
   res.send(menuData.categories);
+});
+
+app.post('/order', (req, res) => {
+  const { items, customerInfo } = req.body;
+  console.log('Order received:', { items, customerInfo });
+  res.send('Order placed');
 });
 
 app.listen(port, () => console.log(`*:${port} - Listening on port ${port}\n`));

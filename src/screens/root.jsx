@@ -12,9 +12,6 @@ function Root() {
             <li>
               <Link to="menu">Menu</Link>
             </li>
-            <li>
-              <Link to="checkout">Checkout</Link>
-            </li>
             <li className="ml-auto">
               <Link to="cart">Cart</Link>
             </li>

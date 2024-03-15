@@ -7,7 +7,7 @@
   "scripts": {
     "start": "concurrently -k -n server,vite -c \"#E1DF4C,#63CD90\" \"npm run server\" \"npm run dev\"",
     "dev": "vite",
-    "server": "nodemon src/api/server.js",
+    "server": "nodemon --watch src/api src/api/server.js",
     "build": "tsc && vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
