@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Title } from '@/components/ui/title';
 import { useCart } from '@/lib/cart/use-cart';
 import { formatMoney } from '@/lib/format-money';
 
@@ -27,7 +28,7 @@ function Cart() {
 
   return (
     <div>
-      <h1>My Cart</h1>
+      <Title>My Cart</Title>
       <ul>
         {items.map(({ product, quantity }) => (
           <li key={product.productId}>

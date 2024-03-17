@@ -2,6 +2,7 @@
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Title } from '@/components/ui/title';
 import { useCart } from '@/lib/cart/use-cart';
 import { formatMoney } from '@/lib/format-money';
 
@@ -23,7 +24,7 @@ function Checkout() {
 
   return (
     <div>
-      <h1>Checkout</h1>
+      <Title>Checkout</Title>
       <form onSubmit={handleSubmit}>
         <Label htmlFor="name-field">Name</Label>
         <Input type="text" id="name-field" />
