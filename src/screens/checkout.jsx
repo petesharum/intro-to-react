@@ -1,15 +1,12 @@
+// TODO: style
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useCart } from '@/data/cart/use-cart';
+import { useCart } from '@/lib/cart/use-cart';
+import { formatMoney } from '@/lib/format-money';
 
 function Checkout() {
-  const { items } = useCart();
-  const priceTotal = items.reduce(
-    (total, { product, quantity }) => total + product.price * quantity,
-    0,
-  );
-  const quantityTotal = items.reduce((total, item) => total + item.quantity, 0);
+  const { items, totalPrice, itemCount } = useCart();
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -48,17 +45,17 @@ function Checkout() {
         <Input type="text" id="cvv-field" />
         <div>
           <h2>
-            {quantityTotal} {quantityTotal === 1 ? 'Item' : 'Items'}
+            {itemCount} {itemCount === 1 ? 'Item' : 'Items'}
           </h2>
           <ul>
             {items.map(({ product, quantity }) => (
               <li key={product.productId}>
-                {product.name} ✕ {quantity} {product.price}
+                {product.name} ✕ {quantity} {formatMoney(product.price)}
               </li>
             ))}
           </ul>
-          <p>Total: {priceTotal}</p>
-          <Button>Place Order {priceTotal}</Button>
+          <p>Total: {formatMoney(totalPrice)}</p>
+          <Button>Place Order {formatMoney(totalPrice)}</Button>
         </div>
       </form>
     </div>

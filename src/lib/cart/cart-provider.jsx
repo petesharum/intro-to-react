@@ -5,9 +5,24 @@ import { CartContext } from './cart-context';
 function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
 
+  const totalPrice = useMemo(
+    () =>
+      cartItems.reduce(
+        (total, { product, quantity }) => total + product.price * quantity,
+        0,
+      ),
+    [cartItems],
+  );
+  const itemCount = useMemo(
+    () => cartItems.reduce((total, item) => total + item.quantity, 0),
+    [cartItems],
+  );
+
   const cart = useMemo(
     () => ({
       items: cartItems,
+      totalPrice,
+      itemCount,
 
       addToCart: (item) => {
         setCartItems((prevItems) => {
@@ -47,7 +62,7 @@ function CartProvider({ children }) {
         );
       },
     }),
-    [cartItems],
+    [cartItems, totalPrice, itemCount],
   );
 
   return <CartContext.Provider value={cart}>{children}</CartContext.Provider>;

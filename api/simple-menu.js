@@ -6,7 +6,7 @@ export default {
       description: 'Delicious pizza made with fresh ingredients',
       image: {
         url: 'pizza.jpg',
-        altText: 'Delicious pizza made with fresh ingredients',
+        alt: 'Delicious pizza made with fresh ingredients',
       },
     },
     {
@@ -15,7 +15,7 @@ export default {
       description: 'Juicy burgers made with 100% beef',
       image: {
         url: 'burger.jpg',
-        altText: 'Juicy burgers made with 100% beef',
+        alt: 'Juicy burgers made with 100% beef',
       },
     },
     {
@@ -24,7 +24,7 @@ export default {
       description: 'Spicy tacos made with authentic Mexican recipes',
       image: {
         url: 'tacos.jpg',
-        altText: 'Spicy tacos made with authentic Mexican recipes',
+        alt: 'Spicy tacos made with authentic Mexican recipes',
       },
     },
     {
@@ -34,8 +34,7 @@ export default {
         'Crispy fried chicken made with secret spices and a side of your choice',
       image: {
         url: 'fried_chicken.jpg',
-        altText:
-          'Crispy fried chicken made with secret spices and a side of your choice',
+        alt: 'Crispy fried chicken made with secret spices and a side of your choice',
       },
     },
     {
@@ -44,7 +43,7 @@ export default {
       description: 'Refreshing beverages to quench your thirst',
       image: {
         url: 'beverages.jpg',
-        altText: 'Refreshing beverages to quench your thirst',
+        alt: 'Refreshing beverages to quench your thirst',
       },
     },
   ],
@@ -54,7 +53,7 @@ export default {
       categories: ['1'],
       name: 'Pepperoni Pizza',
       description: 'Regular pizza with pepperoni and mozzarella',
-      price: 9.99,
+      price: 999,
       quantityInStock: 20,
       customizableOptions: [
         {
@@ -62,14 +61,14 @@ export default {
           name: 'Toppings',
           limit: 0,
           choices: [
-            { name: 'Extra Cheese', price: 1.5 },
-            { name: 'Extra Pepperoni', price: 2.0 },
+            { name: 'Extra Cheese', price: 150 },
+            { name: 'Extra Pepperoni', price: 200 },
           ],
         },
       ],
       image: {
-        url: 'pepperoni_pizza.jpg',
-        altText: 'Regular pizza with pepperoni and mozzarella',
+        url: 'pepperoni-pizza.jpeg',
+        alt: 'Regular pizza with pepperoni and mozzarella',
       },
     },
     {
@@ -77,7 +76,7 @@ export default {
       categories: ['2'],
       name: 'Cheeseburger',
       description: 'Classic cheeseburger with lettuce, tomato, and pickles',
-      price: 6.99,
+      price: 699,
       quantityInStock: 30,
       customizableOptions: [
         {
@@ -85,24 +84,24 @@ export default {
           name: 'Toppings',
           limit: 0,
           choices: [
-            { name: 'Bacon', price: 1.5 },
-            { name: 'Onions', price: 0.75 },
-            { name: 'Jalapeños', price: 1.0 },
+            { name: 'Bacon', price: 150 },
+            { name: 'Onions', price: 75 },
+            { name: 'Jalapeños', price: 100 },
           ],
         },
         {
           optionId: '2',
-          name: 'Size',
+          name: 'Extras',
           limit: 1,
           choices: [
-            { name: 'Regular', price: 0.0 },
-            { name: 'Large', price: 1.5 },
+            { name: 'Regular', price: 0 },
+            { name: 'Double Meat', price: 150 },
           ],
         },
       ],
       image: {
-        url: 'cheeseburger.jpg',
-        altText: 'Cheeseburger with lettuce, tomato, and pickles',
+        url: 'cheeseburger.jpeg',
+        alt: 'Cheeseburger with lettuce, tomato, and pickles',
       },
     },
     {
@@ -110,7 +109,7 @@ export default {
       categories: ['3'],
       name: 'Cruncy Tacos',
       description: 'Cruncy beef tacos with salsa and guacamole',
-      price: 8.5,
+      price: 850,
       quantityInStock: 25,
       customizableOptions: [
         {
@@ -118,15 +117,15 @@ export default {
           name: 'Toppings',
           limit: 0,
           choices: [
-            { name: 'Sour Cream', price: 1.0 },
-            { name: 'Cilantro', price: 0.5 },
-            { name: 'Lime', price: 0.25 },
+            { name: 'Sour Cream', price: 100 },
+            { name: 'Cilantro', price: 50 },
+            { name: 'Lime', price: 25 },
           ],
         },
       ],
       image: {
-        url: 'chicken_tacos.jpg',
-        altText: 'Spicy chicken tacos with salsa and guacamole',
+        url: 'tacos-two.jpeg',
+        alt: 'Spicy chicken tacos with salsa and guacamole',
       },
     },
     {
@@ -134,7 +133,7 @@ export default {
       categories: ['4'],
       name: 'Fried Chicken',
       description: 'Crispy fried chicken with your choice of sides',
-      price: 10.99,
+      price: 1099,
       quantityInStock: 15,
       customizableOptions: [
         {
@@ -142,16 +141,16 @@ export default {
           name: 'Sides',
           limit: 2,
           choices: [
-            { name: 'Coleslaw', price: 2.0 },
-            { name: 'Fries', price: 2.0 },
-            { name: 'Mashed Potatoes', price: 2.5 },
-            { name: 'Mac and Cheese', price: 3.0 },
+            { name: 'Coleslaw', price: 200 },
+            { name: 'Fries', price: 200 },
+            { name: 'Mashed Potatoes', price: 250 },
+            { name: 'Mac and Cheese', price: 300 },
           ],
         },
       ],
       image: {
-        url: 'fried_chicken.jpg',
-        altText: 'Crispy fried chicken with your choice of sides',
+        url: 'fried-chicken.jpeg',
+        alt: 'Crispy fried chicken with your choice of sides',
       },
     },
     {
@@ -159,7 +158,7 @@ export default {
       categories: ['5'],
       name: 'Soda',
       description: 'Refreshing carbonated beverage',
-      price: 1.99,
+      price: 199,
       quantityInStock: 50,
       customizableOptions: [
         {
@@ -167,9 +166,9 @@ export default {
           name: 'Flavor',
           limit: 1,
           choices: [
-            { name: 'Cola', price: 0.0 },
-            { name: 'Lemon-Lime', price: 0.0 },
-            { name: 'Orange', price: 0.0 },
+            { name: 'Cola', price: 0 },
+            { name: 'Lemon-Lime', price: 0 },
+            { name: 'Orange', price: 0 },
           ],
         },
         {
@@ -177,15 +176,15 @@ export default {
           name: 'Size',
           limit: 1,
           choices: [
-            { name: 'Small', price: 0.0 },
-            { name: 'Medium', price: 0.5 },
-            { name: 'Large', price: 1.0 },
+            { name: 'Small', price: 0 },
+            { name: 'Medium', price: 50 },
+            { name: 'Large', price: 100 },
           ],
         },
       ],
       image: {
-        url: 'soda.jpg',
-        altText: 'Refreshing soda in various flavors and sizes',
+        url: 'soda.jpeg',
+        alt: 'Refreshing soda in various flavors and sizes',
       },
     },
   ],

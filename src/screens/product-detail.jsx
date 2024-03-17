@@ -1,10 +1,23 @@
+// TODO: style
+// TODO: options if time
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useCart } from '@/data/cart/use-cart';
+import { useCart } from '@/lib/cart/use-cart';
+import { formatMoney } from '@/lib/format-money';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Title } from '@/components/ui/title';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
 
 function ProductDetail() {
   const [product, setProduct] = useState({});
@@ -32,41 +45,69 @@ function ProductDetail() {
 
   return (
     <>
-      <div className="col-span-6 col-start-2">
-        <ol className="flex gap-2">
-          <li className="flex gap-2">
-            <Link to=".." relative="path">
-              Menu
-            </Link>
-          </li>
-          <li className="flex gap-2">
-            <span>&gt;</span>
-            <Link to="#" aria-current="page">
+      <Breadcrumb className="col-span-10 col-start-2">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild>
+              <Link to=".." relative="path">
+                Menu
+              </Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage className="font-bold">
               {product.name}
-            </Link>
-          </li>
-        </ol>
-        <ul>
-          <li>image</li>
-          <li>options</li>
-        </ul>
+            </BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+      <div className="col-span-6 col-start-2">
+        <div className="flex flex-col gap-4">
+          <img src={`/images/${product.image?.url}`} alt={product.image?.alt} />
+          <div>
+            {product.customizableOptions?.map((option) => (
+              <>
+                <div key={option.optionId}>{option.name}</div>
+                {option.choices.map((choice) => (
+                  <div key={choice.name}>
+                    {choice.name} {formatMoney(choice.price)}
+                  </div>
+                ))}
+              </>
+            ))}
+          </div>
+        </div>
       </div>
-      <div className="col-span-3">
-        <h1>{product.name}</h1>
-        <p>{product.description}</p>
-        <form onSubmit={handleSubmit}>
-          <Label htmlFor="quantity-field">Quantity</Label>
-          <Input
-            name="quantity"
-            onChange={handleQuantityChange}
-            id="quantity-field"
-            type="number"
-            step={1}
-            min={1}
-            value={quantity}
-          />
-          <Button type="submit">Add to Cart {product.price}</Button>
-        </form>
+      <div className="col-span-4 col-start-8">
+        <Card className="sticky top-32 shadow-xl">
+          <CardHeader className="gap-8">
+            <Title>{product.name}</Title>
+            <p>{product.description}</p>
+          </CardHeader>
+          <CardContent>
+            <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
+              <div className="flex items-center gap-4">
+                <Label htmlFor="quantity-field">Quantity</Label>
+                <Input
+                  name="quantity"
+                  onChange={handleQuantityChange}
+                  id="quantity-field"
+                  type="number"
+                  step={1}
+                  min={1}
+                  value={quantity}
+                />
+              </div>
+              <Button
+                className="bg-red-600 py-4 text-base font-bold hover:bg-red-700"
+                type="submit"
+              >
+                Add to Cart {formatMoney(product.price)}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
       </div>
     </>
   );

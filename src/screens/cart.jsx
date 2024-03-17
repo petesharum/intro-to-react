@@ -1,20 +1,28 @@
+// TODO: style
+// TODO: move into a dialog?
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useCart } from '@/data/cart/use-cart';
+import { useCart } from '@/lib/cart/use-cart';
+import { formatMoney } from '@/lib/format-money';
 
 function Cart() {
-  const { items, removeFromCart, setCartQuantity } = useCart();
+  const { items, removeFromCart, setCartQuantity, totalPrice, itemCount } =
+    useCart();
   const navigate = useNavigate();
-  const priceTotal = items.reduce(
-    (total, { product, quantity }) => total + product.price * quantity,
-    0,
-  );
-  const quantityTotal = items.reduce((total, item) => total + item.quantity, 0);
 
   function handleCheckout() {
     navigate('/checkout');
+  }
+
+  if (items.length === 0) {
+    return (
+      <div>
+        <div>Uh, your cart is empty!</div>
+        <Button onClick={() => navigate('/menu')}>Start order</Button>
+      </div>
+    );
   }
 
   return (
@@ -34,8 +42,11 @@ function Cart() {
               type="number"
             />
             {' ✕ '}
-            <span>{product.price}</span>
-            <Button onClick={() => removeFromCart(product.productId)}>
+            <span>{formatMoney(product.price)}</span>
+            <Button
+              variant="link"
+              onClick={() => removeFromCart(product.productId)}
+            >
               Remove
             </Button>
           </li>
@@ -43,10 +54,12 @@ function Cart() {
       </ul>
       <div>
         <h2>
-          {quantityTotal} {quantityTotal === 1 ? 'Item' : 'Items'}
+          {itemCount} {itemCount === 1 ? 'Item' : 'Items'}
         </h2>
-        <p>Total: {priceTotal}</p>
-        <Button onClick={handleCheckout}>Checkout {priceTotal}</Button>
+        <p>Total: {formatMoney(totalPrice)}</p>
+        <Button onClick={handleCheckout}>
+          Checkout {formatMoney(totalPrice)}
+        </Button>
       </div>
     </div>
   );
