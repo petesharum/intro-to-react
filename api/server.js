@@ -3,9 +3,12 @@ import express from 'express';
 import menuData from './simple-menu.js';
 
 const app = express();
+app.use(express.json());
 const port = 1415;
 
-app.get('/items', (req, res) => {
+app.get('/items', async (req, res) => {
+  await sleep(1000);
+
   const category = req.query.category;
   let items = menuData.items;
 
@@ -24,7 +27,9 @@ app.get('/items', (req, res) => {
   res.send(items);
 });
 
-app.get('/items/:id', (req, res) => {
+app.get('/items/:id', async (req, res) => {
+  await sleep(1000);
+
   const item = menuData.items.find((item) => item.productId === req.params.id);
 
   if (item) {
@@ -34,20 +39,49 @@ app.get('/items/:id', (req, res) => {
   }
 });
 
-app.get('/categories', (req, res) => {
+app.get('/categories', async (req, res) => {
+  await sleep(1000);
+
   res.send(menuData.categories);
 });
 
-app.post('/order', (req, res) => {
-  const { items, customerInfo } = req.body;
-  console.log('Order received:', { items, customerInfo });
+app.post('/order/line-items', async (req, res) => {
+  await sleep(1000);
+
+  const items = req.body;
+  const something = items.map(({ productId, quantity }) => {
+    const match = menuData.items.find((item) => item.productId === productId);
+    return match ? { ...match, quantity } : undefined;
+  });
+
+  if (something.includes(undefined)) {
+    res.status(404).send('Item not found');
+  } else {
+    const subtotal = something.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0,
+    );
+    // Fake tax calculation of 8.25%
+    const tax = Math.round(subtotal * 0.0825);
+    res.send({ subtotal, tax, total: subtotal + tax });
+  }
+});
+
+app.post('/order', async (req, res) => {
+  await sleep(1000);
+
+  const { order, payment } = req.body;
+  console.log('Order received:', { order, payment });
   res.send('Order placed');
+  // simulate a failed order
+  // res.status(500).send('Something went wrong');
 });
 
 app.listen(port, () => console.log(`*:${port} - Listening on port ${port}\n`));
 
-// function sleep(ms) {
-//   return new Promise((resolve) => {
-//     setTimeout(resolve, ms);
-//   });
-// }
+// Simulate a delay in the server
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
