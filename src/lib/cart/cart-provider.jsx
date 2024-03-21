@@ -1,27 +1,43 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 
 import { CartContext } from './cart-context';
 
 function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
+  const [lineItems, setLineItems] = useState({});
 
-  const totalPrice = useMemo(
-    () =>
-      cartItems.reduce(
-        (total, { product, quantity }) => total + product.price * quantity,
-        0,
-      ),
-    [cartItems],
-  );
   const itemCount = useMemo(
     () => cartItems.reduce((total, item) => total + item.quantity, 0),
     [cartItems],
   );
 
+  useEffect(() => {
+    if (cartItems.length === 0) {
+      setLineItems({});
+      return;
+    }
+
+    const items = cartItems.map(({ product, quantity }) => ({
+      productId: product.productId,
+      quantity,
+    }));
+    fetch('/api/order/line-items', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(items),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setLineItems(data);
+      });
+  }, [cartItems]);
+
   const cart = useMemo(
     () => ({
       items: cartItems,
-      totalPrice,
+      ...lineItems,
       itemCount,
 
       addToCart: (item) => {
@@ -61,8 +77,12 @@ function CartProvider({ children }) {
           ),
         );
       },
+
+      resetCart: () => {
+        setCartItems([]);
+      },
     }),
-    [cartItems, totalPrice, itemCount],
+    [cartItems, lineItems, itemCount],
   );
 
   return <CartContext.Provider value={cart}>{children}</CartContext.Provider>;
