@@ -1,15 +1,6 @@
-// TODO: style
-// TODO: options if time
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { useCart } from '@/lib/cart/use-cart';
-import { formatMoney } from '@/lib/format-money';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Title } from '@/components/ui/title';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -18,6 +9,13 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Title } from '@/components/ui/title';
+import { useCart } from '@/lib/cart/use-cart';
+import { formatMoney } from '@/lib/format-money';
 
 function ProductDetail() {
   const [product, setProduct] = useState({});
@@ -65,18 +63,6 @@ function ProductDetail() {
       <div className="col-span-6 col-start-2">
         <div className="flex flex-col gap-4">
           <img src={`/images/${product.image?.url}`} alt={product.image?.alt} />
-          <div>
-            {product.customizableOptions?.map((option) => (
-              <>
-                <div key={option.optionId}>{option.name}</div>
-                {option.choices.map((choice) => (
-                  <div key={choice.name}>
-                    {choice.name} {formatMoney(choice.price)}
-                  </div>
-                ))}
-              </>
-            ))}
-          </div>
         </div>
       </div>
       <div className="col-span-4 col-start-8">
@@ -103,7 +89,7 @@ function ProductDetail() {
                 className="bg-red-600 py-4 text-base font-bold hover:bg-red-700"
                 type="submit"
               >
-                Add to Cart {formatMoney(product.price)}
+                Add to Cart {formatMoney(quantity * product.price)}
               </Button>
             </form>
           </CardContent>
