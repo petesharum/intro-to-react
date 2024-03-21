@@ -1,28 +1,15 @@
 // TODO: style
-import { useEffect, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 import { Input } from '@/components/ui/input';
 import { formatMoney } from '@/lib/format-money';
-import { useAsync } from '@/lib/use-async';
 import { Title } from '@/components/ui/title';
 
 function Menu() {
   const inputRef = useRef(null);
-  const {
-    data: categories,
-    run: categoryRun,
-    isLoading: isCategoriesLoading,
-  } = useAsync({
-    data: [],
-  });
-  // const [categories, setCategories] = useState([]);
-  const {
-    data: items,
-    run: itemRun,
-    isLoading: isItemsLoading,
-  } = useAsync({ data: [] });
-  // const [items, setItems] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [items, setItems] = useState([]);
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
@@ -32,12 +19,16 @@ function Menu() {
       url.searchParams.append(...entry);
     }
 
-    itemRun(fetch(url).then((res) => res.json()));
-  }, [itemRun, searchParams]);
+    fetch(url)
+      .then((res) => res.json())
+      .then(setItems);
+  }, [searchParams]);
 
   useEffect(() => {
-    categoryRun(fetch('api/categories').then((res) => res.json()));
-  }, [categoryRun]);
+    fetch('api/categories')
+      .then((res) => res.json())
+      .then(setCategories);
+  }, []);
 
   useEffect(() => {
     if (!inputRef.current) return;
@@ -61,29 +52,23 @@ function Menu() {
             defaultValue={searchParams.get('q')}
           />
         </form>
-        {isCategoriesLoading ? (
-          <div>Loading...</div>
-        ) : (
-          <ul className="sticky top-0">
-            <li key="all">
-              <Link to=".">All</Link>
+        <ul className="sticky top-0">
+          <li key="all">
+            <Link to=".">All</Link>
+          </li>
+          {categories.map((category) => (
+            <li key={category.categoryId}>
+              <Link to={`?category=${category.categoryId}`}>
+                {category.name}
+              </Link>
             </li>
-            {categories.map((category) => (
-              <li key={category.categoryId}>
-                <Link to={`?category=${category.categoryId}`}>
-                  {category.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
+          ))}
+        </ul>
       </div>
       <main className="col-span-10 flex flex-col gap-8">
         <Title>Menu</Title>
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-          {isItemsLoading ? (
-            <div>Loading...</div>
-          ) : items.length === 0 ? (
+          {items.length === 0 ? (
             <div>No results</div>
           ) : (
             items.map((item) => (
