@@ -2,8 +2,10 @@
 // TODO: pull into a layout?
 // TODO: pull nav out into a component?
 // TODO: pull cart into a component?
-import { useCart } from '@/lib/cart/use-cart';
 import { Link, Outlet } from 'react-router-dom';
+
+import { Toaster } from '@/components/ui/sonner';
+import { useCart } from '@/lib/cart/use-cart';
 
 function CartIcon() {
   return (
@@ -38,7 +40,7 @@ function Layout() {
               </Link>
             </li>
             <li className="ml-auto">
-              <Link className="relative" to="cart">
+              <Link className="relative inline-block" to="cart">
                 <CartIcon />{' '}
                 {itemCount > 0 && (
                   <span className="absolute right-[-50%] top-[-30%] grid h-6 w-6 place-content-center rounded-full border-[2px] border-white bg-red-600 text-sm font-bold tracking-tighter text-white">
@@ -58,6 +60,7 @@ function Layout() {
           Copyright © Yummy! Foods 2024
         </div>
       </footer>
+      <Toaster />
     </div>
   );
 }
