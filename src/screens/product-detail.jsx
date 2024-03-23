@@ -33,8 +33,9 @@ function ProductDetail() {
   const handleQuantityChange = (event) => {
     setQuantity(+event.target.value);
   };
+
   useEffect(() => {
-    fetch(`/api/items/${id}`)
+    fetch(`/api/menu/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);

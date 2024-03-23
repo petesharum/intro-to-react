@@ -1,10 +1,34 @@
 import { useState, useMemo, useEffect } from 'react';
 
 import { CartContext } from './cart-context';
+import { useMutation } from '@tanstack/react-query';
+
+async function generateLineItems(cartItems) {
+  if (cartItems.length === 0) {
+    return {};
+  }
+
+  const items = cartItems.map(({ product, quantity }) => ({
+    productId: product.productId,
+    quantity,
+  }));
+
+  const response = await fetch('/api/order/line-items', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(items),
+  });
+
+  return response.json();
+}
 
 function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
-  const [lineItems, setLineItems] = useState({});
+  const { data: lineItems, mutate: fetchLineItems } = useMutation({
+    mutationFn: generateLineItems,
+  });
 
   const itemCount = useMemo(
     () => cartItems.reduce((total, item) => total + item.quantity, 0),
@@ -12,27 +36,8 @@ function CartProvider({ children }) {
   );
 
   useEffect(() => {
-    if (cartItems.length === 0) {
-      setLineItems({});
-      return;
-    }
-
-    const items = cartItems.map(({ product, quantity }) => ({
-      productId: product.productId,
-      quantity,
-    }));
-    fetch('/api/order/line-items', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(items),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setLineItems(data);
-      });
-  }, [cartItems]);
+    fetchLineItems(cartItems);
+  }, [fetchLineItems, cartItems]);
 
   const cart = useMemo(
     () => ({
@@ -59,7 +64,6 @@ function CartProvider({ children }) {
 
           return [...prevItems, item];
         });
-        console.log('Item added to cart:', item);
       },
 
       removeFromCart: (productId) => {

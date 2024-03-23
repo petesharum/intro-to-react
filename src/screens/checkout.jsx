@@ -1,6 +1,8 @@
 // TODO: style
+import { useEffect } from 'react';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
 
 import {
   Card,
@@ -27,41 +29,41 @@ function Field({ label, id: idProp, name, type = 'text' }) {
   );
 }
 
+async function submitOrder(event, items) {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+
+  // mutation
+  return fetch('/api/order', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      order: items,
+      payment: Object.fromEntries(formData),
+    }),
+  });
+}
+
 function Checkout() {
   const { items, subtotal, tax, total, itemCount, resetCart } = useCart();
   const navigate = useNavigate();
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-
-    try {
-      const response = await fetch('/api/order', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          order: items,
-          payment: Object.fromEntries(formData),
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Something went wrong');
-      }
-
+  const { mutate: handleSubmit, isPending } = useMutation({
+    mutationFn: async (event) => submitOrder(event, items),
+    onError: (error) => toast.error(error.message),
+    onSuccess: () => {
       resetCart();
+      navigate('/menu');
+      toast.success('Order placed successfully');
+    },
+  });
 
-      toast.success('Order placed successfully', {
-        onAutoClose() {
-          navigate('/menu');
-        },
-      });
-    } catch (error) {
-      toast.error(error.message);
+  useEffect(() => {
+    if (items.length === 0 && !isPending) {
+      navigate('/cart');
     }
-  }
+  }, [items, navigate, isPending]);
 
   return (
     <>

@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 const port = 1415;
 
-app.get('/items', async (req, res) => {
+app.get('/menu', async (req, res) => {
   await sleep(1000);
 
   const category = req.query.category;
@@ -27,7 +27,13 @@ app.get('/items', async (req, res) => {
   res.send(items);
 });
 
-app.get('/items/:id', async (req, res) => {
+app.get('/menu/categories', async (req, res) => {
+  await sleep(1000);
+
+  res.send(menuData.categories);
+});
+
+app.get('/menu/:id', async (req, res) => {
   await sleep(1000);
 
   const item = menuData.items.find((item) => item.productId === req.params.id);
@@ -39,25 +45,18 @@ app.get('/items/:id', async (req, res) => {
   }
 });
 
-app.get('/categories', async (req, res) => {
-  await sleep(1000);
-
-  res.send(menuData.categories);
-});
-
 app.post('/order/line-items', async (req, res) => {
   await sleep(1000);
 
-  const items = req.body;
-  const something = items.map(({ productId, quantity }) => {
+  const orderItems = req.body.map(({ productId, quantity }) => {
     const match = menuData.items.find((item) => item.productId === productId);
     return match ? { ...match, quantity } : undefined;
   });
 
-  if (something.includes(undefined)) {
+  if (orderItems.includes(undefined)) {
     res.status(404).send('Item not found');
   } else {
-    const subtotal = something.reduce(
+    const subtotal = orderItems.reduce(
       (sum, item) => sum + item.price * item.quantity,
       0,
     );
@@ -71,8 +70,10 @@ app.post('/order', async (req, res) => {
   await sleep(1000);
 
   const { order, payment } = req.body;
+
   console.log('Order received:', { order, payment });
   res.send('Order placed');
+
   // simulate a failed order
   // res.status(500).send('Something went wrong');
 });
