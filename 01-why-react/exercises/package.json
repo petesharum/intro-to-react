@@ -1,0 +1,13 @@
+{
+  "name": "week-1",
+  "version": "0.0.0",
+  "description": "Week 1 of Intro to React",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx serve .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
