@@ -6,15 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yummy!</title>
 
-  <!-- 👋 Replace me with the React scripts -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
 </head>
 
 <body>
-
-  <!-- 👋 Replace me with the root element -->
-
+  <div id="root"></div>
   <script type="module">
-    // 👋 Put the JavaScript here
+    const rootElement = document.getElementById('root');
+    const root = ReactDOM.createRoot(rootElement);
+
+    root.render(React.createElement('h1', null, 'Hello, world!'));
   </script>
 </body>
 
