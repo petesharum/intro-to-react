@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
 import {
   Breadcrumb,
@@ -10,23 +11,37 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Title } from '@/components/ui/title';
 import { useCart } from '@/lib/cart/use-cart';
 import { formatMoney } from '@/lib/format-money';
 
+async function fetchProduct(id) {
+  const response = await fetch(`/api/menu/${id}`);
+
+  return response.json();
+}
+
 function ProductDetail() {
-  const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
+  const { data: product } = useQuery({
+    queryKey: ['product', id],
+    queryFn: () => fetchProduct(id),
+  });
   const { addToCart } = useCart();
   const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
-    addToCart({ product: product, quantity });
+    addToCart({ product, quantity });
     navigate('/menu');
   }
 
@@ -34,13 +49,9 @@ function ProductDetail() {
     setQuantity(+event.target.value);
   };
 
-  useEffect(() => {
-    fetch(`/api/menu/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setProduct(data);
-      });
-  }, [id]);
+  if (!product) {
+    return 'Loading...';
+  }
 
   return (
     <>
@@ -67,33 +78,33 @@ function ProductDetail() {
         </div>
       </div>
       <div className="col-span-4 col-start-8">
-        <Card className="sticky top-32 shadow-xl">
-          <CardHeader className="gap-8">
-            <Title>{product.name}</Title>
-            <p>{product.description}</p>
-          </CardHeader>
-          <CardContent>
-            <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
-              <div className="flex items-center gap-4">
-                <Label htmlFor="quantity-field">Quantity</Label>
-                <Input
-                  name="quantity"
-                  onChange={handleQuantityChange}
-                  id="quantity-field"
-                  type="number"
-                  step={1}
-                  min={1}
-                  value={quantity}
-                />
-              </div>
+        <Card asChild className="sticky top-32 shadow-xl">
+          <form onSubmit={handleSubmit}>
+            <CardHeader className="gap-8">
+              <Title>{product.name}</Title>
+              <p>{product.description}</p>
+            </CardHeader>
+            <CardContent>
+              <Label htmlFor="quantity-field">Quantity</Label>
+              <Input
+                name="quantity"
+                onChange={handleQuantityChange}
+                id="quantity-field"
+                type="number"
+                step={1}
+                min={1}
+                value={quantity}
+              />
+            </CardContent>
+            <CardFooter>
               <Button
                 className="bg-red-600 py-4 text-base font-bold hover:bg-red-700"
                 type="submit"
               >
                 Add to Cart {formatMoney(quantity * product.price)}
               </Button>
-            </form>
-          </CardContent>
+            </CardFooter>
+          </form>
         </Card>
       </div>
     </>
