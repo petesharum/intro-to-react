@@ -25,7 +25,7 @@ function Filters() {
     const formData = new FormData(event.target);
     const q = formData.get('q');
 
-    setSearchParams({ q });
+    setSearchParams({ ...(q.trim() && { q }) });
   }
 
   useEffect(() => {

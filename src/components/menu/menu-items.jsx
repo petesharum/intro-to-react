@@ -20,7 +20,7 @@ function MenuItems() {
   const [searchParams] = useSearchParams();
   const { data: items } = useQuery({
     queryKey: ['menu', searchParams.toString()],
-    queryFn: async () => {
+    queryFn: () => {
       return fetchMenuItems(searchParams);
     },
   });

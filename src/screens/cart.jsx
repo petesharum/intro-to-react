@@ -45,7 +45,7 @@ function Cart() {
         <Title>My Cart</Title>
         <ul className="flex flex-col gap-4">
           {items.map(({ product, quantity }) => (
-            <li className="flex bg-slate-100" key={product.productId}>
+            <li className="flex bg-secondary" key={product.productId}>
               <img
                 className="h-36 w-36 object-cover"
                 src={`/images/${product.image.url}`}
