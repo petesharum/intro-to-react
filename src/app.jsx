@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { Layout } from './screens/layout';
 import { ErrorPage } from './screens/error-page';
-import { CartProvider } from './lib/cart/cart-provider';
+import { CartProvider } from './lib/cart-provider';
 
 const Home = lazy(() =>
   import('./screens/home').then((module) => ({ default: module.Home })),

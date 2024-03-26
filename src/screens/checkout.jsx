@@ -14,7 +14,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Title } from '@/components/ui/title';
-import { useCart } from '@/lib/cart/use-cart';
+import { useCart } from '@/lib/use-cart';
 import { formatMoney } from '@/lib/format-money';
 import { useId } from 'react';
 

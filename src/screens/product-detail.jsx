@@ -20,7 +20,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Title } from '@/components/ui/title';
-import { useCart } from '@/lib/cart/use-cart';
+import { useCart } from '@/lib/use-cart';
 import { formatMoney } from '@/lib/format-money';
 
 async function fetchProduct(id) {

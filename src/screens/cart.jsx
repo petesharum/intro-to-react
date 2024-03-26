@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Title } from '@/components/ui/title';
-import { useCart } from '@/lib/cart/use-cart';
+import { useCart } from '@/lib/use-cart';
 import { formatMoney } from '@/lib/format-money';
 
 function Cart() {

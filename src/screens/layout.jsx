@@ -5,7 +5,7 @@
 import { Link, Outlet } from 'react-router-dom';
 
 import { Toaster } from '@/components/ui/sonner';
-import { useCart } from '@/lib/cart/use-cart';
+import { useCart } from '@/lib/use-cart';
 
 function CartIcon() {
   return (
@@ -25,7 +25,7 @@ function Layout() {
           <ul className="flex items-center gap-4">
             <li>
               <Link
-                className="inline-block font-bold transition-transform hover:translate-y-[-2px]"
+                className="inline-block font-black uppercase transition-transform hover:translate-y-[-2px]"
                 to="/"
               >
                 Home
@@ -33,7 +33,7 @@ function Layout() {
             </li>
             <li>
               <Link
-                className="inline-block font-bold transition-transform hover:translate-y-[-2px]"
+                className="inline-block font-black uppercase transition-transform hover:translate-y-[-2px]"
                 to="menu"
               >
                 Menu
