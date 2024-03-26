@@ -37,7 +37,7 @@ function MenuItems() {
         >
           <div className="overflow-hidden">
             <img
-              className="transition-transform"
+              className="transition-transform ease-out"
               height="300"
               width="300"
               src={`/images/${item.image.url}`}
