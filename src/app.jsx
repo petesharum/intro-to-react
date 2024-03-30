@@ -2,7 +2,7 @@ import { lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { Layout } from './screens/layout';
+import { GlobalLayout } from './layouts/global-layout';
 import { ErrorPage } from './screens/error-page';
 import { CartProvider } from './lib/cart-provider';
 
@@ -30,17 +30,17 @@ function Loading() {
 
 const router = createBrowserRouter([
   {
-    element: <Layout />,
+    path: '/',
+    element: (
+      <Suspense fallback={<Loading />}>
+        <Home />
+      </Suspense>
+    ),
+  },
+  {
+    element: <GlobalLayout />,
     errorElement: <ErrorPage />,
     children: [
-      {
-        path: '/',
-        element: (
-          <Suspense fallback={<Loading />}>
-            <Home />
-          </Suspense>
-        ),
-      },
       {
         path: '/menu',
         element: (

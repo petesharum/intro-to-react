@@ -20,35 +20,44 @@ function CartIcon({ className }) {
   );
 }
 
-function Layout() {
+function GlobalLayout() {
   const { itemCount } = useCart();
 
   return (
     <div className="grid h-screen grid-rows-[auto_1fr_auto] gap-x-8">
-      <header className="sticky top-0 border-b-4 border-slate-900 bg-white">
+      <header className="sticky top-0 border-b-4 border-foreground bg-white">
         <nav className="container py-4">
           <ul className="flex items-center gap-4">
             <li>
               <Link
-                className="inline-block font-black uppercase transition-transform hover:translate-y-[-2px] hover:text-red-600"
+                className="block font-black uppercase transition-transform hover:scale-110 hover:drop-shadow-md"
                 to="/"
               >
-                Home
+                <img
+                  className="h-12 w-12 object-contain p-1"
+                  src="images/logo-burger.png"
+                  alt="Yummy! Foods Home"
+                  width="237"
+                  height="248"
+                />
               </Link>
             </li>
             <li>
               <Link
-                className="inline-block font-black uppercase transition-transform hover:translate-y-[-2px] hover:text-red-600"
+                className="block font-black uppercase transition-transform hover:scale-110 hover:text-red-600"
                 to="menu"
               >
                 Menu
               </Link>
             </li>
             <li className="ml-auto">
-              <Link className="relative inline-block" to="cart">
-                <CartIcon className="hover:animate-shake" />{' '}
+              <Link
+                className="relative block p-1 [&:has(:hover)_svg]:animate-shake"
+                to="cart"
+              >
+                <CartIcon className="fill-current" />{' '}
                 {itemCount > 0 && (
-                  <span className="absolute right-[-50%] top-[-30%] grid h-6 w-6 place-content-center rounded-full border-[2px] border-white bg-red-600 text-sm font-bold tracking-tighter text-white">
+                  <span className="absolute bottom-1 left-[85%] grid h-6 w-6 place-content-center rounded-full border-[2px] border-white bg-red-600 text-sm font-bold tracking-tighter text-white">
                     {itemCount}
                   </span>
                 )}
@@ -70,4 +79,4 @@ function Layout() {
   );
 }
 
-export { Layout };
+export { GlobalLayout };
