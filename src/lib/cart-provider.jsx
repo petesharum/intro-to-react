@@ -1,7 +1,7 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
 
 import { CartContext } from './cart-context';
-import { useMutation } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 async function generateLineItems(cartItems) {
   if (cartItems.length === 0) {
@@ -26,22 +26,34 @@ async function generateLineItems(cartItems) {
 
 function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
-  const { data: lineItems, mutate: fetchLineItems } = useMutation({
-    mutationFn: generateLineItems,
+  const previousLineItems = useRef({
+    subtotal: 0,
+    tax: 0,
+    total: 0,
   });
+  const {
+    data: lineItems,
+    isPending,
+    isPlaceholderData,
+  } = useQuery({
+    queryKey: ['line-items', cartItems],
+    queryFn: () => generateLineItems(cartItems),
+    placeholderData: previousLineItems.current,
+  });
+
+  useEffect(() => {
+    previousLineItems.current = lineItems;
+  }, [lineItems]);
 
   const itemCount = useMemo(
     () => cartItems.reduce((total, item) => total + item.quantity, 0),
     [cartItems],
   );
 
-  useEffect(() => {
-    fetchLineItems(cartItems);
-  }, [fetchLineItems, cartItems]);
-
   const cart = useMemo(
     () => ({
       items: cartItems,
+      isPending: isPending || isPlaceholderData,
       ...lineItems,
       itemCount,
 
@@ -86,7 +98,7 @@ function CartProvider({ children }) {
         setCartItems([]);
       },
     }),
-    [cartItems, lineItems, itemCount],
+    [cartItems, isPending, isPlaceholderData, lineItems, itemCount],
   );
 
   return <CartContext.Provider value={cart}>{children}</CartContext.Provider>;

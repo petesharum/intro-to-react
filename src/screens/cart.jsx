@@ -13,6 +13,7 @@ import { Input } from '@/components/ui/input';
 import { Title } from '@/components/ui/title';
 import { useCart } from '@/lib/use-cart';
 import { formatMoney } from '@/lib/format-money';
+import { cn } from '@/lib/utils';
 
 function Cart() {
   const {
@@ -23,6 +24,7 @@ function Cart() {
     tax,
     total,
     itemCount,
+    isPending,
   } = useCart();
   const navigate = useNavigate();
 
@@ -85,18 +87,31 @@ function Cart() {
             </h2>
           </CardHeader>
           <CardContent>
-            <p>Subtotal: {formatMoney(subtotal)}</p>
-            <p>Tax: {formatMoney(tax)}</p>
-            <p>Estimated Total: {formatMoney(total)}</p>
+            <Receipt
+              isPending={isPending}
+              subtotal={subtotal}
+              tax={tax}
+              total={total}
+            />
           </CardContent>
           <CardFooter>
-            <Button onClick={handleCheckout}>
+            <Button onClick={handleCheckout} isPending={isPending}>
               Checkout {formatMoney(total)}
             </Button>
           </CardFooter>
         </Card>
       </div>
     </>
+  );
+}
+
+function Receipt({ isPending, className, subtotal, tax, total }) {
+  return (
+    <div className={cn(className, { 'opacity-50': isPending })}>
+      <p>Subtotal: {formatMoney(subtotal)}</p>
+      <p>Tax: {formatMoney(tax)}</p>
+      <p>Estimated Total: {formatMoney(total)}</p>
+    </div>
   );
 }
 
