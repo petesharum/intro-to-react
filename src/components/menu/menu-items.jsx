@@ -28,7 +28,7 @@ function MenuItems() {
   return items?.length === 0 ? (
     <div>No results</div>
   ) : (
-    <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+    <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">
       {items?.map((item) => (
         <Link
           className="flex flex-col gap-2 [&:hover_img]:scale-110"
