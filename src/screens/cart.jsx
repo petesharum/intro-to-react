@@ -1,8 +1,8 @@
-// TODO: style
 // TODO: move into a dialog?
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { X, Loader2 } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -15,6 +15,40 @@ import { useCart } from '@/lib/use-cart';
 import { formatMoney } from '@/lib/format-money';
 import { cn } from '@/lib/utils';
 
+function EmptyCart() {
+  return (
+    <div className="relative col-span-full">
+      <img
+        className="w-1/2 max-w-[950px] md:translate-x-[10%]"
+        src="images/empty-bag.png"
+        alt="An empty paper bag."
+      />
+      <div className="left-1/2 top-1/2 flex flex-col gap-4 md:absolute md:w-1/2 md:translate-y-[-50%]">
+        <Title>Move along, folks. Nothing&nbsp;here to&nbsp;see</Title>
+        <div className="flex flex-col items-start gap-8">
+          <p>
+            Psst...if you&apos;re really that hungry, try adding something to
+            your cart.
+          </p>
+          <Link className={buttonVariants()} to="/menu">
+            Start a new order
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Receipt({ isPending, className, subtotal, tax, total }) {
+  return (
+    <div className={cn(className, { 'opacity-50': isPending })}>
+      <p>Subtotal: {formatMoney(subtotal)}</p>
+      <p>Tax: {formatMoney(tax)}</p>
+      <p>Estimated Total: {formatMoney(total)}</p>
+    </div>
+  );
+}
+
 function Cart() {
   const {
     items,
@@ -26,19 +60,9 @@ function Cart() {
     itemCount,
     isPending,
   } = useCart();
-  const navigate = useNavigate();
-
-  function handleCheckout() {
-    navigate('/checkout');
-  }
 
   if (items.length === 0) {
-    return (
-      <div className="col-span-10 col-start-2 flex flex-col gap-8">
-        <Title>Uh, your cart is empty!</Title>
-        <Button onClick={() => navigate('/menu')}>Start order</Button>
-      </div>
-    );
+    return <EmptyCart />;
   }
 
   return (
@@ -47,35 +71,45 @@ function Cart() {
         <Title>My Cart</Title>
         <ul className="flex flex-col gap-4">
           {items.map(({ product, quantity }) => (
-            <li className="flex bg-secondary" key={product.productId}>
-              <img
-                className="h-36 w-36 object-cover"
-                src={`/images/${product.image.url}`}
-                alt={product.image.alt}
-              />
-              <div className="flex flex-1 flex-col gap-2 p-4">
-                <h2 className="text-lg font-semibold">{product.name}</h2>
-                <div className="flex items-center">
-                  <Input
-                    value={quantity}
-                    onChange={(event) => {
-                      setCartQuantity(product.productId, +event.target.value);
-                    }}
-                    min={1}
-                    step={1}
-                    type="number"
-                  />
-                  {' ✕ '}
-                  <span>{formatMoney(product.price)}</span>
+            <Card
+              asChild
+              className="flex gap-4 bg-secondary p-4 shadow-xl"
+              key={product.productId}
+            >
+              <li className="relative">
+                <img
+                  className="h-28 w-28 object-cover"
+                  src={`/images/${product.image.url}`}
+                  alt={product.image.alt}
+                />
+                <div className="flex flex-1 flex-col gap-2 p-4">
+                  <h2 className="text-lg font-semibold">{product.name}</h2>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      className="w-20"
+                      value={quantity}
+                      onChange={(event) => {
+                        setCartQuantity(product.productId, +event.target.value);
+                      }}
+                      min={1}
+                      max={50}
+                      step={1}
+                      type="number"
+                    />
+                    {' ✕ '}
+                    <span>{formatMoney(product.price)}</span>
+                  </div>
                 </div>
                 <Button
-                  variant="link"
+                  className="absolute right-0 top-0 p-4 text-primary/30 hover:text-primary/100"
+                  variant="ghost"
                   onClick={() => removeFromCart(product.productId)}
                 >
-                  Remove
+                  <X />
+                  <span className="sr-only">Remove</span>
                 </Button>
-              </div>
-            </li>
+              </li>
+            </Card>
           ))}
         </ul>
       </div>
@@ -95,23 +129,20 @@ function Cart() {
             />
           </CardContent>
           <CardFooter>
-            <Button onClick={handleCheckout} isPending={isPending}>
+            <Link
+              className={cn(buttonVariants(), {
+                'opacity-50': isPending,
+              })}
+              to="/checkout"
+              isPending={isPending}
+            >
+              {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}{' '}
               Checkout {formatMoney(total)}
-            </Button>
+            </Link>
           </CardFooter>
         </Card>
       </div>
     </>
-  );
-}
-
-function Receipt({ isPending, className, subtotal, tax, total }) {
-  return (
-    <div className={cn(className, { 'opacity-50': isPending })}>
-      <p>Subtotal: {formatMoney(subtotal)}</p>
-      <p>Tax: {formatMoney(tax)}</p>
-      <p>Estimated Total: {formatMoney(total)}</p>
-    </div>
   );
 }
 
