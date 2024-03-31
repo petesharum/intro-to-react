@@ -74,7 +74,7 @@ function GlobalLayout() {
           Copyright © Yummy! Foods 2024
         </div>
       </footer>
-      <Toaster />
+      <Toaster position="top-right" />
     </div>
   );
 }

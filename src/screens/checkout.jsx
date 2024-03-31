@@ -33,8 +33,7 @@ async function submitOrder(event, items) {
   event.preventDefault();
   const formData = new FormData(event.target);
 
-  // mutation
-  return fetch('/api/order', {
+  const response = await fetch('/api/order', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -44,6 +43,10 @@ async function submitOrder(event, items) {
       payment: Object.fromEntries(formData),
     }),
   });
+
+  if (!response.ok) {
+    throw new Error('Failed to submit order');
+  }
 }
 
 function Checkout() {
