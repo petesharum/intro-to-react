@@ -1,5 +1,4 @@
-// TODO: style
-import { useEffect } from 'react';
+import { useEffect, useId, Fragment } from 'react';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
@@ -13,16 +12,17 @@ import {
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 import { Title } from '@/components/ui/title';
 import { useCart } from '@/lib/use-cart';
 import { formatMoney } from '@/lib/format-money';
-import { useId } from 'react';
+import { cn } from '@/lib/utils';
 
-function Field({ label, id: idProp, name, type = 'text' }) {
+function Field({ className, label, id: idProp, name, type = 'text' }) {
   const id = useId();
   const resolvedId = idProp || id;
   return (
-    <div>
+    <div className={cn('flex flex-col gap-2', className)}>
       <Label htmlFor={resolvedId}>{label}</Label>
       <Input name={name} type={type} id={resolvedId} />
     </div>
@@ -70,16 +70,34 @@ function Checkout() {
       <div className="col-span-6 col-start-2 flex flex-col gap-8">
         <Title>Checkout</Title>
         <form
-          className="flex flex-col gap-4"
+          className="grid grid-cols-12 gap-x-4 gap-y-8"
           id="payment-info"
           onSubmit={handleSubmit}
+          autoComplete="off"
         >
-          <Field label="Name" name="fName" />
-          <Field label="Email" name="email" type="email" />
-          <Field label="Card Number" name="cardNumber" />
-          <Field label="Expiration Date (MM/YY)" name="expiry" />
-          <Field label="CVV (3 or 4 digits)" name="cvv" />
-          <Field label="Postal Code" name="postalCode" />
+          <Field className="col-span-full" label="Name" name="fName" />
+          <Field
+            className="col-span-full"
+            label="Email"
+            name="email"
+            type="email"
+          />
+          <Field
+            className="col-span-full"
+            label="Card Number"
+            name="cardNumber"
+          />
+          <Field
+            className="col-span-4"
+            label="Expiration Date (MM/YY)"
+            name="expiry"
+          />
+          <Field
+            className="col-span-4"
+            label="CVV (3 or 4 digits)"
+            name="cvv"
+          />
+          <Field className="col-span-4" label="Postal Code" name="postalCode" />
         </form>
       </div>
       <div className="col-span-4 col-start-8">
@@ -90,9 +108,33 @@ function Checkout() {
             </h2>
           </CardHeader>
           <CardContent>
-            <p>Subtotal: {formatMoney(subtotal)}</p>
-            <p>Tax: {formatMoney(tax)}</p>
-            <p>Total: {formatMoney(total)}</p>
+            <div className="grid grid-cols-[min-content_min-content_1fr_min-content] gap-x-4">
+              {items.map(({ product, quantity }) => (
+                <Fragment key={product.productId}>
+                  <span className="text-right">{quantity}</span>
+                  <span>✕</span>
+                  <span className="font-bold">{product.name}</span>
+                  <span className="text-right">
+                    {formatMoney(product.price)}
+                  </span>
+                </Fragment>
+              ))}
+            </div>
+            <Separator className="my-4" />
+            <dl>
+              <div className="flex gap-4">
+                <dt>Subtotal:</dt>
+                <dd className="ml-auto text-right">{formatMoney(subtotal)}</dd>
+              </div>
+              <div className="flex gap-4">
+                <dt>Tax:</dt>
+                <dd className="ml-auto text-right">{formatMoney(tax)}</dd>
+              </div>
+              <div className="flex gap-4 font-bold">
+                <dt>Total:</dt>
+                <dd className="ml-auto text-right">{formatMoney(total)}</dd>
+              </div>
+            </dl>
           </CardContent>
           <CardFooter>
             <Button form="payment-info" type="submit">

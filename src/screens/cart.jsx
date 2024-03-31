@@ -39,16 +39,6 @@ function EmptyCart() {
   );
 }
 
-function Receipt({ isPending, className, subtotal, tax, total }) {
-  return (
-    <div className={cn(className, { 'opacity-50': isPending })}>
-      <p>Subtotal: {formatMoney(subtotal)}</p>
-      <p>Tax: {formatMoney(tax)}</p>
-      <p>Estimated Total: {formatMoney(total)}</p>
-    </div>
-  );
-}
-
 function Cart() {
   const {
     items,
@@ -83,7 +73,7 @@ function Cart() {
                   alt={product.image.alt}
                 />
                 <div className="flex flex-1 flex-col gap-2 p-4">
-                  <h2 className="text-lg font-semibold">{product.name}</h2>
+                  <h2 className="text-lg font-bold">{product.name}</h2>
                   <div className="flex items-center gap-2">
                     <Input
                       className="w-20"
@@ -120,13 +110,21 @@ function Cart() {
               {itemCount} {itemCount === 1 ? 'Item' : 'Items'}
             </h2>
           </CardHeader>
-          <CardContent>
-            <Receipt
-              isPending={isPending}
-              subtotal={subtotal}
-              tax={tax}
-              total={total}
-            />
+          <CardContent className={cn({ 'opacity-50': isPending })}>
+            <dl>
+              <div className="flex gap-4">
+                <dt>Subtotal:</dt>
+                <dd className="ml-auto text-right">{formatMoney(subtotal)}</dd>
+              </div>
+              <div className="flex gap-4">
+                <dt>Tax:</dt>
+                <dd className="ml-auto text-right">{formatMoney(tax)}</dd>
+              </div>
+              <div className="flex gap-4 font-bold">
+                <dt>Estimated Total:</dt>
+                <dd className="ml-auto text-right">{formatMoney(total)}</dd>
+              </div>
+            </dl>
           </CardContent>
           <CardFooter>
             <Link
@@ -134,7 +132,6 @@ function Cart() {
                 'opacity-50': isPending,
               })}
               to="/checkout"
-              isPending={isPending}
             >
               {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}{' '}
               Checkout {formatMoney(total)}
