@@ -137,7 +137,7 @@ function Checkout() {
             </dl>
           </CardContent>
           <CardFooter>
-            <Button form="payment-info" type="submit">
+            <Button form="payment-info" type="submit" isPending={isPending}>
               Place Order {formatMoney(total)}
             </Button>
           </CardFooter>
