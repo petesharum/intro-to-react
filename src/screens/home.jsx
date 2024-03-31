@@ -11,7 +11,7 @@ function Home() {
       >
         <img
           className="max-w-[470px]"
-          src="images/logo-hero.png"
+          src="/images/logo-hero.png"
           alt="Bright, friendly illustration of a cute, smiling cartoon burger. It's honestly a bit disturbing."
         />
         <div className="flex items-center justify-center">

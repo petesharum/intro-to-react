@@ -35,7 +35,7 @@ function GlobalLayout() {
               >
                 <img
                   className="h-12 w-12 object-contain p-1"
-                  src="images/logo-burger.png"
+                  src="/images/logo-burger.png"
                   alt="Yummy! Foods Home"
                   width="237"
                   height="248"

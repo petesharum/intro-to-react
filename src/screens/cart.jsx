@@ -20,7 +20,7 @@ function EmptyCart() {
     <div className="relative col-span-full">
       <img
         className="w-1/2 max-w-[950px] md:translate-x-[10%]"
-        src="images/empty-bag.png"
+        src="/images/empty-bag.png"
         alt="An empty paper bag."
       />
       <div className="left-1/2 top-1/2 flex flex-col gap-4 md:absolute md:w-1/2 md:translate-y-[-50%]">
