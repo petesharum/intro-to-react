@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Loader2 } from 'lucide-react';
 
 import { GlobalLayout } from './layouts/global-layout';
 import { ErrorPage } from './screens/error-page';
@@ -25,7 +26,11 @@ const Checkout = lazy(() =>
 );
 
 function Loading() {
-  return <div>Loading...</div>;
+  return (
+    <div className="fixed grid h-screen w-screen place-items-center bg-background">
+      <Loader2 className="h-12 w-12 animate-spin" />
+    </div>
+  );
 }
 
 const router = createBrowserRouter([

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 
-// TODO: style
 function Home() {
   return (
     <div className="container grid h-screen place-items-center">
@@ -15,7 +14,7 @@ function Home() {
           alt="Bright, friendly illustration of a cute, smiling cartoon burger. It's honestly a bit disturbing."
         />
         <div className="flex items-center justify-center">
-          <p className="text-xl font-black uppercase text-slate-800">
+          <p className="text-xl font-black uppercase text-foreground">
             Check out our menu
           </p>
           {<ChevronRight size={24} />}
