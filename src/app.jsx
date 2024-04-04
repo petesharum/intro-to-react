@@ -44,10 +44,10 @@ const router = createBrowserRouter([
   },
   {
     element: <GlobalLayout />,
-    errorElement: <ErrorPage />,
     children: [
       {
         path: '/menu',
+        errorElement: <ErrorPage />,
         element: (
           <Suspense fallback={<Loading />}>
             <Menu />
@@ -56,6 +56,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/menu/:id',
+        errorElement: <ErrorPage />,
         element: (
           <Suspense fallback={<Loading />}>
             <ProductDetail />
@@ -64,6 +65,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/cart',
+        errorElement: <ErrorPage />,
         element: (
           <Suspense fallback={<Loading />}>
             <Cart />
@@ -72,11 +74,17 @@ const router = createBrowserRouter([
       },
       {
         path: '/checkout',
+        errorElement: <ErrorPage />,
         element: (
           <Suspense fallback={<Loading />}>
             <Checkout />
           </Suspense>
         ),
+      },
+      {
+        path: '*',
+        errorElement: <ErrorPage />,
+        element: <ErrorPage message="404: Page not found!" />,
       },
     ],
   },
