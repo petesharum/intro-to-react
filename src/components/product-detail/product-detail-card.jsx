@@ -3,10 +3,9 @@ import { useState } from 'react';
 import { StickyCard } from '@/components/shared/sticky-card';
 import { Button } from '@/components/ui/button';
 import { CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Title } from '@/components/ui/title';
 import { formatMoney } from '@/lib/format-money';
+import { Field } from '../shared/field';
 
 function ProductDetailCard({ product, onAddToCart }) {
   const [quantity, setQuantity] = useState(1);
@@ -28,15 +27,18 @@ function ProductDetailCard({ product, onAddToCart }) {
           <p>{product.description}</p>
         </CardHeader>
         <CardContent>
-          <Label htmlFor="quantity-field">Quantity</Label>
-          <Input
+          <Field
+            label="Quantity"
             name="quantity"
-            onChange={handleQuantityChange}
-            id="quantity-field"
             type="number"
-            step={1}
-            min={1}
-            value={quantity}
+            slotProps={{
+              input: {
+                step: 1,
+                min: 1,
+                value: quantity,
+                onChange: handleQuantityChange,
+              },
+            }}
           />
         </CardContent>
         <CardFooter>

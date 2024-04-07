@@ -1,29 +1,16 @@
-import { useEffect, useId, Fragment } from 'react';
+import { useEffect, Fragment } from 'react';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 
+import { Field } from '@/components/shared/field';
 import { StickyCard } from '@/components/shared/sticky-card';
 import { CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Title } from '@/components/ui/title';
 import { useCart } from '@/lib/cart';
 import { formatMoney } from '@/lib/format-money';
-import { cn } from '@/lib/utils';
-
-function Field({ className, label, id: idProp, name, type = 'text' }) {
-  const id = useId();
-  const resolvedId = idProp || id;
-  return (
-    <div className={cn('flex flex-col gap-2', className)}>
-      <Label htmlFor={resolvedId}>{label}</Label>
-      <Input name={name} type={type} id={resolvedId} />
-    </div>
-  );
-}
 
 async function submitOrder(event, items) {
   event.preventDefault();
