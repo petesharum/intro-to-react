@@ -12,7 +12,7 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useCart } from '@/lib/use-cart';
+import { useCart } from '@/lib/cart';
 
 async function fetchProduct(id) {
   const response = await fetch(`/api/menu/${id}`);

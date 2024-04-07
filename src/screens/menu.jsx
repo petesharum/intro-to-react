@@ -84,9 +84,7 @@ function loader(queryClient) {
 
 function Menu() {
   const [searchParams] = useSearchParams();
-  // TODO: useCategories
   const { data: categories } = useQuery(getCategoryListQuery());
-  // TODO: useMenuItems
   const { data: items } = useQuery(getMenuItemListQuery(searchParams));
 
   return (

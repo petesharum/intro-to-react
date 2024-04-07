@@ -5,7 +5,7 @@ import { Loader2 } from 'lucide-react';
 
 import { GlobalLayout } from './layouts/global-layout';
 import { ErrorPage } from './screens/error-page';
-import { CartProvider } from './lib/cart-provider';
+import { CartProvider } from './lib/cart';
 
 const Home = lazy(() =>
   import('./screens/home').then((module) => ({ default: module.Home })),

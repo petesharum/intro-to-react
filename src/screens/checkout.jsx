@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Title } from '@/components/ui/title';
-import { useCart } from '@/lib/use-cart';
+import { useCart } from '@/lib/cart';
 import { formatMoney } from '@/lib/format-money';
 import { cn } from '@/lib/utils';
 

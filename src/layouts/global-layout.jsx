@@ -5,7 +5,7 @@
 import { Link, Outlet } from 'react-router-dom';
 
 import { Toaster } from '@/components/ui/sonner';
-import { useCart } from '@/lib/use-cart';
+import { useCart } from '@/lib/cart';
 
 function CartIcon({ className }) {
   return (

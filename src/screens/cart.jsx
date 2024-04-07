@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Title } from '@/components/ui/title';
-import { useCart } from '@/lib/use-cart';
+import { useCart } from '@/lib/cart';
 import { formatMoney } from '@/lib/format-money';
 import { cn } from '@/lib/utils';
 import { StickyCard } from '@/components/shared/sticky-card';
