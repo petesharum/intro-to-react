@@ -66,7 +66,7 @@ function GlobalLayout() {
           </ul>
         </nav>
       </header>
-      <div className="container grid auto-rows-min grid-cols-12 gap-x-16 gap-y-8 pb-16 pt-8">
+      <div className="container grid auto-rows-min grid-cols-12 gap-x-8 gap-y-4 pb-16 pt-8 lg:gap-x-16 lg:gap-y-8">
         <Outlet />
       </div>
       <footer className="bg-slate-800 text-slate-400">

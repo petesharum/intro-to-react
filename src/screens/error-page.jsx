@@ -1,4 +1,3 @@
-// TODO: style
 import { useRouteError } from 'react-router-dom';
 
 import { Title } from '@/components/ui/title';

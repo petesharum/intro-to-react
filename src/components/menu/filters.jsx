@@ -1,24 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
 
 import { Input } from '@/components/ui/input';
-import { Skeleton } from '@/components/ui/skeleton';
 
-async function fetchCategories() {
-  const response = await fetch('/api/menu/categories');
-
-  return response.json();
-}
-
-function Filters() {
+function Filters({ categories }) {
   const inputRef = useRef(null);
   const [searchParams, setSearchParams] = useSearchParams();
-  const { data: categories } = useQuery({
-    queryKey: ['categories'],
-    queryFn: fetchCategories,
-  });
 
   function handleSearchSubmit(event) {
     event.preventDefault();
@@ -39,20 +27,8 @@ function Filters() {
     }
   }, [searchParams]);
 
-  if (!categories)
-    return (
-      <div className="sticky top-32 flex flex-col gap-4">
-        <Skeleton className="h-10 w-full" />
-        <div className="flex flex-col gap-2">
-          <Skeleton className="h-6 w-20" />
-          <Skeleton className="h-6 w-24" />
-          <Skeleton className="h-6 w-20" />
-        </div>
-      </div>
-    );
-
   return (
-    <div className="sticky top-32 flex flex-col gap-4">
+    <>
       <form onSubmit={handleSearchSubmit}>
         <Input
           ref={inputRef}
@@ -82,7 +58,7 @@ function Filters() {
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 }
 

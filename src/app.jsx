@@ -10,20 +10,6 @@ import { CartProvider } from './lib/cart-provider';
 const Home = lazy(() =>
   import('./screens/home').then((module) => ({ default: module.Home })),
 );
-const Menu = lazy(() =>
-  import('./screens/menu').then((module) => ({ default: module.Menu })),
-);
-const ProductDetail = lazy(() =>
-  import('./screens/product-detail').then((module) => ({
-    default: module.ProductDetail,
-  })),
-);
-const Cart = lazy(() =>
-  import('./screens/cart').then((module) => ({ default: module.Cart })),
-);
-const Checkout = lazy(() =>
-  import('./screens/checkout').then((module) => ({ default: module.Checkout })),
-);
 
 function Loading() {
   return (
@@ -32,6 +18,8 @@ function Loading() {
     </div>
   );
 }
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -48,38 +36,37 @@ const router = createBrowserRouter([
       {
         path: '/menu',
         errorElement: <ErrorPage />,
-        element: (
-          <Suspense fallback={<Loading />}>
-            <Menu />
-          </Suspense>
-        ),
+        lazy: async () => {
+          const { Menu } = await import('./screens/menu');
+          return { Component: Menu, loader: Menu.loader(queryClient) };
+        },
       },
       {
         path: '/menu/:id',
         errorElement: <ErrorPage />,
-        element: (
-          <Suspense fallback={<Loading />}>
-            <ProductDetail />
-          </Suspense>
-        ),
+        lazy: async () => {
+          const { ProductDetail } = await import('./screens/product-detail');
+          return {
+            Component: ProductDetail,
+            loader: ProductDetail.loader(queryClient),
+          };
+        },
       },
       {
         path: '/cart',
         errorElement: <ErrorPage />,
-        element: (
-          <Suspense fallback={<Loading />}>
-            <Cart />
-          </Suspense>
-        ),
+        lazy: async () => {
+          const { Cart } = await import('./screens/cart');
+          return { Component: Cart };
+        },
       },
       {
         path: '/checkout',
         errorElement: <ErrorPage />,
-        element: (
-          <Suspense fallback={<Loading />}>
-            <Checkout />
-          </Suspense>
-        ),
+        lazy: async () => {
+          const { Checkout } = await import('./screens/checkout');
+          return { Component: Checkout };
+        },
       },
       {
         path: '*',
@@ -89,8 +76,6 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-
-const queryClient = new QueryClient();
 
 function App() {
   return (

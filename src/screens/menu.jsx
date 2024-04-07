@@ -1,19 +1,110 @@
 import { Title } from '@/components/ui/title';
 import { Filters } from '@/components/menu/filters';
-import { MenuItems } from '@/components/menu/menu-items';
+import { FiltersSkeleton } from '@/components/menu/filters-skeleton';
+import { useQuery } from '@tanstack/react-query';
+import { useSearchParams } from 'react-router-dom';
+import { MenuItemSkeleton } from '@/components/menu/menu-item-skeleton';
+import { MenuItem } from '@/components/menu/menu-item';
+
+async function fetchCategories() {
+  const response = await fetch('/api/menu/categories');
+
+  return response.json();
+}
+
+function renderCategories(categories) {
+  if (!categories) {
+    return <FiltersSkeleton />;
+  }
+
+  return <Filters categories={categories} />;
+}
+
+async function fetchMenuItems(searchParams) {
+  const url = new URL('/api/menu', window.location.origin);
+
+  for (let entry of searchParams.entries()) {
+    url.searchParams.append(...entry);
+  }
+
+  const response = await fetch(url);
+
+  return response.json();
+}
+
+function renderMenuItems(items) {
+  if (!items) {
+    return Array.from({ length: 8 }).map((_, i) => (
+      <MenuItemSkeleton key={i} />
+    ));
+  }
+
+  if (items.length === 0) {
+    return <div>No results</div>;
+  }
+
+  return items.map((item) => <MenuItem key={item.productId} {...item} />);
+}
+
+function getCategoryListQuery() {
+  return {
+    queryKey: ['categories'],
+    queryFn: fetchCategories,
+  };
+}
+
+function getMenuItemListQuery(searchParams) {
+  return {
+    queryKey: ['menu', searchParams.toString()],
+    queryFn: () => fetchMenuItems(searchParams),
+  };
+}
+
+function loader(queryClient) {
+  return async ({ request }) => {
+    const url = new URL(request.url);
+    const categoryListQuery = getCategoryListQuery();
+    const menuItemListQuery = getMenuItemListQuery(url.searchParams);
+
+    const categoriesPromise = queryClient.ensureQueryData(categoryListQuery);
+    const itemsPromise = queryClient.ensureQueryData(menuItemListQuery);
+
+    try {
+      const [categories, items] = await Promise.all([
+        categoriesPromise,
+        itemsPromise,
+      ]);
+
+      return { categories, items };
+    } catch (error) {
+      throw new Response(error.message, { status: 500 });
+    }
+  };
+}
 
 function Menu() {
+  const [searchParams] = useSearchParams();
+  // TODO: useCategories
+  const { data: categories } = useQuery(getCategoryListQuery());
+  // TODO: useMenuItems
+  const { data: items } = useQuery(getMenuItemListQuery(searchParams));
+
   return (
     <>
       <div className="col-span-2 flex flex-col gap-4 pt-8">
-        <Filters />
+        <div className="sticky top-32 flex flex-col gap-4">
+          {renderCategories(categories)}
+        </div>
       </div>
       <main className="col-span-10 flex flex-col gap-8">
         <Title>Menu</Title>
-        <MenuItems />
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">
+          {renderMenuItems(items)}
+        </div>
       </main>
     </>
   );
 }
+Menu.loader = loader;
 
 export { Menu };

@@ -1,4 +1,3 @@
-// TODO: move into a dialog?
 import { Link } from 'react-router-dom';
 import { X, Loader2 } from 'lucide-react';
 
@@ -14,6 +13,7 @@ import { Title } from '@/components/ui/title';
 import { useCart } from '@/lib/use-cart';
 import { formatMoney } from '@/lib/format-money';
 import { cn } from '@/lib/utils';
+import { StickyCard } from '@/components/shared/sticky-card';
 
 function EmptyCart() {
   return (
@@ -104,7 +104,7 @@ function Cart() {
         </ul>
       </div>
       <div className="col-span-4 col-start-8">
-        <Card className="sticky top-32 shadow-xl">
+        <StickyCard>
           <CardHeader className="gap-8">
             <h2 className="text-xl font-black uppercase tracking-wide">
               {itemCount} {itemCount === 1 ? 'Item' : 'Items'}
@@ -137,7 +137,7 @@ function Cart() {
               Checkout {formatMoney(total)}
             </Link>
           </CardFooter>
-        </Card>
+        </StickyCard>
       </div>
     </>
   );

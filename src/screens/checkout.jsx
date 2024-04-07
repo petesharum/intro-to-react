@@ -3,12 +3,8 @@ import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from '@/components/ui/card';
+import { StickyCard } from '@/components/shared/sticky-card';
+import { CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -104,7 +100,7 @@ function Checkout() {
         </form>
       </div>
       <div className="col-span-4 col-start-8">
-        <Card className="sticky top-32 shadow-xl">
+        <StickyCard>
           <CardHeader className="gap-8">
             <h2 className="text-xl font-black uppercase tracking-wide">
               {itemCount} {itemCount === 1 ? 'Item' : 'Items'}
@@ -144,7 +140,7 @@ function Checkout() {
               Place Order {formatMoney(total)}
             </Button>
           </CardFooter>
-        </Card>
+        </StickyCard>
       </div>
     </>
   );
