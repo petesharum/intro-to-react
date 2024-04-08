@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { X, Loader2 } from 'lucide-react';
+import { X } from 'lucide-react';
 
-import { Button, buttonVariants } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -10,34 +10,10 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Title } from '@/components/ui/title';
-import { useCart } from '@/lib/cart';
+import { useCart, EmptyCart } from '@/lib/cart';
 import { formatMoney } from '@/lib/format-money';
 import { cn } from '@/lib/utils';
 import { StickyCard } from '@/components/shared/sticky-card';
-
-function EmptyCart() {
-  return (
-    <div className="relative col-span-full">
-      <img
-        className="w-1/2 max-w-[950px] md:translate-x-[10%]"
-        src="/images/empty-bag.png"
-        alt="An empty paper bag."
-      />
-      <div className="left-1/2 top-1/2 flex flex-col gap-4 md:absolute md:w-1/2 md:translate-y-[-50%]">
-        <Title>Move along, folks. Nothing&nbsp;here to&nbsp;see</Title>
-        <div className="flex flex-col items-start gap-8">
-          <p>
-            Psst...if you&apos;re really that hungry, try adding something to
-            your cart.
-          </p>
-          <Link className={buttonVariants()} to="/menu">
-            Start a new order
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function Cart() {
   const {
@@ -127,15 +103,9 @@ function Cart() {
             </dl>
           </CardContent>
           <CardFooter>
-            <Link
-              className={cn(buttonVariants(), {
-                'opacity-50': isPending,
-              })}
-              to="/checkout"
-            >
-              {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}{' '}
-              Checkout {formatMoney(total)}
-            </Link>
+            <Button asChild isPending={isPending}>
+              <Link to="/checkout">Checkout {formatMoney(total)}</Link>
+            </Button>
           </CardFooter>
         </StickyCard>
       </div>

@@ -64,8 +64,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         aria-disabled={isPending ? 'true' : undefined}
         {...props}
       >
-        {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}{' '}
-        {children}
+        <span>
+          {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}{' '}
+          {children}
+        </span>
       </Comp>
     );
   },

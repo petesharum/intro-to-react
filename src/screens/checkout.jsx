@@ -75,12 +75,14 @@ function Checkout() {
           />
           <Field
             className="col-span-4"
-            label="Expiration Date (MM/YY)"
+            label="Expiration Date"
+            description="(MM/YY)"
             name="expiry"
           />
           <Field
             className="col-span-4"
-            label="CVV (3 or 4 digits)"
+            label="CVV"
+            description="(3 or 4 digits)"
             name="cvv"
           />
           <Field className="col-span-4" label="Postal Code" name="postalCode" />
