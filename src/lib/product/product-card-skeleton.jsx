@@ -1,9 +1,11 @@
-import { Card, CardContent, CardFooter, CardHeader } from '@/lib/ui/card';
+import { CardContent, CardFooter, CardHeader } from '@/lib/ui/card';
 import { Skeleton } from '@/lib/ui/skeleton';
+
+import { StickyCard } from '../shared-components/sticky-card';
 
 function ProductCardSkeleton() {
   return (
-    <Card className="sticky top-32 shadow-xl">
+    <StickyCard>
       <CardHeader className="gap-8">
         <Skeleton className="h-10 w-2/3" />
         <div className="flex flex-col gap-2">
@@ -20,7 +22,7 @@ function ProductCardSkeleton() {
       <CardFooter>
         <Skeleton className="h-14 w-1/2 rounded-full" />
       </CardFooter>
-    </Card>
+    </StickyCard>
   );
 }
 
