@@ -3,6 +3,7 @@ import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 
+import { submitOrder } from '@/lib/api';
 import { pluralize } from '@/lib/pluralize';
 import { Field } from '@/lib/shared-components/field';
 import { LineItem, LineItems } from '@/lib/shared-components/line-items';
@@ -13,20 +14,6 @@ import { Separator } from '@/lib/ui/separator';
 import { Title } from '@/lib/ui/title';
 import { useCart } from '@/lib/cart-context';
 import { formatMoney } from '@/lib/format-money';
-
-async function submitOrder(order) {
-  const response = await fetch('/api/order', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(order),
-  });
-
-  if (!response.ok) {
-    throw new Error('Failed to submit order');
-  }
-}
 
 function Checkout() {
   const { items, subtotal, tax, total, itemCount, resetCart } = useCart();

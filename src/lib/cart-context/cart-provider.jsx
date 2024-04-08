@@ -1,28 +1,9 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
+import { generateLineItems } from '@/lib/api';
+
 import { CartContext } from './cart-context';
-
-async function generateLineItems(cartItems) {
-  if (cartItems.length === 0) {
-    return {};
-  }
-
-  const items = cartItems.map(({ product, quantity }) => ({
-    productId: product.productId,
-    quantity,
-  }));
-
-  const response = await fetch('/api/order/line-items', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(items),
-  });
-
-  return response.json();
-}
 
 function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);

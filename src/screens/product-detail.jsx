@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
+import { fetchProduct } from '@/lib/api';
 import { useCart } from '@/lib/cart-context';
 import {
   Breadcrumbs,
@@ -8,12 +9,6 @@ import {
   ProductDetailCard,
 } from '@/lib/product';
 import { Skeleton } from '@/lib/ui/skeleton';
-
-async function fetchProduct(id) {
-  const response = await fetch(`/api/menu/${id}`);
-
-  return response.json();
-}
 
 function getProductQuery(id, queryClient) {
   return {

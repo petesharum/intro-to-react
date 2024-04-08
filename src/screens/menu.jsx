@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
 
+import { fetchCategories, fetchMenuItems } from '@/lib/api';
 import { Title } from '@/lib/ui/title';
 import {
   MenuItem,
@@ -9,30 +10,12 @@ import {
   FiltersSkeleton,
 } from '@/lib/menu';
 
-async function fetchCategories() {
-  const response = await fetch('/api/menu/categories');
-
-  return response.json();
-}
-
 function renderCategories(categories) {
   if (!categories) {
     return <FiltersSkeleton />;
   }
 
   return <Filters categories={categories} />;
-}
-
-async function fetchMenuItems(searchParams) {
-  const url = new URL('/api/menu', window.location.origin);
-
-  for (let entry of searchParams.entries()) {
-    url.searchParams.append(...entry);
-  }
-
-  const response = await fetch(url);
-
-  return response.json();
 }
 
 function renderMenuItems(items) {
