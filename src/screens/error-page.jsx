@@ -1,6 +1,6 @@
 import { useRouteError } from 'react-router-dom';
 
-import { Title } from '@/components/ui/title';
+import { Title } from '@/lib/ui/title';
 
 export default function ErrorPage({ message }) {
   const error = useRouteError();

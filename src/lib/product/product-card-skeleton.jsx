@@ -1,10 +1,5 @@
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from '@/components/ui/card';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Card, CardContent, CardFooter, CardHeader } from '@/lib/ui/card';
+import { Skeleton } from '@/lib/ui/skeleton';
 
 function ProductCardSkeleton() {
   return (

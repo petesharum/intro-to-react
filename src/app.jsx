@@ -3,9 +3,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 
-import { GlobalLayout } from './layouts/global-layout';
+import { GlobalLayout } from './global-layout';
 import { ErrorPage } from './screens/error-page';
-import { CartProvider } from './lib/cart';
+import { CartProvider } from './lib/cart-context';
 
 const Home = lazy(() =>
   import('./screens/home').then((module) => ({ default: module.Home })),

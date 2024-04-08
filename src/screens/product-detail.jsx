@@ -1,18 +1,13 @@
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { ProductCardSkeleton } from '@/components/product-detail/product-card-skeleton';
-import { ProductDetailCard } from '@/components/product-detail/product-detail-card';
+import { useCart } from '@/lib/cart-context';
 import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
-import { Skeleton } from '@/components/ui/skeleton';
-import { useCart } from '@/lib/cart';
+  Breadcrumbs,
+  ProductCardSkeleton,
+  ProductDetailCard,
+} from '@/lib/product';
+import { Skeleton } from '@/lib/ui/skeleton';
 
 async function fetchProduct(id) {
   const response = await fetch(`/api/menu/${id}`);
@@ -58,32 +53,16 @@ function ProductDetail() {
   return (
     <>
       <div className="col-span-12 lg:col-span-10 lg:col-start-2">
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link to=".." relative="path">
-                  Menu
-                </Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage className="font-bold">
-                {product?.name}
-              </BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+        <Breadcrumbs
+          path={[{ name: 'Menu', href: '/menu' }, { name: product?.name }]}
+        />
       </div>
-      <div className="col-span-7 lg:col-span-6 lg:col-start-2">
-        <div className="flex flex-col gap-4">
-          {!product ? (
-            <Skeleton className="aspect-square w-full" />
-          ) : (
-            <img src={`/images/${product.image.url}`} alt={product.image.alt} />
-          )}
-        </div>
+      <div className="col-span-7 flex flex-col gap-4 lg:col-span-6 lg:col-start-2 lg:gap-8">
+        {!product ? (
+          <Skeleton className="aspect-square w-full" />
+        ) : (
+          <img src={`/images/${product.image.url}`} alt={product.image.alt} />
+        )}
       </div>
       <div className="col-span-5 lg:col-span-4 lg:col-start-8">
         {!product ? (

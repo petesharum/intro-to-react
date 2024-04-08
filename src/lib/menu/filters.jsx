@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-import { Input } from '@/components/ui/input';
+import { Input } from '@/lib/ui/input';
 
 function Filters({ categories }) {
   const inputRef = useRef(null);

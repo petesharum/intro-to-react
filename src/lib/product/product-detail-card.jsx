@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
-import { StickyCard } from '@/components/shared/sticky-card';
-import { Button } from '@/components/ui/button';
-import { CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { Title } from '@/components/ui/title';
+import { StickyCard } from '@/lib/shared-components/sticky-card';
+import { Button } from '@/lib/ui/button';
+import { CardContent, CardFooter, CardHeader } from '@/lib/ui/card';
+import { Title } from '@/lib/ui/title';
 import { formatMoney } from '@/lib/format-money';
-import { Field } from '../shared/field';
+import { Field } from '../shared-components/field';
 
 function ProductDetailCard({ product, onAddToCart }) {
   const [quantity, setQuantity] = useState(1);

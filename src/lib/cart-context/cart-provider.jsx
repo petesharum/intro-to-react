@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 import { CartContext } from './cart-context';
-import { useQuery } from '@tanstack/react-query';
 
 async function generateLineItems(cartItems) {
   if (cartItems.length === 0) {

@@ -69,9 +69,9 @@ app.post('/order/line-items', async (req, res) => {
 app.post('/order', async (req, res) => {
   await sleep(1000);
 
-  const { order, payment } = req.body;
+  const { items, payment } = req.body;
 
-  console.log('Order received:', { order, payment });
+  console.log('Order received:', { items, payment });
   res.send('Order placed');
 
   // simulate a failed order

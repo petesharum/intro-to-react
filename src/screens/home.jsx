@@ -17,7 +17,7 @@ function Home() {
           <p className="text-xl font-black uppercase text-foreground">
             Check out our menu
           </p>
-          {<ChevronRight size={24} />}
+          <ChevronRight size={24} />
         </div>
       </Link>
     </div>

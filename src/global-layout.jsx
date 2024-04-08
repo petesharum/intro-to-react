@@ -1,11 +1,7 @@
-// TODO: style
-// TODO: pull into a layout?
-// TODO: pull nav out into a component?
-// TODO: pull cart into a component?
 import { Link, Outlet } from 'react-router-dom';
 
-import { Toaster } from '@/components/ui/sonner';
-import { useCart } from '@/lib/cart';
+import { Toaster } from '@/lib/ui/sonner';
+import { useCart } from '@/lib/cart-context';
 
 function CartIcon({ className }) {
   return (

@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 
-import { Card } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
+import { Card } from '@/lib/ui/card';
+import { cn } from '@/lib/ui-utils';
 
 const StickyCard = forwardRef(({ className, children }, ref) => {
   return (

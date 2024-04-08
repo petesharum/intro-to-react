@@ -1,10 +1,13 @@
-import { Title } from '@/components/ui/title';
-import { Filters } from '@/components/menu/filters';
-import { FiltersSkeleton } from '@/components/menu/filters-skeleton';
 import { useQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
-import { MenuItemSkeleton } from '@/components/menu/menu-item-skeleton';
-import { MenuItem } from '@/components/menu/menu-item';
+
+import { Title } from '@/lib/ui/title';
+import {
+  MenuItem,
+  MenuItemSkeleton,
+  Filters,
+  FiltersSkeleton,
+} from '@/lib/menu';
 
 async function fetchCategories() {
   const response = await fetch('/api/menu/categories');

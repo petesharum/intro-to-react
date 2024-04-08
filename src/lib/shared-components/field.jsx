@@ -1,8 +1,8 @@
 import { useId } from 'react';
 
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { cn } from '@/lib/utils';
+import { Label } from '@/lib/ui/label';
+import { Input } from '@/lib/ui/input';
+import { cn } from '@/lib/ui-utils';
 
 function Field({
   className,

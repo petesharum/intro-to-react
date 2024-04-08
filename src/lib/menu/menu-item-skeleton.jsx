@@ -1,4 +1,4 @@
-import { Skeleton } from '@/components/ui/skeleton';
+import { Skeleton } from '@/lib/ui/skeleton';
 
 function MenuItemSkeleton() {
   return (
