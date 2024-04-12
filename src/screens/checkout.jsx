@@ -21,7 +21,7 @@ import {
 } from '@/lib/shared-components/sticky-card';
 import { Button } from '@/lib/ui/button';
 import { Separator } from '@/lib/ui/separator';
-import { Title } from '@/lib/ui/title';
+import { Title } from '@/lib/shared-components/title';
 import { useCart } from '@/lib/cart-context';
 import { formatMoney } from '@/lib/format-money';
 import { Grid, GridColLeft, GridColRight } from '@/lib/shared-components/grid';
@@ -102,7 +102,8 @@ function Checkout() {
               {items.map(({ product, quantity }) => (
                 <LineItem
                   key={product.productId}
-                  product={product}
+                  name={product.name}
+                  price={product.price}
                   quantity={quantity}
                 />
               ))}

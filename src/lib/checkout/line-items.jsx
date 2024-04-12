@@ -8,16 +8,13 @@ function LineItems({ children }) {
   );
 }
 
-function LineItem({ product, quantity }) {
+function LineItem({ name, price, quantity }) {
   return (
-    <li
-      className="col-span-full grid grid-cols-subgrid"
-      key={product.productId}
-    >
+    <li className="col-span-full grid grid-cols-subgrid">
       <span className="text-right">{quantity}</span>
       <span>✕</span>
-      <span className="font-bold">{product.name}</span>
-      <span className="text-right">{formatMoney(product.price)}</span>
+      <span className="font-bold">{name}</span>
+      <span className="text-right">{formatMoney(price)}</span>
     </li>
   );
 }

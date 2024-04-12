@@ -5,8 +5,12 @@ import { Card } from '@/lib/ui/card';
 import { Input } from '@/lib/ui/input';
 import { formatMoney } from '@/lib/format-money';
 
-function CartItems(props) {
-  return <ul className="flex flex-col gap-4" {...props} />;
+function CartItems({ children, ...props }) {
+  return (
+    <ul className="flex flex-col gap-4" {...props}>
+      {children}
+    </ul>
+  );
 }
 
 function CartItem({

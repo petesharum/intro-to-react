@@ -2,7 +2,7 @@ import { Label } from '@/lib/ui/label';
 import { Input } from '@/lib/ui/input';
 import { cn } from '@/lib/ui-utils';
 
-function Field({ className, ...props }) {
+function Field({ className, children, ...props }) {
   return (
     <div
       className={cn(
@@ -10,21 +10,29 @@ function Field({ className, ...props }) {
         className,
       )}
       {...props}
-    />
+    >
+      {children}
+    </div>
   );
 }
 
-function FieldLabel(props) {
-  return <Label className="font-bold" {...props} />;
+function FieldLabel({ children, ...props }) {
+  return (
+    <Label className="font-bold" {...props}>
+      {children}
+    </Label>
+  );
 }
 
 function FieldInput(props) {
   return <Input autoComplete="off" {...props} />;
 }
 
-function FieldDescription(props) {
+function FieldDescription({ children, ...props }) {
   return (
-    <p className="text-sm leading-none text-muted-foreground" {...props} />
+    <p className="text-sm leading-none text-muted-foreground" {...props}>
+      {children}
+    </p>
   );
 }
 

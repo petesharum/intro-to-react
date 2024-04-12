@@ -7,7 +7,7 @@ import {
   StickyCardFooter,
 } from '@/lib/shared-components/sticky-card';
 import { Button } from '@/lib/ui/button';
-import { Title } from '@/lib/ui/title';
+import { Title } from '@/lib/shared-components/title';
 import { formatMoney } from '@/lib/format-money';
 import { Field, FieldLabel, FieldInput } from '../shared-components/field';
 
@@ -25,12 +25,12 @@ function ProductDetailCard({ product, onAddToCart }) {
 
   return (
     <StickyCard>
-      <form onSubmit={handleSubmit}>
-        <StickyCardHeader>
-          <Title>{product.name}</Title>
-          <p>{product.description}</p>
-        </StickyCardHeader>
-        <StickyCardContent>
+      <StickyCardHeader>
+        <Title>{product.name}</Title>
+        <p>{product.description}</p>
+      </StickyCardHeader>
+      <StickyCardContent>
+        <form id="add-to-cart" onSubmit={handleSubmit}>
           <Field>
             <FieldLabel htmlFor="quantity">Quantity</FieldLabel>
             <FieldInput
@@ -43,16 +43,17 @@ function ProductDetailCard({ product, onAddToCart }) {
               onChange={handleQuantityChange}
             />
           </Field>
-        </StickyCardContent>
-        <StickyCardFooter>
-          <Button
-            className="bg-red-600 py-4 text-base font-bold hover:bg-red-700"
-            type="submit"
-          >
-            Add to Cart {formatMoney(quantity * product.price)}
-          </Button>
-        </StickyCardFooter>
-      </form>
+        </form>
+      </StickyCardContent>
+      <StickyCardFooter>
+        <Button
+          className="bg-red-600 py-4 text-base font-bold hover:bg-red-700"
+          type="submit"
+          form="add-to-cart"
+        >
+          Add to Cart {formatMoney(quantity * product.price)}
+        </Button>
+      </StickyCardFooter>
     </StickyCard>
   );
 }

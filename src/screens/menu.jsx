@@ -2,22 +2,16 @@ import { useQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
 
 import { fetchCategories, fetchMenuItems } from '@/lib/api';
-import { Grid } from '@/lib/shared-components/grid';
-import { Title } from '@/lib/ui/title';
+import { Grid, GridAside, GridMain } from '@/lib/shared-components/grid';
+import { Title } from '@/lib/shared-components/title';
 import {
   MenuItem,
   MenuItemSkeleton,
-  Filters,
-  FiltersSkeleton,
+  CategoryFilters,
+  CategoryFilter,
+  SearchForm,
+  StickySidebar,
 } from '@/lib/menu';
-
-function renderCategories(categories) {
-  if (!categories) {
-    return <FiltersSkeleton />;
-  }
-
-  return <Filters categories={categories} />;
-}
 
 function renderMenuItems(items) {
   if (!items) {
@@ -76,17 +70,30 @@ function Menu() {
 
   return (
     <Grid>
-      <div className="col-span-2 flex flex-col gap-4 pt-8">
-        <div className="sticky top-32 flex flex-col gap-4">
-          {renderCategories(categories)}
-        </div>
-      </div>
-      <main className="col-span-10 flex flex-col gap-8">
+      <GridAside>
+        <StickySidebar>
+          <SearchForm />
+          <CategoryFilters isPending={!categories}>
+            <CategoryFilter key="all" href=".">
+              All
+            </CategoryFilter>
+            {categories?.map((category) => (
+              <CategoryFilter
+                key={category.categoryId}
+                href={`?category=${category.categoryId}`}
+              >
+                {category.name}
+              </CategoryFilter>
+            ))}
+          </CategoryFilters>
+        </StickySidebar>
+      </GridAside>
+      <GridMain>
         <Title>Menu</Title>
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">
           {renderMenuItems(items)}
         </div>
-      </main>
+      </GridMain>
     </Grid>
   );
 }

@@ -12,7 +12,7 @@ import {
   StickyCardFooter,
 } from '@/lib/shared-components/sticky-card';
 import { Button } from '@/lib/ui/button';
-import { Title } from '@/lib/ui/title';
+import { Title } from '@/lib/shared-components/title';
 import { Grid, GridColLeft, GridColRight } from '@/lib/shared-components/grid';
 
 function Cart() {
@@ -39,7 +39,9 @@ function Cart() {
           {items.map(({ product, quantity }) => (
             <CartItem
               key={product.productId}
-              {...product}
+              image={product.image}
+              name={product.name}
+              price={product.price}
               quantity={quantity}
               onQuantityChange={(event) => {
                 setCartQuantity(product.productId, +event.target.value);

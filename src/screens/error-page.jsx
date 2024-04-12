@@ -1,6 +1,6 @@
 import { useRouteError } from 'react-router-dom';
 
-import { Title } from '@/lib/ui/title';
+import { Title } from '@/lib/shared-components/title';
 import { Grid } from '@/lib/shared-components/grid';
 
 export default function ErrorPage({ message }) {

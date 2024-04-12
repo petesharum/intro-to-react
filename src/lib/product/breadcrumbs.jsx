@@ -1,42 +1,41 @@
-import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import {
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink,
+  BreadcrumbLink as BreadcrumbLinkBase,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/lib/ui/breadcrumb';
 
-function Breadcrumbs({ path }) {
+function Breadcrumbs({ children }) {
   return (
     <Breadcrumb>
-      <BreadcrumbList>
-        {path.map(({ name, href }, index) => {
-          const isCurrentPage = index === path.length - 1;
-
-          if (isCurrentPage) {
-            return (
-              <BreadcrumbItem key="current-page">
-                <BreadcrumbPage className="font-bold">{name}</BreadcrumbPage>
-              </BreadcrumbItem>
-            );
-          }
-
-          return (
-            <Fragment key={name}>
-              <BreadcrumbLink asChild>
-                <Link to={href}>{name}</Link>
-              </BreadcrumbLink>
-              <BreadcrumbSeparator />
-            </Fragment>
-          );
-        })}
-      </BreadcrumbList>
+      <BreadcrumbList>{children}</BreadcrumbList>
     </Breadcrumb>
   );
 }
 
-export { Breadcrumbs };
+function BreadcrumbLink({ children, href }) {
+  return (
+    <BreadcrumbLinkBase asChild>
+      <Link to={href}>{children}</Link>
+    </BreadcrumbLinkBase>
+  );
+}
+
+function BreadcrumbCurrent({ children }) {
+  return (
+    <BreadcrumbItem>
+      <BreadcrumbPage className="font-bold">{children}</BreadcrumbPage>
+    </BreadcrumbItem>
+  );
+}
+
+export {
+  Breadcrumbs,
+  BreadcrumbLink as Breadcrumb,
+  BreadcrumbCurrent,
+  BreadcrumbSeparator,
+};

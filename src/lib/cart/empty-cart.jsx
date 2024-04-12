@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import { Button } from '@/lib/ui/button';
-import { Title } from '@/lib/ui/title';
+import { Title } from '@/lib/shared-components/title';
 
 function EmptyCart() {
   return (
