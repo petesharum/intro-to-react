@@ -8,6 +8,12 @@ function StickyCardHeader(props) {
   return <CardHeader className="gap-8" {...props} />;
 }
 
+function StickyCardHeading({ children }) {
+  return (
+    <h2 className="text-xl font-black uppercase tracking-wide">{children}</h2>
+  );
+}
+
 function StickyCardSkeleton() {
   return (
     <>
@@ -43,6 +49,7 @@ StickyCard.displayName = 'StickyCard';
 export {
   StickyCard,
   StickyCardHeader,
+  StickyCardHeading,
   CardContent as StickyCardContent,
   CardFooter as StickyCardFooter,
 };

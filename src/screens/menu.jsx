@@ -1,45 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
 
-import { fetchCategories, fetchMenuItems } from '@/lib/api';
 import { Grid, GridAside, GridMain } from '@/lib/shared-components/grid';
 import { Title } from '@/lib/shared-components/title';
 import {
+  MenuItems,
   MenuItem,
-  MenuItemSkeleton,
+  MenuItemsNoResults,
   CategoryFilters,
   CategoryFilter,
+  getCategoryListQuery,
+  getMenuItemListQuery,
   SearchForm,
   StickySidebar,
 } from '@/lib/menu';
-
-function renderMenuItems(items) {
-  if (!items) {
-    return Array.from({ length: 8 }).map((_, i) => (
-      <MenuItemSkeleton key={i} />
-    ));
-  }
-
-  if (items.length === 0) {
-    return <div>No results</div>;
-  }
-
-  return items.map((item) => <MenuItem key={item.productId} {...item} />);
-}
-
-function getCategoryListQuery() {
-  return {
-    queryKey: ['categories'],
-    queryFn: fetchCategories,
-  };
-}
-
-function getMenuItemListQuery(searchParams) {
-  return {
-    queryKey: ['menu', searchParams.toString()],
-    queryFn: () => fetchMenuItems(searchParams),
-  };
-}
 
 function loader(queryClient) {
   return async ({ request }) => {
@@ -90,9 +64,13 @@ function Menu() {
       </GridAside>
       <GridMain>
         <Title>Menu</Title>
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">
-          {renderMenuItems(items)}
-        </div>
+        <MenuItems>
+          {items.length === 0 ? (
+            <MenuItemsNoResults />
+          ) : (
+            items.map((item) => <MenuItem key={item.productId} {...item} />)
+          )}
+        </MenuItems>
       </GridMain>
     </Grid>
   );

@@ -41,4 +41,12 @@ function GridColRight({ children, ...props }) {
   );
 }
 
-export { Grid, GridAside, GridMain, GridColLeft, GridColRight };
+function GridColFull({ children, ...props }) {
+  return (
+    <div className="col-span-12 lg:col-span-10 lg:col-start-2" {...props}>
+      {children}
+    </div>
+  );
+}
+
+export { Grid, GridAside, GridMain, GridColLeft, GridColRight, GridColFull };

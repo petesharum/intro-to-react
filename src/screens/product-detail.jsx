@@ -1,15 +1,20 @@
 import { useParams, useNavigate, useState } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { fetchProduct } from '@/lib/api';
 import { useCart } from '@/lib/cart-context';
 import {
   Breadcrumb,
   BreadcrumbCurrent,
   BreadcrumbSeparator,
   Breadcrumbs,
+  getProductQuery,
 } from '@/lib/product';
-import { Grid, GridColLeft, GridColRight } from '@/lib/shared-components/grid';
+import {
+  Grid,
+  GridColFull,
+  GridColLeft,
+  GridColRight,
+} from '@/lib/shared-components/grid';
 import {
   StickyCard,
   StickyCardFooter,
@@ -21,15 +26,6 @@ import { formatMoney } from '@/lib/format-money';
 import { Title } from '@/lib/shared-components/title';
 import { Button } from '@/lib/ui/button';
 import { Skeleton } from '@/lib/ui/skeleton';
-
-function getProductQuery(id, queryClient) {
-  return {
-    queryKey: ['product', id],
-    queryFn: () => fetchProduct(id),
-    placeholderData: () =>
-      queryClient.getQueryData(['menu', ''])?.find((p) => p.productId === id),
-  };
-}
 
 function loader(queryClient) {
   return async ({ params }) => {
@@ -65,13 +61,13 @@ function ProductDetail() {
 
   return (
     <Grid>
-      <div className="col-span-12 lg:col-span-10 lg:col-start-2">
+      <GridColFull>
         <Breadcrumbs>
           <Breadcrumb href="/menu">Menu</Breadcrumb>
           <BreadcrumbSeparator />
           <BreadcrumbCurrent>{product?.name}</BreadcrumbCurrent>
         </Breadcrumbs>
-      </div>
+      </GridColFull>
       <GridColLeft>
         {!product ? (
           <Skeleton className="aspect-square w-full" />

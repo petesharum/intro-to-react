@@ -1,6 +1,29 @@
 import { Link } from 'react-router-dom';
 
 import { formatMoney } from '@/lib/format-money';
+import { MenuItemSkeleton } from './menu-item-skeleton';
+
+function MenuItems({ children, isPending }) {
+  if (isPending) {
+    return Array.from({ length: 8 }).map((_, i) => (
+      <MenuItemSkeleton key={i} />
+    ));
+  }
+
+  return (
+    <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">
+      {children}
+    </div>
+  );
+}
+
+function MenuItemsNoResults() {
+  return (
+    <div className="grid-cols-12">
+      <p>No menu items found.</p>
+    </div>
+  );
+}
 
 function MenuItem({ productId, image, name, price }) {
   return (
@@ -25,4 +48,4 @@ function MenuItem({ productId, image, name, price }) {
   );
 }
 
-export { MenuItem };
+export { MenuItem, MenuItems, MenuItemsNoResults };

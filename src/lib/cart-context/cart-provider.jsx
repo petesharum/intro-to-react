@@ -5,14 +5,6 @@ import { generateSummary } from '@/lib/api';
 
 import { CartContext } from './cart-context';
 
-function getLineItemsQuery(cartItems, placeholderData) {
-  return {
-    queryKey: ['summary', cartItems],
-    queryFn: () => generateSummary(cartItems),
-    placeholderData,
-  };
-}
-
 function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
   const previousLineItems = useRef({
@@ -24,7 +16,11 @@ function CartProvider({ children }) {
     data: lineItems,
     isPending,
     isPlaceholderData,
-  } = useQuery(getLineItemsQuery(cartItems, previousLineItems.current));
+  } = useQuery({
+    queryKey: ['summary', cartItems],
+    queryFn: () => generateSummary(cartItems),
+    placeholderData: previousLineItems.current,
+  });
 
   useEffect(() => {
     previousLineItems.current = lineItems;

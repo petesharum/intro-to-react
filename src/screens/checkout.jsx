@@ -16,6 +16,7 @@ import { SummaryItem, Summary } from '@/lib/shared-components/summary';
 import {
   StickyCard,
   StickyCardHeader,
+  StickyCardHeading,
   StickyCardContent,
   StickyCardFooter,
 } from '@/lib/shared-components/sticky-card';
@@ -93,9 +94,9 @@ function Checkout() {
       <GridColRight>
         <StickyCard>
           <StickyCardHeader>
-            <h2 className="text-xl font-black uppercase tracking-wide">
+            <StickyCardHeading>
               {itemCount} {pluralize(itemCount, 'Item', 'Items')}
-            </h2>
+            </StickyCardHeading>
           </StickyCardHeader>
           <StickyCardContent>
             <LineItems>
