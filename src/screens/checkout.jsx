@@ -1,14 +1,19 @@
-import { useEffect, Fragment } from 'react';
+import { useEffect } from 'react';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 
 import { submitOrder } from '@/lib/api';
+import { LineItems, LineItem } from '@/lib/checkout';
 import { pluralize } from '@/lib/pluralize';
 import { Field } from '@/lib/shared-components/field';
-import { LineItem, LineItems } from '@/lib/shared-components/line-items';
-import { StickyCard } from '@/lib/shared-components/sticky-card';
-import { CardContent, CardFooter, CardHeader } from '@/lib/ui/card';
+import { SummaryItem, Summary } from '@/lib/shared-components/summary';
+import {
+  StickyCard,
+  StickyCardHeader,
+  StickyCardContent,
+  StickyCardFooter,
+} from '@/lib/shared-components/sticky-card';
 import { Button } from '@/lib/ui/button';
 import { Separator } from '@/lib/ui/separator';
 import { Title } from '@/lib/ui/title';
@@ -81,40 +86,37 @@ function Checkout() {
       </div>
       <div className="col-span-5 lg:col-span-4 lg:col-start-8">
         <StickyCard>
-          <CardHeader className="gap-8">
+          <StickyCardHeader className="gap-8">
             <h2 className="text-xl font-black uppercase tracking-wide">
               {itemCount} {pluralize(itemCount, 'Item', 'Items')}
             </h2>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-[min-content_min-content_1fr_min-content] gap-x-4">
-              {items.map(({ product, quantity }) => (
-                <Fragment key={product.productId}>
-                  <span className="text-right">{quantity}</span>
-                  <span>✕</span>
-                  <span className="font-bold">{product.name}</span>
-                  <span className="text-right">
-                    {formatMoney(product.price)}
-                  </span>
-                </Fragment>
-              ))}
-            </div>
-            <Separator className="my-4" />
+          </StickyCardHeader>
+          <StickyCardContent>
             <LineItems>
-              <LineItem label="Subtotal" detail={formatMoney(subtotal)} />
-              <LineItem label="Tax" detail={formatMoney(tax)} />
-              <LineItem
+              {items.map(({ product, quantity }) => (
+                <LineItem
+                  key={product.productId}
+                  product={product}
+                  quantity={quantity}
+                />
+              ))}
+            </LineItems>
+            <Separator className="my-4" />
+            <Summary>
+              <SummaryItem label="Subtotal" detail={formatMoney(subtotal)} />
+              <SummaryItem label="Tax" detail={formatMoney(tax)} />
+              <SummaryItem
                 label="Total"
                 detail={formatMoney(total)}
                 className="font-bold"
               />
-            </LineItems>
-          </CardContent>
-          <CardFooter>
+            </Summary>
+          </StickyCardContent>
+          <StickyCardFooter>
             <Button form="payment-info" type="submit" isPending={isPending}>
               Place Order {formatMoney(total)}
             </Button>
-          </CardFooter>
+          </StickyCardFooter>
         </StickyCard>
       </div>
     </>

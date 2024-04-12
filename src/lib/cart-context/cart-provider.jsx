@@ -1,14 +1,14 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-import { generateLineItems } from '@/lib/api';
+import { generateSummary } from '@/lib/api';
 
 import { CartContext } from './cart-context';
 
 function getLineItemsQuery(cartItems, placeholderData) {
   return {
-    queryKey: ['line-items', cartItems],
-    queryFn: () => generateLineItems(cartItems),
+    queryKey: ['summary', cartItems],
+    queryFn: () => generateSummary(cartItems),
     placeholderData,
   };
 }

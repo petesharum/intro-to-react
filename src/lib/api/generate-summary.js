@@ -1,4 +1,4 @@
-async function generateLineItems(cartItems) {
+async function generateSummary(cartItems) {
   if (cartItems.length === 0) {
     return {};
   }
@@ -8,7 +8,7 @@ async function generateLineItems(cartItems) {
     quantity,
   }));
 
-  const response = await fetch('/api/order/line-items', {
+  const response = await fetch('/api/order/summary', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -19,4 +19,4 @@ async function generateLineItems(cartItems) {
   return response.json();
 }
 
-export { generateLineItems };
+export { generateSummary };

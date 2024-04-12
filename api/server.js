@@ -45,7 +45,7 @@ app.get('/menu/:id', async (req, res) => {
   }
 });
 
-app.post('/order/line-items', async (req, res) => {
+app.post('/order/summary', async (req, res) => {
   await sleep(1000);
 
   const orderItems = req.body.map(({ productId, quantity }) => {

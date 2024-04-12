@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-import { Card } from '@/lib/ui/card';
+import { Card, CardHeader, CardContent, CardFooter } from '@/lib/ui/card';
 import { cn } from '@/lib/ui-utils';
 
 const StickyCard = forwardRef(({ className, children }, ref) => {
@@ -12,4 +12,13 @@ const StickyCard = forwardRef(({ className, children }, ref) => {
 });
 StickyCard.displayName = 'StickyCard';
 
-export { StickyCard };
+function StickyCardHeader(props) {
+  return <CardHeader className="gap-8" {...props} />;
+}
+
+export {
+  StickyCard,
+  StickyCardHeader,
+  CardContent as StickyCardContent,
+  CardFooter as StickyCardFooter,
+};
