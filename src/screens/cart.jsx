@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { EmptyCart, CartItem } from '@/lib/cart';
+import { EmptyCart, CartItems, CartItem } from '@/lib/cart';
 import { useCart } from '@/lib/cart-context';
 import { formatMoney } from '@/lib/format-money';
 import { pluralize } from '@/lib/pluralize';
@@ -35,20 +35,19 @@ function Cart() {
     <Grid>
       <GridColLeft>
         <Title>My Cart</Title>
-        <ul className="flex flex-col gap-4">
+        <CartItems>
           {items.map(({ product, quantity }) => (
-            <li key={product.productId}>
-              <CartItem
-                {...product}
-                quantity={quantity}
-                onQuantityChange={(event) => {
-                  setCartQuantity(product.productId, +event.target.value);
-                }}
-                onRemove={() => removeFromCart(product.productId)}
-              />
-            </li>
+            <CartItem
+              key={product.productId}
+              {...product}
+              quantity={quantity}
+              onQuantityChange={(event) => {
+                setCartQuantity(product.productId, +event.target.value);
+              }}
+              onRemove={() => removeFromCart(product.productId)}
+            />
           ))}
-        </ul>
+        </CartItems>
       </GridColLeft>
       <GridColRight>
         <StickyCard>
