@@ -8,6 +8,7 @@ import {
   ProductCardSkeleton,
   ProductDetailCard,
 } from '@/lib/product';
+import { Grid, GridColLeft, GridColRight } from '@/lib/shared-components/grid';
 import { Skeleton } from '@/lib/ui/skeleton';
 
 function getProductQuery(id, queryClient) {
@@ -46,27 +47,27 @@ function ProductDetail() {
   }
 
   return (
-    <>
+    <Grid>
       <div className="col-span-12 lg:col-span-10 lg:col-start-2">
         <Breadcrumbs
           path={[{ name: 'Menu', href: '/menu' }, { name: product?.name }]}
         />
       </div>
-      <div className="col-span-7 flex flex-col gap-4 lg:col-span-6 lg:col-start-2 lg:gap-8">
+      <GridColLeft>
         {!product ? (
           <Skeleton className="aspect-square w-full" />
         ) : (
           <img src={`/images/${product.image.url}`} alt={product.image.alt} />
         )}
-      </div>
-      <div className="col-span-5 lg:col-span-4 lg:col-start-8">
+      </GridColLeft>
+      <GridColRight>
         {!product ? (
           <ProductCardSkeleton />
         ) : (
           <ProductDetailCard product={product} onAddToCart={handleAddToCart} />
         )}
-      </div>
-    </>
+      </GridColRight>
+    </Grid>
   );
 }
 ProductDetail.loader = loader;

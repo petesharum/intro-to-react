@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
 
 import { fetchCategories, fetchMenuItems } from '@/lib/api';
+import { Grid } from '@/lib/shared-components/grid';
 import { Title } from '@/lib/ui/title';
 import {
   MenuItem,
@@ -74,7 +75,7 @@ function Menu() {
   const { data: items } = useQuery(getMenuItemListQuery(searchParams));
 
   return (
-    <>
+    <Grid>
       <div className="col-span-2 flex flex-col gap-4 pt-8">
         <div className="sticky top-32 flex flex-col gap-4">
           {renderCategories(categories)}
@@ -86,7 +87,7 @@ function Menu() {
           {renderMenuItems(items)}
         </div>
       </main>
-    </>
+    </Grid>
   );
 }
 Menu.loader = loader;

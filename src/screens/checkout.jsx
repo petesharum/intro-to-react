@@ -6,7 +6,12 @@ import { useMutation } from '@tanstack/react-query';
 import { submitOrder } from '@/lib/api';
 import { LineItems, LineItem } from '@/lib/checkout';
 import { pluralize } from '@/lib/pluralize';
-import { Field } from '@/lib/shared-components/field';
+import {
+  Field,
+  FieldLabel,
+  FieldInput,
+  FieldDescription,
+} from '@/lib/shared-components/field';
 import { SummaryItem, Summary } from '@/lib/shared-components/summary';
 import {
   StickyCard,
@@ -19,6 +24,7 @@ import { Separator } from '@/lib/ui/separator';
 import { Title } from '@/lib/ui/title';
 import { useCart } from '@/lib/cart-context';
 import { formatMoney } from '@/lib/format-money';
+import { Grid, GridColLeft, GridColRight } from '@/lib/shared-components/grid';
 
 function Checkout() {
   const { items, subtotal, tax, total, itemCount, resetCart } = useCart();
@@ -48,43 +54,43 @@ function Checkout() {
   }, [items, navigate, isPending]);
 
   return (
-    <>
-      <div className="col-span-7 flex flex-col gap-4 lg:col-span-6 lg:col-start-2 lg:gap-8">
+    <Grid>
+      <GridColLeft>
         <Title>Checkout</Title>
         <form
           className="grid grid-cols-12 gap-x-4 gap-y-8"
           id="payment-info"
           onSubmit={handleSubmit}
-          autoComplete="off"
         >
-          <Field className="col-span-full" label="Name" name="fName" />
-          <Field
-            className="col-span-full"
-            label="Email"
-            name="email"
-            type="email"
-          />
-          <Field
-            className="col-span-full"
-            label="Card Number"
-            name="cardNumber"
-          />
-          <Field
-            className="col-span-4"
-            label="Expiration Date"
-            description="(MM/YY)"
-            name="expiry"
-          />
-          <Field
-            className="col-span-4"
-            label="CVV"
-            description="(3 or 4 digits)"
-            name="cvv"
-          />
-          <Field className="col-span-4" label="Postal Code" name="postalCode" />
+          <Field className="col-span-full">
+            <FieldLabel htmlFor="fName">Name</FieldLabel>
+            <FieldInput name="fName" id="fName" />
+          </Field>
+          <Field className="col-span-full">
+            <FieldLabel htmlFor="email">Email</FieldLabel>
+            <FieldInput name="email" id="email" type="email" />
+          </Field>
+          <Field className="col-span-full">
+            <FieldLabel htmlFor="cardNumber">Card Number</FieldLabel>
+            <FieldInput name="cardNumber" id="cardNumber" maxLength="16" />
+          </Field>
+          <Field className="col-span-4">
+            <FieldLabel htmlFor="expiry">Expiration Date</FieldLabel>
+            <FieldInput name="expiry" id="expiry" maxLength="5" />
+            <FieldDescription>(MM/YY)</FieldDescription>
+          </Field>
+          <Field className="col-span-4">
+            <FieldLabel htmlFor="cvv">CVV</FieldLabel>
+            <FieldInput name="cvv" id="cvv" maxLength="4" />
+            <FieldDescription>(3 or 4 digits)</FieldDescription>
+          </Field>
+          <Field className="col-span-4">
+            <FieldLabel htmlFor="postalCode">Postal Code</FieldLabel>
+            <FieldInput name="postalCode" id="postalCode" />
+          </Field>
         </form>
-      </div>
-      <div className="col-span-5 lg:col-span-4 lg:col-start-8">
+      </GridColLeft>
+      <GridColRight>
         <StickyCard>
           <StickyCardHeader className="gap-8">
             <h2 className="text-xl font-black uppercase tracking-wide">
@@ -118,8 +124,8 @@ function Checkout() {
             </Button>
           </StickyCardFooter>
         </StickyCard>
-      </div>
-    </>
+      </GridColRight>
+    </Grid>
   );
 }
 

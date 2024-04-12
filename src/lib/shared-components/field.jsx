@@ -1,45 +1,31 @@
-import { useId } from 'react';
-
 import { Label } from '@/lib/ui/label';
 import { Input } from '@/lib/ui/input';
 import { cn } from '@/lib/ui-utils';
 
-function Field({
-  className,
-  label,
-  id: idProp,
-  name,
-  type = 'text',
-  slotProps = {},
-  description,
-}) {
-  const id = useId();
-  const resolvedId = idProp || id;
+function Field({ className, ...props }) {
   return (
     <div
       className={cn(
         'flex flex-col gap-2 has-[:disabled]:opacity-50',
         className,
       )}
-    >
-      <Label htmlFor={resolvedId} className="font-bold" {...slotProps.label}>
-        {label}
-      </Label>
-      <Input
-        name={name}
-        type={type}
-        id={resolvedId}
-        aria-describedby={`${resolvedId}-description`}
-        {...slotProps.input}
-      />
-      <p
-        id={`${resolvedId}-description`}
-        className="text-sm leading-none text-muted-foreground"
-      >
-        {description}
-      </p>
-    </div>
+      {...props}
+    />
   );
 }
 
-export { Field };
+function FieldLabel(props) {
+  return <Label className="font-bold" {...props} />;
+}
+
+function FieldInput(props) {
+  return <Input autoComplete="off" {...props} />;
+}
+
+function FieldDescription(props) {
+  return (
+    <p className="text-sm leading-none text-muted-foreground" {...props} />
+  );
+}
+
+export { Field, FieldLabel, FieldInput, FieldDescription };

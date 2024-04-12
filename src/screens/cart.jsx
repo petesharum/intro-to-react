@@ -13,6 +13,7 @@ import {
 } from '@/lib/shared-components/sticky-card';
 import { Button } from '@/lib/ui/button';
 import { Title } from '@/lib/ui/title';
+import { Grid, GridColLeft, GridColRight } from '@/lib/shared-components/grid';
 
 function Cart() {
   const {
@@ -31,8 +32,8 @@ function Cart() {
   }
 
   return (
-    <>
-      <div className="col-span-7 flex flex-col gap-4 lg:col-span-6 lg:col-start-2 lg:gap-8">
+    <Grid>
+      <GridColLeft>
         <Title>My Cart</Title>
         <ul className="flex flex-col gap-4">
           {items.map(({ product, quantity }) => (
@@ -48,8 +49,8 @@ function Cart() {
             </li>
           ))}
         </ul>
-      </div>
-      <div className="col-span-5 lg:col-span-4 lg:col-start-8">
+      </GridColLeft>
+      <GridColRight>
         <StickyCard>
           <StickyCardHeader className="gap-8">
             <h2 className="text-xl font-black uppercase tracking-wide">
@@ -73,8 +74,8 @@ function Cart() {
             </Button>
           </StickyCardFooter>
         </StickyCard>
-      </div>
-    </>
+      </GridColRight>
+    </Grid>
   );
 }
 

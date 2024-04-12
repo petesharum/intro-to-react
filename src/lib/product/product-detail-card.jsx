@@ -9,7 +9,7 @@ import {
 import { Button } from '@/lib/ui/button';
 import { Title } from '@/lib/ui/title';
 import { formatMoney } from '@/lib/format-money';
-import { Field } from '../shared-components/field';
+import { Field, FieldLabel, FieldInput } from '../shared-components/field';
 
 function ProductDetailCard({ product, onAddToCart }) {
   const [quantity, setQuantity] = useState(1);
@@ -31,19 +31,18 @@ function ProductDetailCard({ product, onAddToCart }) {
           <p>{product.description}</p>
         </StickyCardHeader>
         <StickyCardContent>
-          <Field
-            label="Quantity"
-            name="quantity"
-            type="number"
-            slotProps={{
-              input: {
-                step: 1,
-                min: 1,
-                value: quantity,
-                onChange: handleQuantityChange,
-              },
-            }}
-          />
+          <Field>
+            <FieldLabel htmlFor="quantity">Quantity</FieldLabel>
+            <FieldInput
+              name="quantity"
+              id="quantity"
+              type="number"
+              step="1"
+              min="1"
+              value={quantity}
+              onChange={handleQuantityChange}
+            />
+          </Field>
         </StickyCardContent>
         <StickyCardFooter>
           <Button
