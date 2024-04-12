@@ -92,7 +92,7 @@ function Checkout() {
       </GridColLeft>
       <GridColRight>
         <StickyCard>
-          <StickyCardHeader className="gap-8">
+          <StickyCardHeader>
             <h2 className="text-xl font-black uppercase tracking-wide">
               {itemCount} {pluralize(itemCount, 'Item', 'Items')}
             </h2>
