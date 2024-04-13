@@ -1,19 +1,15 @@
-import * as React from 'react';
-
 import { cn } from '@/lib/ui-utils';
 
-const Title = React.forwardRef<
-  HTMLHeadingElement,
-  React.HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => {
+function Title({ children, className, ...props }: React.ComponentProps<'h1'>) {
   return (
     <h1
       className={cn('text-4xl font-black uppercase tracking-wider', className)}
-      ref={ref}
       {...props}
-    />
+    >
+      {children}
+    </h1>
   );
-});
+}
 Title.displayName = 'Title';
 
 export { Title };

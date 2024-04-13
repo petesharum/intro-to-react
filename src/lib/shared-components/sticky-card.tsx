@@ -1,14 +1,12 @@
-import { forwardRef } from 'react';
-
 import { Card, CardHeader, CardContent, CardFooter } from '@/lib/ui/card';
 import { Skeleton } from '@/lib/ui/skeleton';
 import { cn } from '@/lib/ui-utils';
 
-function StickyCardHeader(props) {
+function StickyCardHeader(props: React.ComponentProps<typeof CardHeader>) {
   return <CardHeader className="gap-8" {...props} />;
 }
 
-function StickyCardHeading({ children }) {
+function StickyCardHeading({ children }: { children: React.ReactNode }) {
   return (
     <h2 className="text-xl font-black uppercase tracking-wide">{children}</h2>
   );
@@ -37,14 +35,19 @@ function StickyCardSkeleton() {
   );
 }
 
-const StickyCard = forwardRef(({ className, isPending, children }, ref) => {
+type StickyCardProps = {
+  className?: string;
+  isPending?: boolean;
+  children: React.ReactNode;
+};
+
+function StickyCard({ className, isPending, children }: StickyCardProps) {
   return (
-    <Card className={cn('sticky top-32 shadow-xl', className)} ref={ref}>
+    <Card className={cn('sticky top-32 shadow-xl', className)}>
       {isPending ? <StickyCardSkeleton /> : children}
     </Card>
   );
-});
-StickyCard.displayName = 'StickyCard';
+}
 
 export {
   StickyCard,
