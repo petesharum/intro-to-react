@@ -1,4 +1,6 @@
-async function submitOrder(order) {
+import { Order } from './types';
+
+async function submitOrder(order: Order): Promise<void> {
   const response = await fetch('/api/order', {
     method: 'POST',
     headers: {

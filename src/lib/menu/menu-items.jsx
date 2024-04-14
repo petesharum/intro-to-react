@@ -1,7 +1,19 @@
 import { Link } from 'react-router-dom';
 
 import { formatMoney } from '@/lib/format-money';
-import { MenuItemSkeleton } from './menu-item-skeleton';
+import { Skeleton } from '@/lib/ui/skeleton';
+
+function MenuItemSkeleton() {
+  return (
+    <div className="flex flex-col gap-2">
+      <Skeleton className="aspect-square w-full rounded" />
+      <div className="flex flex-col gap-2">
+        <Skeleton className="h-6 w-24" />
+        <Skeleton className="h-6 w-20" />
+      </div>
+    </div>
+  );
+}
 
 function MenuItems({ children, isPending }) {
   if (isPending) {

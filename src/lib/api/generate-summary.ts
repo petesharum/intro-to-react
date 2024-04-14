@@ -1,6 +1,10 @@
-async function generateSummary(cartItems) {
+import { CartItem, OrderPaymentSummary } from './types';
+
+async function generateSummary(
+  cartItems: CartItem[],
+): Promise<OrderPaymentSummary | null> {
   if (cartItems.length === 0) {
-    return {};
+    return null;
   }
 
   const items = cartItems.map(({ product, quantity }) => ({
