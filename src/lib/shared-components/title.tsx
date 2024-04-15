@@ -10,6 +10,5 @@ function Title({ children, className, ...props }: React.ComponentProps<'h1'>) {
     </h1>
   );
 }
-Title.displayName = 'Title';
 
 export { Title };
