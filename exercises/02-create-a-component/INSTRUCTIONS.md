@@ -4,9 +4,7 @@ Currently our app is rendering a simple `h1` element. React's strength is in its
 
 There are two ways of creating components in React: function components and class components. We will focus on function components, which are simply functions that contain rendering instructions. Let's move our `h1` render into a new function component.
 
-> ℹ️ **Good to know**
-> 
-> For this exercise, you can drag the `index.html` file into a browser to render the result.
+For this exercise, you can drag the `index.html` file into a browser to render the result.
 
 ## Create the initial component
 
@@ -18,9 +16,7 @@ function Title() {
 }
 ```
 
-> 🚨 **Careful!**
-> 
-> Function components, and React components in general, must be captialized when rendered. The capitalization tells React to render this as a custom component and not as a native browser element (e.g. `Title` vs. `<title>`).
+**Note:** Function components, and React components in general, must be captialized when rendered. The capitalization tells React to render this as a custom component and not as a native browser element (e.g. `Title` vs. `<title>`).
 
 Inside the `Title` component function, return a new `React.createElement`. We'll render an `h1` like the current `root.render`:
 

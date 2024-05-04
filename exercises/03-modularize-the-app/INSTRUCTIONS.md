@@ -36,10 +36,6 @@ Since you're using `Title` in `createElement`, you will need to import it from `
 import { Title } from './title.js';
 ```
 
-> 🚨 **Careful!**
-> 
-> Make sure to include the `.js` when importing JavaScript modules. The ECMAScript Module (ESM) specification requires a complete path, including the extension. The `./` refers to the directory the current file lives in (in this case, `src`).
-
 Creating a top-level `App` component is a common practice in React. It serves as a place to add global functionality and configuration. Next we'll render this app component.
 
 ## Create the bootstrap module
@@ -52,9 +48,7 @@ Finally, in `index.html`, remove anything that's left between the `script` tags 
 
 To test this out, in your terminal, run `npm start`. This will start a local development server. Modules almost always require a server due to security policies in browsers. 
     
-> ℹ️ **Good to know** 
-> 
-> We are using `npx` to run a dependency without having to add it to this project. You may be asked to install the `server` package. Go ahead and agree by entering `y` after the prompt. 
+Type `y` and `return/enter` if prompted to install the `server` package. 
 
 Navigate to the address shown after initialization (usually `localhost:3000`). You should see the same result from the last exercise.
 
