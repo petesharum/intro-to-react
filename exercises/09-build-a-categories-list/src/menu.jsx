@@ -1,7 +1,9 @@
-import { MenuItem, MenuItems } from './menu-items';
 import { Title } from './title';
+import { MenuItem, MenuItems, MenuItemsNoResults } from './menu-items';
 // eslint-disable-next-line no-unused-vars -- required for exercise
-import { items } from './menu-data';
+import { items, categories } from './menu-data';
+// eslint-disable-next-line no-unused-vars -- required for exercise
+import { CategoryFilter, CategoryFilters } from './category-filters';
 
 function Menu() {
   return (
@@ -18,35 +20,26 @@ function Menu() {
         </div>
       </header>
       <div className="container pb-16 pt-8 lg:gap-x-16 lg:gap-y-8">
-        <main className="col-span-full flex flex-col gap-8">
+        <aside className="col-span-2 flex flex-col gap-4 pt-8">
+          <div className="sticky top-32 flex flex-col gap-4">
+            {/* 👋 Replace this comment with the category filters */}
+          </div>
+        </aside>
+        <main className="col-span-10 flex flex-col gap-8">
           <Title>Menu</Title>
           <MenuItems>
-            <MenuItem
-              name="Cheeseburger"
-              price={699}
-              image={{ url: 'cheeseburger.jpeg', alt: 'Cheeseburger' }}
-            />
-            <MenuItem
-              name="Bacon Cheeseburger"
-              price={849}
-              image={{
-                url: 'bacon-cheeseburger.jpeg',
-                alt: 'Bacon Cheeseburger',
-              }}
-            />
-            <MenuItem
-              name="Double Cheeseburger"
-              price={949}
-              image={{
-                url: 'double-cheeseburger.jpeg',
-                alt: 'Double Cheeseburger',
-              }}
-            />
-            <MenuItem
-              name="Soda"
-              price={199}
-              image={{ url: 'soda.jpeg', alt: 'Soda' }}
-            />
+            {items.length === 0 ? (
+              <MenuItemsNoResults />
+            ) : (
+              items.map((menuItem) => (
+                <MenuItem
+                  key={menuItem.productId}
+                  name={menuItem.name}
+                  image={menuItem.image}
+                  price={menuItem.price}
+                />
+              ))
+            )}
           </MenuItems>
         </main>
       </div>

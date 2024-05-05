@@ -1,5 +1,6 @@
-import { Title } from './title';
+// eslint-disable-next-line no-unused-vars -- required for exercise
 import { MenuItem } from './menu-items';
+import { Title } from './title';
 
 function Menu() {
   return (
@@ -18,8 +19,49 @@ function Menu() {
       <div className="container pb-16 pt-8 lg:gap-x-16 lg:gap-y-8">
         <main className="col-span-full flex flex-col gap-8">
           <Title>Menu</Title>
-          <div>
-            <MenuItem />
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">
+            {/* 👇 beginning of menu item */}
+            <div>
+              <img
+                height="300"
+                width="300"
+                src="/images/cheeseburger.jpeg"
+                alt="Cheeseburger"
+              />
+              <div className="text-lg font-bold">Cheeseburger</div>
+              <div>$6.99</div>
+            </div>
+            {/* 👆 end of menu item */}
+            <div>
+              <img
+                height="300"
+                width="300"
+                src="/images/bacon-cheeseburger.jpeg"
+                alt="Bacon Cheeseburger"
+              />
+              <div className="text-lg font-bold">Bacon Cheeseburger</div>
+              <div>$8.49</div>
+            </div>
+            <div>
+              <img
+                height="300"
+                width="300"
+                src="/images/double-cheeseburger.jpeg"
+                alt="Double Cheeseburger"
+              />
+              <div className="text-lg font-bold">Double Cheeseburger</div>
+              <div>$9.49</div>
+            </div>
+            <div>
+              <img
+                height="300"
+                width="300"
+                src="/images/soda.jpeg"
+                alt="Soda"
+              />
+              <div className="text-lg font-bold">Soda</div>
+              <div>$1.99</div>
+            </div>
           </div>
         </main>
       </div>

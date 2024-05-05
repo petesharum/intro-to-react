@@ -1,4 +1,4 @@
-import { formatMoney } from '@/lib/format-money';
+import { formatMoney } from './lib/format-money';
 
 function MenuItems({ children }) {
   return (
@@ -8,9 +8,17 @@ function MenuItems({ children }) {
   );
 }
 
-function MenuItem({ image, name, price }) {
+function MenuItemsNoResults() {
   return (
-    <>
+    <div className="grid-cols-12">
+      <p>No menu items found.</p>
+    </div>
+  );
+}
+
+function MenuItem({ name, price, image }) {
+  return (
+    <div>
       <img
         height="300"
         width="300"
@@ -19,8 +27,8 @@ function MenuItem({ image, name, price }) {
       />
       <div className="text-lg font-bold">{name}</div>
       <div>{formatMoney(price)}</div>
-    </>
+    </div>
   );
 }
 
-export { MenuItem, MenuItems };
+export { MenuItem, MenuItems, MenuItemsNoResults };

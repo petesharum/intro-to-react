@@ -1,7 +1,5 @@
-import { MenuItem, MenuItems } from './menu-items';
+import { MenuItem } from './menu-items';
 import { Title } from './title';
-// eslint-disable-next-line no-unused-vars -- required for exercise
-import { items } from './menu-data';
 
 function Menu() {
   return (
@@ -20,7 +18,7 @@ function Menu() {
       <div className="container pb-16 pt-8 lg:gap-x-16 lg:gap-y-8">
         <main className="col-span-full flex flex-col gap-8">
           <Title>Menu</Title>
-          <MenuItems>
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">
             <MenuItem
               name="Cheeseburger"
               price={699}
@@ -47,7 +45,7 @@ function Menu() {
               price={199}
               image={{ url: 'soda.jpeg', alt: 'Soda' }}
             />
-          </MenuItems>
+          </div>
         </main>
       </div>
       <footer className="bg-slate-800 text-slate-400">

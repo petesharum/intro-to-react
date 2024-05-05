@@ -123,10 +123,22 @@ In HTML, you would reference this CSS class with the `class` attribute:
 <p class="red">I am red text.</p>
 ```
 
-However, `class` is a reserved keyword in JavaScript. The JSX equivalent of `class` is `className`:
+However, the `class` attribute creates an issue for JavaScript. Recall that all JSX is first converted to `createElement`:
+
+```js
+<p class="red">I am red text.</p>
+
+// converted to
+React.createElement('p', {class: 'red'}, 'I am red text.');
+```
+
+`class` is a reserved keyword in JavaScript, so we can't simply pass `class` as a prop. The DOM API overcomes this issue by renaming the `class` attribute as `className`. This is what JSX uses as well:
 
 ```js
 <p className="red">I am still red text.</p>
+
+// converted to
+React.createElement('p', {className: 'red'}, 'I am still red text.');
 ```
 
 There are a couple of other ways to approach styling in React, but we will stick to CSS classes for this course.
@@ -137,7 +149,7 @@ For our restaurant website, we've added [Tailwind CSS](https://tailwindcss.com),
 
 Our `Title` looks very plain right now. Let's style it to look more like a page title.
 
-Add the following CSS classes to the `h1` in `Title`:
+Add the following CSS class name to the returned `h1` in `Title`:
 
 ```
 "text-4xl font-black uppercase tracking-wider"

@@ -1,15 +1,17 @@
-function MenuItem() {
+import { formatMoney } from './lib/format-money';
+
+function MenuItem({ name, price, image }) {
   return (
-    <>
+    <div>
       <img
         height="300"
         width="300"
-        src="/images/cheeseburger.jpeg"
-        alt="Cheeseburger" // You can do better than this...😅
+        src={`/images/${image.url}`}
+        alt={image.alt}
       />
-      <div className="text-lg font-bold">Cheeseburger</div>
-      <div>$6.99</div>
-    </>
+      <div className="text-lg font-bold">{name}</div>
+      <div>{formatMoney(price)}</div>
+    </div>
   );
 }
 

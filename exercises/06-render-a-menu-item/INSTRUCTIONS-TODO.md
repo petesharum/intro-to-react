@@ -1,6 +1,10 @@
 # Exercise 6: Render a menu item
 
-The rest of this course will involve building a restaurant website, so let's start by building a single menu item.
+Components hide the details of their logic, styling, and markup, while allowing customization via props. This allows them to simplify repeated patterns in UI with slightly different data. In this exercise, we will simplify the repeated menu item markup by creating a `MenuItem` component. 
+
+
+
+---
 
 ## Explore the files
 

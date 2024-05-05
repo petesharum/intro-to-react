@@ -8,6 +8,14 @@ function MenuItems({ children }) {
   );
 }
 
+function MenuItemsNoResults() {
+  return (
+    <div className="grid-cols-12">
+      <p>No menu items found.</p>
+    </div>
+  );
+}
+
 function MenuItem({ name, price, image }) {
   return (
     <div>
@@ -23,4 +31,4 @@ function MenuItem({ name, price, image }) {
   );
 }
 
-export { MenuItem, MenuItems };
+export { MenuItem, MenuItems, MenuItemsNoResults };

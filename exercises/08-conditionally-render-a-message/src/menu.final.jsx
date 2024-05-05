@@ -1,5 +1,5 @@
 import { Title } from './title';
-import { MenuItem, MenuItems } from './menu-items';
+import { MenuItem, MenuItems, MenuItemsNoResults } from './menu-items';
 import { items } from './menu-data';
 
 function Menu() {
@@ -20,14 +20,18 @@ function Menu() {
         <main className="col-span-full flex flex-col gap-8">
           <Title>Menu</Title>
           <MenuItems>
-            {items.map((menuItem) => (
-              <MenuItem
-                key={menuItem.productId}
-                name={menuItem.name}
-                image={menuItem.image}
-                price={menuItem.price}
-              />
-            ))}
+            {items.length === 0 ? (
+              <MenuItemsNoResults />
+            ) : (
+              items.map((menuItem) => (
+                <MenuItem
+                  key={menuItem.productId}
+                  name={menuItem.name}
+                  image={menuItem.image}
+                  price={menuItem.price}
+                />
+              ))
+            )}
           </MenuItems>
         </main>
       </div>
