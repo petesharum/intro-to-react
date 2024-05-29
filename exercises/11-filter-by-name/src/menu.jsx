@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { Input } from '@/lib/ui/input';
+
 import { Title } from './title';
 import { MenuItem, MenuItems, MenuItemsNoResults } from './menu-items';
 import { items, categories } from './menu-data';
@@ -8,6 +10,9 @@ import { CategoryFilter, CategoryFilters } from './category-filters';
 function Menu() {
   let filteredItems = items;
   const [categoryId, setCategoryId] = useState('');
+  // 👋 Make these component state
+  const q = '';
+  const query = '';
 
   if (categoryId) {
     filteredItems = items.filter((item) =>
@@ -15,9 +20,27 @@ function Menu() {
     );
   }
 
+  if (query) {
+    filteredItems = items.filter((item) =>
+      item.name.toLowerCase().includes(query.toLowerCase()),
+    );
+  }
+
   function handleCategoryChange(event, nextCategory) {
     event.preventDefault();
+    // 👋 Don't forget to clear query state here
     setCategoryId(nextCategory);
+  }
+
+  // eslint-disable-next-line no-unused-vars -- Useful for this exercise
+  function handleSearchChange(event) {
+    // 👋 Implement me
+  }
+
+  function handleSearchSubmit(event) {
+    event.preventDefault();
+    setCategoryId('');
+    // 👋 There's something you need to do here...
   }
 
   return (
@@ -36,6 +59,15 @@ function Menu() {
       <div className="container grid auto-rows-min grid-cols-12 gap-x-8 gap-y-4 pb-16 pt-8 lg:gap-x-16 lg:gap-y-8">
         <aside className="col-span-2 flex flex-col gap-4 pt-8">
           <div className="sticky top-32 flex flex-col gap-4">
+            <form onSubmit={handleSearchSubmit}>
+              <Input
+                name="q"
+                type="search"
+                placeholder="search"
+                onChange={handleSearchChange}
+                value={q}
+              />
+            </form>
             <CategoryFilters>
               <CategoryFilter key="all" href="." onClick={handleCategoryChange}>
                 All
