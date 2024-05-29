@@ -90,7 +90,7 @@ export const items = [
       'Creamy, indulgent frozen custard available in various flavors.',
     price: 499,
     image: {
-      url: 'frozen-custard.jpg',
+      url: 'frozen-custard.jpeg',
       alt: 'Creamy, indulgent frozen custard available in various flavors.',
     },
   },
@@ -101,7 +101,7 @@ export const items = [
     description: 'Refreshing soda available in a variety of flavors and sizes.',
     price: 199,
     image: {
-      url: 'soda.jpg',
+      url: 'soda.jpeg',
       alt: 'Refreshing soda available in a variety of flavors and sizes.',
     },
   },
