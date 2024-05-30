@@ -53,7 +53,7 @@ function MenuItem({ productId, image, name, price }) {
         />
       </div>
       <div>
-        <div className="text-lg font-bold">{name}</div>
+        <div className="text-lg font-bold leading-5">{name}</div>
         <div>{formatMoney(price)}</div>
       </div>
     </Link>

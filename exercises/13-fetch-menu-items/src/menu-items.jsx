@@ -18,14 +18,14 @@ function MenuItemsNoResults() {
 
 function MenuItem({ name, price, image }) {
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       <img
         height="300"
         width="300"
         src={`/images/${image.url}`}
         alt={image.alt}
       />
-      <div className="text-lg font-bold">{name}</div>
+      <div className="text-lg font-bold leading-5">{name}</div>
       <div>{formatMoney(price)}</div>
     </div>
   );

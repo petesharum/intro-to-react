@@ -5,7 +5,7 @@ export default {
       name: 'Burgers',
       description: 'Juicy burgers made with 100% beef',
       image: {
-        url: 'burgers.jpg',
+        url: 'burgers.jpeg',
         alt: 'Juicy burgers made with 100% beef',
       },
     },
@@ -14,7 +14,7 @@ export default {
       name: 'Chicken',
       description: 'Crispy chicken sandwiches and tenders',
       image: {
-        url: 'chicken.jpg',
+        url: 'chicken.jpeg',
         alt: 'Crispy chicken sandwiches and tenders',
       },
     },
@@ -23,7 +23,7 @@ export default {
       name: 'Sides',
       description: 'Delicious sides to complement your meal',
       image: {
-        url: 'sides.jpg',
+        url: 'sides.jpeg',
         alt: 'Delicious sides to complement your meal',
       },
     },
@@ -32,7 +32,7 @@ export default {
       name: 'Beverages',
       description: 'Whatever you need to quench your thirst',
       image: {
-        url: 'drinks.jpg',
+        url: 'drinks.jpeg',
         alt: 'Whatever you need to quench your thirst',
       },
     },
@@ -41,7 +41,7 @@ export default {
       name: 'Desserts',
       description: 'Sweet treats to satisfy your cravings',
       image: {
-        url: 'desserts.jpg',
+        url: 'desserts.jpeg',
         alt: 'Sweet treats to satisfy your cravings',
       },
     },
@@ -148,7 +148,7 @@ export default {
         'Creamy, indulgent frozen custard available in various flavors.',
       price: 499,
       image: {
-        url: 'frozen-custard.jpg',
+        url: 'frozen-custard.jpeg',
         alt: 'Creamy, indulgent frozen custard available in various flavors.',
       },
     },
@@ -159,7 +159,7 @@ export default {
       description: 'Rich and creamy chocolate shake, a classic favorite.',
       price: 399,
       image: {
-        url: 'chocolate-shake.jpg',
+        url: 'chocolate-shake.jpeg',
         alt: 'Rich and creamy chocolate shake, a classic favorite.',
       },
     },
@@ -171,7 +171,7 @@ export default {
         'Refreshing soda available in a variety of flavors and sizes.',
       price: 199,
       image: {
-        url: 'soda.jpg',
+        url: 'soda.jpeg',
         alt: 'Refreshing soda available in a variety of flavors and sizes.',
       },
     },
