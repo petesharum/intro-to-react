@@ -6,31 +6,76 @@ import { Title } from './title';
 import { MenuItem, MenuItems, MenuItemsNoResults } from './menu-items';
 import { CategoryFilter, CategoryFilters } from './category-filters';
 
+const Status = {
+  IDLE: 'idle',
+  PENDING: 'pending',
+  RESOLVED: 'resolved',
+  REJECTED: 'rejected',
+};
+
 function Menu() {
+  const [itemsStatus, setItemsStatus] = useState(Status.IDLE);
   const [items, setItems] = useState([]);
+  const [categoriesStatus, setCategoriesStatus] = useState(Status.IDLE);
   const [categories, setCategories] = useState([]);
   const searchParams = new URLSearchParams(window.location.search);
   const query = searchParams.get('q');
 
   useEffect(() => {
+    let ignore = false;
     const apiUrl = `${window.location.origin}/api/menu${window.location.search}`;
+
+    setItemsStatus(Status.PENDING);
 
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        setItems(data);
+        if (!ignore) {
+          setItems(data);
+          setItemsStatus(Status.RESOLVED);
+        }
+      })
+      .catch(() => {
+        setItemsStatus(Status.REJECTED);
       });
+
+    return () => {
+      ignore = true;
+    };
   }, []);
 
   useEffect(() => {
+    let ignore = false;
     const apiUrl = `${window.location.origin}/api/menu/categories`;
+
+    setCategoriesStatus(Status.PENDING);
 
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        setCategories(data);
+        if (!ignore) {
+          setCategories(data);
+          setCategoriesStatus(Status.RESOLVED);
+        }
+      })
+      .catch(() => {
+        setCategoriesStatus(Status.REJECTED);
       });
+
+    return () => {
+      ignore = true;
+    };
   }, []);
+
+  if (itemsStatus === Status.REJECTED || categoriesStatus === Status.REJECTED) {
+    return (
+      <div className="container py-8 text-center">
+        <p className="text-red-600">
+          An error occurred. Please try again later.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="grid h-screen grid-rows-[auto_1fr_auto] gap-x-8">
@@ -56,7 +101,7 @@ function Menu() {
                 defaultValue={query}
               />
             </form>
-            <CategoryFilters>
+            <CategoryFilters isPending={categoriesStatus === Status.PENDING}>
               <CategoryFilter key="all" href=".">
                 All
               </CategoryFilter>
@@ -73,7 +118,7 @@ function Menu() {
         </aside>
         <main className="col-span-10 flex flex-col gap-8">
           <Title>Menu</Title>
-          <MenuItems>
+          <MenuItems isPending={itemsStatus === Status.PENDING}>
             {items.length === 0 ? (
               <MenuItemsNoResults />
             ) : (
