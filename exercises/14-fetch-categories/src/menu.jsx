@@ -13,9 +13,7 @@ function Menu() {
   const query = searchParams.get('q');
 
   useEffect(() => {
-    const apiUrl = new URL(
-      `${window.location.origin}/api/menu${window.location.search}`,
-    );
+    const apiUrl = `${window.location.origin}/api/menu${window.location.search}`;
 
     fetch(apiUrl)
       .then((response) => response.json())
