@@ -1,6 +1,29 @@
 import { formatMoney } from './lib/format-money';
+import { Skeleton } from '@/lib/ui/skeleton';
 
-function MenuItems({ children }) {
+function MenuItemSkeleton() {
+  return (
+    <div className="flex flex-col gap-2">
+      <Skeleton className="aspect-square w-full rounded" />
+      <div className="flex flex-col gap-2">
+        <Skeleton className="h-6 w-24" />
+        <Skeleton className="h-6 w-20" />
+      </div>
+    </div>
+  );
+}
+
+function MenuItems({ isPending, children }) {
+  if (isPending) {
+    return (
+      <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <MenuItemSkeleton key={i} />
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">
       {children}
