@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Input } from '@/lib/ui/input';
 
@@ -6,25 +6,28 @@ import { Title } from './title';
 import { MenuItem, MenuItems, MenuItemsNoResults } from './menu-items';
 import { CategoryFilter, CategoryFilters } from './category-filters';
 
+/**
+ * @returns {URL} The API URL for our website
+ */
+function getApiUrl() {
+  return new URL(`${window.location.origin}/api/menu${window.location.search}`);
+}
+
 function Menu() {
   const [items, setItems] = useState([]);
-  const [categories, setCategories] = useState([]);
-  let filteredItems = items;
+  const categories = [];
   const searchParams = new URLSearchParams(window.location.search);
-  const categoryId = searchParams.get('category');
   const query = searchParams.get('q');
 
-  if (categoryId) {
-    filteredItems = items.filter((item) =>
-      item.categories.includes(categoryId),
-    );
-  }
+  useEffect(() => {
+    const apiUrl = getApiUrl();
 
-  if (query) {
-    filteredItems = items.filter((item) =>
-      item.name.toLowerCase().includes(query.toLowerCase()),
-    );
-  }
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        setItems(data);
+      });
+  }, []);
 
   return (
     <div className="grid h-screen grid-rows-[auto_1fr_auto] gap-x-8">
@@ -68,10 +71,10 @@ function Menu() {
         <main className="col-span-10 flex flex-col gap-8">
           <Title>Menu</Title>
           <MenuItems>
-            {filteredItems.length === 0 ? (
+            {items.length === 0 ? (
               <MenuItemsNoResults />
             ) : (
-              filteredItems.map((menuItem) => (
+              items.map((menuItem) => (
                 <MenuItem
                   key={menuItem.productId}
                   name={menuItem.name}
