@@ -6,13 +6,6 @@ import { Title } from './title';
 import { MenuItem, MenuItems, MenuItemsNoResults } from './menu-items';
 import { CategoryFilter, CategoryFilters } from './category-filters';
 
-/**
- * @returns {URL} The API URL for our website
- */
-function getApiUrl() {
-  return new URL(`${window.location.origin}/api/menu${window.location.search}`);
-}
-
 function Menu() {
   const [items, setItems] = useState([]);
   const categories = [];
@@ -20,7 +13,7 @@ function Menu() {
   const query = searchParams.get('q');
 
   useEffect(() => {
-    const apiUrl = getApiUrl();
+    const apiUrl = `${window.location.origin}/api/menu${window.location.search}`;
 
     fetch(apiUrl)
       .then((response) => response.json())

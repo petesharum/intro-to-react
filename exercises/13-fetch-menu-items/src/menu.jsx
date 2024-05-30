@@ -7,20 +7,16 @@ import { Title } from './title';
 import { MenuItem, MenuItems, MenuItemsNoResults } from './menu-items';
 import { CategoryFilter, CategoryFilters } from './category-filters';
 
-/**
- * @returns {URL} The API URL for our website
- */
-// eslint-disable-next-line no-unused-vars -- Required for the exercise
-function getApiUrl() {
-  return new URL(`${window.location.origin}/api/menu${window.location.search}`);
-}
-
 function Menu() {
   // eslint-disable-next-line no-unused-vars -- 👋 You'll need to set the items...
   const [items, setItems] = useState([]);
   const categories = [];
   const searchParams = new URLSearchParams(window.location.search);
   const query = searchParams.get('q');
+
+  // 👇 Here's the URL for the menu endpoint...
+  // eslint-disable-next-line no-unused-vars -- Required for the exercise
+  const apiUrl = `${window.location.origin}/api/menu${window.location.search}`;
 
   return (
     <div className="grid h-screen grid-rows-[auto_1fr_auto] gap-x-8">
