@@ -13,59 +13,46 @@ const Status = {
   REJECTED: 'rejected',
 };
 
+function useFetch(url, initialData = null) {
+  const [status, setStatus] = useState(Status.IDLE);
+  const [data, setData] = useState(initialData);
+
+  useEffect(() => {
+    let ignore = false;
+
+    setStatus(Status.PENDING);
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        if (!ignore) {
+          setData(data);
+          setStatus(Status.RESOLVED);
+        }
+      })
+      .catch(() => {
+        setStatus(Status.REJECTED);
+      });
+
+    return () => {
+      ignore = true;
+    };
+  }, [url]);
+
+  return { data, status };
+}
+
 function Menu() {
-  const [itemsStatus, setItemsStatus] = useState(Status.IDLE);
-  const [items, setItems] = useState([]);
-  const [categoriesStatus, setCategoriesStatus] = useState(Status.IDLE);
-  const [categories, setCategories] = useState([]);
+  const { data: items, status: itemsStatus } = useFetch(
+    `${window.location.origin}/api/menu${window.location.search}`,
+    [],
+  );
+  const { data: categories, status: categoriesStatus } = useFetch(
+    `${window.location.origin}/api/menu/categories`,
+    [],
+  );
   const searchParams = new URLSearchParams(window.location.search);
   const query = searchParams.get('q');
-
-  useEffect(() => {
-    let ignore = false;
-    const apiUrl = `${window.location.origin}/api/menu${window.location.search}`;
-
-    setItemsStatus(Status.PENDING);
-
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        if (!ignore) {
-          setItems(data);
-          setItemsStatus(Status.RESOLVED);
-        }
-      })
-      .catch(() => {
-        setItemsStatus(Status.REJECTED);
-      });
-
-    return () => {
-      ignore = true;
-    };
-  }, []);
-
-  useEffect(() => {
-    let ignore = false;
-    const apiUrl = `${window.location.origin}/api/menu/categories`;
-
-    setCategoriesStatus(Status.PENDING);
-
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        if (!ignore) {
-          setCategories(data);
-          setCategoriesStatus(Status.RESOLVED);
-        }
-      })
-      .catch(() => {
-        setCategoriesStatus(Status.REJECTED);
-      });
-
-    return () => {
-      ignore = true;
-    };
-  }, []);
 
   if (itemsStatus === Status.REJECTED || categoriesStatus === Status.REJECTED) {
     return (

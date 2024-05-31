@@ -13,6 +13,11 @@ const Status = {
   REJECTED: 'rejected',
 };
 
+// eslint-disable-next-line no-unused-vars -- Required for exercise
+function useFetch(url, initialData = null) {
+  // 👋 Make me work!
+}
+
 function Menu() {
   const [itemsStatus, setItemsStatus] = useState(Status.IDLE);
   const [items, setItems] = useState([]);
