@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { Skeleton } from '@/lib/ui/skeleton';
 
 function FiltersSkeleton() {
@@ -21,12 +23,12 @@ function CategoryFilters({ isPending, children }) {
 function CategoryFilter({ href, children }) {
   return (
     <li>
-      <a
+      <Link
         className="block font-bold transition hover:translate-x-1 hover:text-red-600"
-        href={href}
+        to={href}
       >
         {children}
-      </a>
+      </Link>
     </li>
   );
 }
