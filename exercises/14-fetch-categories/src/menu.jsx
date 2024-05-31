@@ -7,10 +7,10 @@ import { MenuItem, MenuItems, MenuItemsNoResults } from './menu-items';
 import { CategoryFilter, CategoryFilters } from './category-filters';
 
 function Menu() {
-  const [items, setItems] = useState([]);
-  const categories = [];
   const searchParams = new URLSearchParams(window.location.search);
   const query = searchParams.get('q');
+  const [items, setItems] = useState([]);
+  const categories = [];
 
   useEffect(() => {
     const apiUrl = `${window.location.origin}/api/menu${window.location.search}`;

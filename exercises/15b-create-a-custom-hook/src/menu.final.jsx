@@ -43,6 +43,9 @@ function useFetch(url, initialData = null) {
 }
 
 function Menu() {
+  const searchParams = new URLSearchParams(window.location.search);
+  const query = searchParams.get('q');
+
   const { data: items, status: itemsStatus } = useFetch(
     `${window.location.origin}/api/menu${window.location.search}`,
     [],
@@ -51,8 +54,6 @@ function Menu() {
     `${window.location.origin}/api/menu/categories`,
     [],
   );
-  const searchParams = new URLSearchParams(window.location.search);
-  const query = searchParams.get('q');
 
   if (itemsStatus === Status.REJECTED || categoriesStatus === Status.REJECTED) {
     return (

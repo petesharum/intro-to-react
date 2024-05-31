@@ -14,12 +14,12 @@ const Status = {
 };
 
 function Menu() {
+  const searchParams = new URLSearchParams(window.location.search);
+  const query = searchParams.get('q');
   const itemsStatus = Status.IDLE;
   const [items, setItems] = useState([]);
   const categoriesStatus = Status.IDLE;
   const [categories, setCategories] = useState([]);
-  const searchParams = new URLSearchParams(window.location.search);
-  const query = searchParams.get('q');
 
   useEffect(() => {
     const apiUrl = `${window.location.origin}/api/menu${window.location.search}`;

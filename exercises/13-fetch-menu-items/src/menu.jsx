@@ -8,11 +8,11 @@ import { MenuItem, MenuItems, MenuItemsNoResults } from './menu-items';
 import { CategoryFilter, CategoryFilters } from './category-filters';
 
 function Menu() {
+  const searchParams = new URLSearchParams(window.location.search);
+  const query = searchParams.get('q');
   // eslint-disable-next-line no-unused-vars -- 👋 You'll need to set the items...
   const [items, setItems] = useState([]);
   const categories = [];
-  const searchParams = new URLSearchParams(window.location.search);
-  const query = searchParams.get('q');
 
   // 👇 Here's the URL for the menu endpoint...
   // eslint-disable-next-line no-unused-vars -- Required for the exercise

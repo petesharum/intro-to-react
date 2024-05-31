@@ -14,12 +14,12 @@ const Status = {
 };
 
 function Menu() {
+  const searchParams = new URLSearchParams(window.location.search);
+  const query = searchParams.get('q');
   const [itemsStatus, setItemsStatus] = useState(Status.IDLE);
   const [items, setItems] = useState([]);
   const [categoriesStatus, setCategoriesStatus] = useState(Status.IDLE);
   const [categories, setCategories] = useState([]);
-  const searchParams = new URLSearchParams(window.location.search);
-  const query = searchParams.get('q');
 
   useEffect(() => {
     let ignore = false;
