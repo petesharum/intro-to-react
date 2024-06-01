@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import { Input } from '@/lib/ui/input';
 import { Title } from '@/lib/shared-components/title';
 import {
   MenuItems,
@@ -9,48 +7,11 @@ import {
   MenuItemsNoResults,
   CategoryFilters,
   CategoryFilter,
+  SearchForm,
 } from '@/lib/menu';
-
-const Status = {
-  IDLE: 'idle',
-  PENDING: 'pending',
-  RESOLVED: 'resolved',
-  REJECTED: 'rejected',
-};
-
-function useFetch(url, initialData = null) {
-  const [status, setStatus] = useState(Status.IDLE);
-  const [data, setData] = useState(initialData);
-
-  useEffect(() => {
-    let ignore = false;
-
-    setStatus(Status.PENDING);
-
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        if (!ignore) {
-          setData(data);
-          setStatus(Status.RESOLVED);
-        }
-      })
-      .catch(() => {
-        setStatus(Status.REJECTED);
-      });
-
-    return () => {
-      ignore = true;
-    };
-  }, [url]);
-
-  return { data, status };
-}
+import { useFetch, Status } from '@/lib/use-fetch';
 
 function Menu() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get('q');
-
   const { data: items, status: itemsStatus } = useFetch(
     `${window.location.origin}/api/menu${window.location.search}`,
     [],
@@ -59,15 +20,6 @@ function Menu() {
     `${window.location.origin}/api/menu/categories`,
     [],
   );
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-    const search = { q: formData.get('q') };
-
-    setSearchParams(search);
-  };
 
   if (itemsStatus === Status.REJECTED || categoriesStatus === Status.REJECTED) {
     return (
@@ -112,14 +64,7 @@ function Menu() {
       <div className="container grid auto-rows-min grid-cols-12 gap-x-8 gap-y-4 pb-16 pt-8 lg:gap-x-16 lg:gap-y-8">
         <aside className="col-span-2 flex flex-col gap-4 pt-8">
           <div className="sticky top-32 flex flex-col gap-4">
-            <form onSubmit={handleSubmit}>
-              <Input
-                name="q"
-                type="search"
-                placeholder="search"
-                defaultValue={query}
-              />
-            </form>
+            <SearchForm />
             <CategoryFilters isPending={categoriesStatus === Status.PENDING}>
               <CategoryFilter key="all" href=".">
                 All
