@@ -18,7 +18,7 @@ function ProductDetail() {
   const { id } = useParams();
   const { data: product, status } = useFetch(
     `${window.location.origin}/api/menu/${id}`,
-    null,
+    { name: '', description: '', image: {} },
   );
   const isPending = status === Status.PENDING;
 
@@ -28,7 +28,7 @@ function ProductDetail() {
         <Breadcrumbs>
           <Breadcrumb href="/menu">Menu</Breadcrumb>
           <BreadcrumbSeparator />
-          <BreadcrumbCurrent>{product?.name}</BreadcrumbCurrent>
+          <BreadcrumbCurrent>{product.name}</BreadcrumbCurrent>
         </Breadcrumbs>
       </div>
       <div className="col-span-7 lg:col-span-6 lg:col-start-2">

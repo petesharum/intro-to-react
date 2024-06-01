@@ -58,6 +58,7 @@ function Menu() {
             items.map((menuItem) => (
               <MenuItem
                 key={menuItem.productId}
+                productId={menuItem.productId}
                 name={menuItem.name}
                 image={menuItem.image}
                 price={menuItem.price}

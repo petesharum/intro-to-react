@@ -12,7 +12,7 @@ import { Title } from '@/lib/shared-components/title';
 import { Skeleton } from '@/lib/ui/skeleton';
 
 function ProductDetail() {
-  const product = null;
+  const product = { name: '', description: '', image: {} };
   const isPending = true;
 
   return (
@@ -21,7 +21,7 @@ function ProductDetail() {
         <Breadcrumbs>
           <Breadcrumb href="/menu">Menu</Breadcrumb>
           <BreadcrumbSeparator />
-          <BreadcrumbCurrent>{product?.name}</BreadcrumbCurrent>
+          <BreadcrumbCurrent>{product.name}</BreadcrumbCurrent>
         </Breadcrumbs>
       </div>
       <div className="col-span-7 lg:col-span-6 lg:col-start-2">
