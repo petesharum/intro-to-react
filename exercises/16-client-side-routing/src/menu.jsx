@@ -68,15 +68,26 @@ function Menu() {
   return (
     <div className="grid h-screen grid-rows-[auto_1fr_auto] gap-x-8">
       <header className="sticky top-0 border-b-4 border-foreground bg-white">
-        <div className="container py-4">
-          <img
-            className="h-12 w-12 object-contain p-1"
-            src="/images/logo-burger.png"
-            alt="Yummy! Foods Home"
-            width="237"
-            height="248"
-          />
-        </div>
+        <nav className="container py-4">
+          <ul className="flex items-center gap-4">
+            <li>
+              <span className="block font-black uppercase transition-transform hover:scale-110 hover:drop-shadow-md">
+                <img
+                  className="h-12 w-12 object-contain p-1"
+                  src="/images/logo-burger.png"
+                  alt="Yummy! Foods Home"
+                  width="237"
+                  height="248"
+                />
+              </span>
+            </li>
+            <li>
+              <span className="block font-black uppercase transition-transform hover:scale-110 hover:text-red-600">
+                Menu
+              </span>
+            </li>
+          </ul>
+        </nav>
       </header>
       <div className="container grid auto-rows-min grid-cols-12 gap-x-8 gap-y-4 pb-16 pt-8 lg:gap-x-16 lg:gap-y-8">
         <aside className="col-span-2 flex flex-col gap-4 pt-8">
