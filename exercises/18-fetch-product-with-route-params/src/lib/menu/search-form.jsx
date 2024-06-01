@@ -1,10 +1,8 @@
-import { useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { Input } from '@/lib/ui/input';
 
 function SearchForm() {
-  const inputRef = useRef(null);
   const [searchParams, setSearchParams] = useSearchParams();
 
   function handleSearchSubmit(event) {
@@ -23,7 +21,6 @@ function SearchForm() {
   return (
     <form onSubmit={handleSearchSubmit}>
       <Input
-        ref={inputRef}
         name="q"
         type="search"
         placeholder="search"
