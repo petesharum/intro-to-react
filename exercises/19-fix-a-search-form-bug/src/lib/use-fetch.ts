@@ -10,7 +10,6 @@ const Status = {
 export type UseFetchStatus = (typeof Status)[keyof typeof Status];
 
 function useFetch<T>(url: string, initialData: T) {
-  console.log(url);
   const [status, setStatus] = useState<UseFetchStatus>(Status.IDLE);
   const [data, setData] = useState(initialData);
 
