@@ -48,7 +48,7 @@ function Menu() {
   const query = searchParams.get('q');
 
   const { data: items, status: itemsStatus } = useFetch(
-    `${window.location.origin}/api/menu${window.location.search}`,
+    `${window.location.origin}/api/menu?${searchParams.toString()}`,
     [],
   );
   const { data: categories, status: categoriesStatus } = useFetch(

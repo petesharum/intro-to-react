@@ -1,3 +1,5 @@
+import { useSearchParams } from 'react-router-dom';
+
 import { Title } from '@/lib/shared-components/title';
 import {
   MenuItems,
@@ -10,8 +12,10 @@ import {
 import { useFetch, Status } from '@/lib/use-fetch';
 
 function Menu() {
+  const [searchParams] = useSearchParams();
+
   const { data: items, status: itemsStatus } = useFetch(
-    `${window.location.origin}/api/menu${window.location.search}`,
+    `${window.location.origin}/api/menu?${searchParams.toString()}`,
     [],
   );
   const { data: categories, status: categoriesStatus } = useFetch(
