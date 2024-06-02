@@ -7,36 +7,32 @@ import { CartContext } from './cart-context';
 
 function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
-  const previousLineItems = useRef({
+  const previousSummary = useRef({
     subtotal: 0,
     tax: 0,
     total: 0,
   });
   const {
-    data: lineItems,
+    data: summary,
     isPending,
     isPlaceholderData,
   } = useQuery({
     queryKey: ['summary', cartItems],
     queryFn: () => generateSummary(cartItems),
-    placeholderData: previousLineItems.current,
+    placeholderData: previousSummary.current,
   });
 
   useEffect(() => {
-    previousLineItems.current = lineItems;
-  }, [lineItems]);
-
-  const itemCount = useMemo(
-    () => cartItems.reduce((total, item) => total + item.quantity, 0),
-    [cartItems],
-  );
+    previousSummary.current = summary;
+  }, [summary]);
 
   const cart = useMemo(
     () => ({
       items: cartItems,
       isPending: isPending || isPlaceholderData,
-      ...lineItems,
-      itemCount,
+      ...summary,
+
+      itemCount: cartItems.reduce((total, item) => total + item.quantity, 0),
 
       addToCart: (item) => {
         setCartItems((prevItems) => {
@@ -79,7 +75,7 @@ function CartProvider({ children }) {
         setCartItems([]);
       },
     }),
-    [cartItems, isPending, isPlaceholderData, lineItems, itemCount],
+    [cartItems, isPending, isPlaceholderData, summary],
   );
 
   return <CartContext.Provider value={cart}>{children}</CartContext.Provider>;
