@@ -7,10 +7,11 @@ const Status = {
   REJECTED: 'rejected',
 } as const;
 
+type FetchOptions<T> = RequestInit & { initialData: T };
+
 export type UseFetchStatus = (typeof Status)[keyof typeof Status];
 
-function useFetch<T>(url: string, initialData: T) {
-  console.log(url);
+function useFetch<T>(url: string, { initialData, ...opts }: FetchOptions<T>) {
   const [status, setStatus] = useState<UseFetchStatus>(Status.IDLE);
   const [data, setData] = useState(initialData);
 
@@ -19,7 +20,7 @@ function useFetch<T>(url: string, initialData: T) {
 
     setStatus(Status.PENDING);
 
-    fetch(url)
+    fetch(url, opts)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch data');

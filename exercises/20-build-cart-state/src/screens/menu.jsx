@@ -1,5 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 
+import { Grid, GridAside, GridMain } from '@/lib/shared-components/grid';
 import { Title } from '@/lib/shared-components/title';
 import {
   MenuItems,
@@ -8,6 +9,7 @@ import {
   CategoryFilters,
   CategoryFilter,
   SearchForm,
+  StickySidebar,
 } from '@/lib/menu';
 import { useFetch, Status } from '@/lib/use-fetch';
 
@@ -16,11 +18,11 @@ function Menu() {
 
   const { data: items, status: itemsStatus } = useFetch(
     `${window.location.origin}/api/menu?${searchParams.toString()}`,
-    [],
+    { initialData: [] },
   );
   const { data: categories, status: categoriesStatus } = useFetch(
     `${window.location.origin}/api/menu/categories`,
-    [],
+    { initialData: [] },
   );
 
   if (itemsStatus === Status.REJECTED || categoriesStatus === Status.REJECTED) {
@@ -34,9 +36,9 @@ function Menu() {
   }
 
   return (
-    <div className="container grid auto-rows-min grid-cols-12 gap-x-8 gap-y-4 pb-16 pt-8 lg:gap-x-16 lg:gap-y-8">
-      <aside className="col-span-2 flex flex-col gap-4 pt-8">
-        <div className="sticky top-32 flex flex-col gap-4">
+    <Grid>
+      <GridAside>
+        <StickySidebar>
           <SearchForm />
           <CategoryFilters isPending={categoriesStatus === Status.PENDING}>
             <CategoryFilter key="all" href=".">
@@ -51,9 +53,9 @@ function Menu() {
               </CategoryFilter>
             ))}
           </CategoryFilters>
-        </div>
-      </aside>
-      <main className="col-span-10 flex flex-col gap-8">
+        </StickySidebar>
+      </GridAside>
+      <GridMain>
         <Title>Menu</Title>
         <MenuItems isPending={itemsStatus === Status.PENDING}>
           {items.length === 0 ? (
@@ -70,8 +72,8 @@ function Menu() {
             ))
           )}
         </MenuItems>
-      </main>
-    </div>
+      </GridMain>
+    </Grid>
   );
 }
 
