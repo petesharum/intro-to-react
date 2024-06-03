@@ -9,9 +9,9 @@ const Status = {
 
 export type UseFetchStatus = (typeof Status)[keyof typeof Status];
 
-function useFetch<T>(url: string, initialData: T) {
+function useFetch(url: string) {
   const [status, setStatus] = useState<UseFetchStatus>(Status.IDLE);
-  const [data, setData] = useState(initialData);
+  const [data, setData] = useState();
 
   useEffect(() => {
     let ignore = false;
@@ -43,7 +43,5 @@ function useFetch<T>(url: string, initialData: T) {
 
   return { data, status };
 }
-
-useFetch;
 
 export { useFetch, Status };

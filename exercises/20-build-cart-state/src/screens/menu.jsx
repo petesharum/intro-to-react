@@ -16,13 +16,11 @@ import { useFetch, Status } from '@/lib/use-fetch';
 function Menu() {
   const [searchParams] = useSearchParams();
 
-  const { data: items, status: itemsStatus } = useFetch(
+  const { data: items = [], status: itemsStatus } = useFetch(
     `${window.location.origin}/api/menu?${searchParams.toString()}`,
-    { initialData: [] },
   );
-  const { data: categories, status: categoriesStatus } = useFetch(
+  const { data: categories = [], status: categoriesStatus } = useFetch(
     `${window.location.origin}/api/menu/categories`,
-    { initialData: [] },
   );
 
   if (itemsStatus === Status.REJECTED || categoriesStatus === Status.REJECTED) {

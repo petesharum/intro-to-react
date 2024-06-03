@@ -14,7 +14,7 @@ const Status = {
 };
 
 // eslint-disable-next-line no-unused-vars -- Required for exercise
-function useFetch(url, initialData = null) {
+function useFetch(url) {
   // 👋 Make me work!
 }
 

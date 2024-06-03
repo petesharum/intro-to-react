@@ -13,9 +13,9 @@ const Status = {
   REJECTED: 'rejected',
 };
 
-function useFetch(url, initialData = null) {
+function useFetch(url) {
   const [status, setStatus] = useState(Status.IDLE);
-  const [data, setData] = useState(initialData);
+  const [data, setData] = useState();
 
   useEffect(() => {
     let ignore = false;
@@ -46,13 +46,11 @@ function Menu() {
   const searchParams = new URLSearchParams(window.location.search);
   const query = searchParams.get('q');
 
-  const { data: items, status: itemsStatus } = useFetch(
+  const { data: items = [], status: itemsStatus } = useFetch(
     `${window.location.origin}/api/menu${window.location.search}`,
-    [],
   );
-  const { data: categories, status: categoriesStatus } = useFetch(
+  const { data: categories = [], status: categoriesStatus } = useFetch(
     `${window.location.origin}/api/menu/categories`,
-    [],
   );
 
   if (itemsStatus === Status.REJECTED || categoriesStatus === Status.REJECTED) {

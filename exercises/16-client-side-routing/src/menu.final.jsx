@@ -14,9 +14,9 @@ const Status = {
   REJECTED: 'rejected',
 };
 
-function useFetch(url, initialData = null) {
+function useFetch(url) {
   const [status, setStatus] = useState(Status.IDLE);
-  const [data, setData] = useState(initialData);
+  const [data, setData] = useState();
 
   useEffect(() => {
     let ignore = false;
@@ -47,13 +47,11 @@ function Menu() {
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('q');
 
-  const { data: items, status: itemsStatus } = useFetch(
+  const { data: items = [], status: itemsStatus } = useFetch(
     `${window.location.origin}/api/menu?${searchParams.toString()}`,
-    [],
   );
-  const { data: categories, status: categoriesStatus } = useFetch(
+  const { data: categories = [], status: categoriesStatus } = useFetch(
     `${window.location.origin}/api/menu/categories`,
-    [],
   );
 
   const handleSubmit = (event) => {

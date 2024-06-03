@@ -7,20 +7,18 @@ const Status = {
   REJECTED: 'rejected',
 } as const;
 
-type FetchOptions<T> = RequestInit & { initialData: T };
-
 export type UseFetchStatus = (typeof Status)[keyof typeof Status];
 
-function useFetch<T>(url: string, { initialData, ...opts }: FetchOptions<T>) {
+function useFetch(url: string, options?: RequestInit) {
   const [status, setStatus] = useState<UseFetchStatus>(Status.IDLE);
-  const [data, setData] = useState(initialData);
+  const [data, setData] = useState();
 
   useEffect(() => {
     let ignore = false;
 
     setStatus(Status.PENDING);
 
-    fetch(url, opts)
+    fetch(url, options)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch data');
@@ -41,11 +39,9 @@ function useFetch<T>(url: string, { initialData, ...opts }: FetchOptions<T>) {
     return () => {
       ignore = true;
     };
-  }, [url]);
+  }, [url, options]);
 
   return { data, status };
 }
-
-useFetch;
 
 export { useFetch, Status };

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 import { EmptyCart, CartItems, CartItem } from '@/lib/cart';
 import { formatMoney } from '@/lib/format-money';
@@ -16,21 +16,29 @@ import { useFetch, Status } from '@/lib/use-fetch';
 
 function Cart() {
   const [items, setItems] = useState([]);
-  const { data: summary = { subtotal: 0, tax: 0, total: 0 }, status } =
-    useFetch(`${window.location.origin}/api/order/summary`, {
-      initialData: { subtotal: 0, tax: 0, total: 0 },
+  const fetchOptions = useMemo(
+    () => ({
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(items),
-    });
+      body: JSON.stringify(
+        items.map(({ product, quantity }) => ({
+          productId: product.productId,
+          quantity,
+        })),
+      ),
+    }),
+    [items],
+  );
+  const { data: summary = { subtotal: 0, tax: 0, total: 0 }, status } =
+    useFetch(`${window.location.origin}/api/order/summary`, fetchOptions);
   const { subtotal, tax, total } = summary;
   const isPending = status === Status.PENDING;
 
   const itemCount = items.reduce((total, item) => total + item.quantity, 0);
 
-  // eslint-disable-next-line no-unused-vars -- you're gonna need this
+  // eslint-disable-next-line no-unused-vars -- You're gonna need this
   const addToCart = (item) => {
     setItems((prevItems) => {
       const prevItem = prevItems.find(

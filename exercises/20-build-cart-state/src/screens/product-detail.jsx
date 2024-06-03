@@ -29,10 +29,8 @@ import { useFetch, Status } from '@/lib/use-fetch';
 function ProductDetail({ addToCart }) {
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
-  const { data: product, status } = useFetch(
-    `${window.location.origin}/api/menu/${id}`,
-    { initialData: { name: '', description: '', image: {} } },
-  );
+  const { data: product = { name: '', description: '', image: {} }, status } =
+    useFetch(`${window.location.origin}/api/menu/${id}`);
   const isPending = status === Status.PENDING;
   const navigate = useNavigate();
 
