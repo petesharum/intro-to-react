@@ -27,7 +27,10 @@ function GridMain({ children, ...props }: React.ComponentProps<'main'>) {
 
 function GridColLeft({ children, ...props }: React.ComponentProps<'div'>) {
   return (
-    <div className="col-span-7 lg:col-span-6 lg:col-start-2" {...props}>
+    <div
+      className="col-span-7 flex flex-col gap-8 lg:col-span-6 lg:col-start-2"
+      {...props}
+    >
       {children}
     </div>
   );
@@ -35,7 +38,10 @@ function GridColLeft({ children, ...props }: React.ComponentProps<'div'>) {
 
 function GridColRight({ children, ...props }: React.ComponentProps<'div'>) {
   return (
-    <div className="col-span-5 lg:col-span-4 lg:col-start-8" {...props}>
+    <div
+      className="col-span-5 flex flex-col gap-8 lg:col-span-4 lg:col-start-8"
+      {...props}
+    >
       {children}
     </div>
   );
@@ -43,7 +49,10 @@ function GridColRight({ children, ...props }: React.ComponentProps<'div'>) {
 
 function GridColFull({ children, ...props }: React.ComponentProps<'div'>) {
   return (
-    <div className="col-span-12 lg:col-span-10 lg:col-start-2" {...props}>
+    <div
+      className="col-span-12 flex flex-col gap-8 lg:col-span-10 lg:col-start-2"
+      {...props}
+    >
       {children}
     </div>
   );
