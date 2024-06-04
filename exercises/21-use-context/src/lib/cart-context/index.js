@@ -1,2 +1,2 @@
-export * from './cart-provider.final';
-export * from './use-cart.final';
+export * from './cart-provider';
+export * from './use-cart';
