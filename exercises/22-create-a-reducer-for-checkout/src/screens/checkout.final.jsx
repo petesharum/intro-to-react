@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback, useReducer } from 'react';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 
@@ -24,41 +24,123 @@ import { Title } from '@/lib/shared-components/title';
 import { useCart } from '@/lib/cart-context';
 import { formatMoney } from '@/lib/format-money';
 import { Grid, GridColLeft, GridColRight } from '@/lib/shared-components/grid';
-import { useFetchCallback } from '@/lib/use-fetch-callback';
-import { Status } from '@/lib/use-fetch';
+
+const Status = {
+  IDLE: 'idle',
+  PENDING: 'pending',
+  RESOLVED: 'resolved',
+  REJECTED: 'rejected',
+};
+
+const ActionType = {
+  MUTATE: 'mutate',
+  RESOLVE: 'resolve',
+  REJECT: 'reject',
+};
+
+function useMutationReducer(state, action) {
+  switch (action.type) {
+    case ActionType.MUTATE:
+      return { ...state, status: Status.PENDING };
+    case ActionType.RESOLVE:
+      return { ...state, status: Status.RESOLVED, data: action.payload };
+    case ActionType.REJECT:
+      return { ...state, status: Status.REJECTED, error: action.payload };
+    default:
+      return state;
+  }
+}
+
+function useMutation({ mutationFn, onSuccess, onError }) {
+  const [state, dispatch] = useReducer(useMutationReducer, {
+    status: Status.IDLE,
+    data: undefined,
+    error: '',
+  });
+
+  const mutate = useCallback(async () => {
+    const promise = mutationFn();
+
+    if (!promise || typeof promise.then !== 'function') {
+      throw new Error(
+        "The mutationFn must return a promise. Maybe you're passing a function that isn't returning anything?",
+      );
+    }
+
+    dispatch({ type: ActionType.MUTATE });
+
+    try {
+      const data = await promise;
+
+      dispatch({ type: ActionType.RESOLVE, payload: data });
+      onSuccess?.(data);
+    } catch (error) {
+      let { message } = error || {};
+
+      if (!message) {
+        message = 'Faild to place order';
+      }
+
+      dispatch({ type: ActionType.REJECT, payload: message });
+      onError?.(error);
+    }
+  }, [mutationFn, onError, onSuccess]);
+
+  return {
+    mutate,
+    ...state,
+    // convenience helpers
+    isIdle: state.status === Status.IDLE,
+    isPending: state.status === Status.PENDING,
+    isResolved: state.status === Status.RESOLVED,
+    isRejected: state.status === Status.REJECTED,
+  };
+}
+
+async function postOrder(payment, items) {
+  const res = await fetch('/api/order', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ payment, items }),
+  });
+
+  if (!res.ok) {
+    throw new Error('Failed to place order');
+  }
+
+  return res.text();
+}
 
 function Checkout() {
   const { items, subtotal, tax, total, itemCount, resetCart } = useCart();
   const navigate = useNavigate();
-  const { fetchData, status } = useFetchCallback();
-  const isPending = status === Status.PENDING;
+  const { mutate, isPending, isIdle } = useMutation({
+    mutationFn: postOrder,
+    onSuccess: () => {
+      resetCart();
+      navigate('/menu');
+      toast.success('Order placed successfully');
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const payment = Object.fromEntries(formData);
 
-    try {
-      await fetchData('', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ payment, items }),
-      });
-      resetCart();
-      navigate('/menu');
-      toast.success('Order placed successfully');
-    } catch (error) {
-      toast.error(error.message);
-    }
+    mutate(payment, items);
   };
 
   useEffect(() => {
-    if (items.length === 0 && !isPending) {
-      navigate('/cart');
+    if (items.length === 0 && isIdle) {
+      navigate('/cart', { replace: true });
     }
-  }, [items, navigate, isPending]);
+  }, [items, navigate, isIdle]);
 
   return (
     <Grid>

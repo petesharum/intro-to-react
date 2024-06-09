@@ -1,5 +1,6 @@
 import { Link, Outlet } from 'react-router-dom';
 
+import { Toaster } from '@/lib/ui/sonner';
 import { useCart } from '@/lib/cart-context';
 
 function CartIcon({ className }) {
@@ -67,6 +68,7 @@ function GlobalLayout() {
           Copyright © Yummy! Foods 2024
         </div>
       </footer>
+      <Toaster position="top-right" />
     </div>
   );
 }

@@ -7,6 +7,7 @@ import { GlobalLayout } from './lib/shared-components/global-layout';
 import { ProductDetail } from './screens/product-detail';
 import { Cart } from './screens/cart';
 import { CartProvider } from './lib/cart-context';
+import { Checkout } from './screens/checkout.final';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/menu" element={<Menu />} />
             <Route path="/menu/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
             <Route
               path="*"
               element={<ErrorPage message="404: Page not found!" />}

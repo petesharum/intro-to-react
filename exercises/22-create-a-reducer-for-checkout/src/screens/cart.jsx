@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { EmptyCart, CartItems, CartItem } from '@/lib/cart';
 import { formatMoney } from '@/lib/format-money';
 import { pluralize } from '@/lib/pluralize';
@@ -7,7 +9,9 @@ import {
   StickyCardHeader,
   StickyCardHeading,
   StickyCardContent,
+  StickyCardFooter,
 } from '@/lib/shared-components/sticky-card';
+import { Button } from '@/lib/ui/button';
 import { Title } from '@/lib/shared-components/title';
 import { Grid, GridColLeft, GridColRight } from '@/lib/shared-components/grid';
 import { useCart } from '@/lib/cart-context';
@@ -66,6 +70,11 @@ function Cart() {
               />
             </Summary>
           </StickyCardContent>
+          <StickyCardFooter>
+            <Button asChild isPending={isPending}>
+              <Link to="/checkout">Checkout {formatMoney(total)}</Link>
+            </Button>
+          </StickyCardFooter>
         </StickyCard>
       </GridColRight>
     </Grid>
