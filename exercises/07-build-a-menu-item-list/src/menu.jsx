@@ -21,6 +21,7 @@ function Menu() {
         <main className="col-span-full flex flex-col gap-8">
           <Title>Menu</Title>
           <MenuItems>
+            {/* 👋 These are the items you are looking for... */}
             <MenuItem
               name="Cheeseburger"
               price={699}

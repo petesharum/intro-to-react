@@ -1,5 +1,6 @@
 import { Title } from './title';
-import { MenuItem, MenuItems } from './menu-items';
+// eslint-disable-next-line no-unused-vars -- Required for this exercise
+import { MenuItem, MenuItems, MenuItemsNoResults } from './menu-items';
 import { items } from './menu-data';
 
 function Menu() {
@@ -20,14 +21,17 @@ function Menu() {
         <main className="col-span-full flex flex-col gap-8">
           <Title>Menu</Title>
           <MenuItems>
-            {items.map((menuItem) => (
-              <MenuItem
-                key={menuItem.productId}
-                name={menuItem.name}
-                image={menuItem.image}
-                price={menuItem.price}
-              />
-            ))}
+            {
+              // 👋 You need to handle an empty list here...
+              items.map((menuItem) => (
+                <MenuItem
+                  key={menuItem.productId}
+                  name={menuItem.name}
+                  image={menuItem.image}
+                  price={menuItem.price}
+                />
+              ))
+            }
           </MenuItems>
         </main>
       </div>

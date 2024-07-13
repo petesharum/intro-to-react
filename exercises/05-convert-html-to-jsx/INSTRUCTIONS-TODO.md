@@ -2,6 +2,18 @@
 
 So far, we've been directly using React's `createElement` to create components. While it's technically possible to build React apps this way, using `createElement` becomes less convenient with more complex markup. JSX is meant to make creating and composing elements in React as easy as writing HTML.
 
+- `src/title.jsx`
+- `src/menu.html`
+- `src/menu.jsx`
+- `src/app.jsx`
+
+1. In `src/title.jsx`, return a `<h1>` with the classes `text-4xl font-black uppercase tracking-wider`. Don't forget to pass the `children`.
+2. Next, we'll convert the HTML in `src/menu.html` to JSX and return that in `src/menu.jsx`. Remember to address the differences JSX vs. HTML.
+3. While still in `src/menu.jsx`, import the `Title` component from `./title` and replace the `<h1>` with it.
+4. Finally, in `src/app.jsx`, replace the returned `<Title />` component with `<Menu />`.
+
+---
+
 There are, however, a few differnces between HTML and JSX. Before we begin this exercise, let's discuss JSX basics.
 
 ## A quick JSX primer

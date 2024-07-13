@@ -2,6 +2,18 @@
 
 In the previous exercise, we created a React component to represent a single menu item. Now, let's take it a step further by exploring how to render multiple menu items dynamically.
 
+- `src/menu.jsx`
+- `src/menu-items.jsx` (review changes)
+- `src/menu-data.js` (review)
+
+1. Review `src/menu-data.js` and `src/menu-items.jsx`.
+   1. `src/menu-data.js` exports a list of menu item objects in an array. This will be used to dynamically render the menu item list.
+   2. We have added a `<MenuItems />` component in `src/menu-items.jsx` to serve as a container for styling.
+2. In `src/menu.jsx`, replace the hard-coded menu items with a block that maps `items` to `<MenuItem />. You can use `item.productId` as a `key`.
+3. Pass the item data into `<MenuItem />` as props.
+
+---
+
 ## Before starting
 
 Run `npm run dev`.

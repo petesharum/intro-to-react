@@ -4,19 +4,19 @@ It's helpful to break up your applications into smaller files, or modules. Modul
 
 ## Create a `Title` module
 
-Inside this directory, create a new folder and call it `src`. This is where your modules will live.
+Notice we have created a new folder called `src`. This is where our modules will live.
 
-Create a new file inside of `src`, `title.js`. Cut the `Title` function component from `index.html` and paste it in this new file. At the bottom of the page, add this line:
+Inside `index.html`, cut the `Title` function component and paste it into `src/title.js`. At the bottom of the page, add this line:
 
 ```js
 export { Title };
 ```
 
-This line allows other JavaScript files to import and execute this code.
+This will allow other JavaScript files to import and execute this code.
 
 ## Create an `App` module
 
-Again inside of `src`, create a new file and call it `app.js`. Create a new function component in this file called `App`, and just like `Title`, export this component at the bottom of the page:
+Inside `src/app`, create a new function component in this file called `App`, and just like `Title`, export this component at the bottom of the page:
 
 ```js
 export { App };
@@ -40,16 +40,14 @@ Creating a top-level `App` component is a common practice in React. It serves as
 
 ## Create the bootstrap module
 
-Once more inside of `src`, create a new file and call it `main.js`. This will be the file that bootstraps our application. Cut our remaining JavaScript code out of `index.html`, starting with line 16, and paste it into `main.js`.
+Finally, cut the remaining JavaScript code out of `index.html`, starting with line 16.
 
-Import and render the `App` component from `./app.js` in place of what is currently in `React.createElement`.
+Open `src/main.js` and paste the bootstrap code here.
+
+Render the `App` component from `./app.js` in place of what is currently in `React.createElement`.
 
 Finally, in `index.html`, remove anything that's left between the `script` tags inside the `body`. In the opening script tag, add a `src` attribute and set it equal to `./src/main.js`.
 
-To test this out, in your terminal, run `npm start`. This will start a local development server. Modules almost always require a server due to security policies in browsers. 
-    
-Type `y` and `return/enter` if prompted to install the `server` package. 
-
-Navigate to the address shown after initialization (usually `localhost:3000`). You should see the same result from the last exercise.
+Check the result in your browser (`npm run start`, http://localhost:3000). You should see the same result from the last exercise.
 
 🎉🎉 Congratulations! You've just created your first React app.

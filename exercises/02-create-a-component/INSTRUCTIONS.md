@@ -8,23 +8,17 @@ For this exercise, you can drag the `index.html` file into a browser to render t
 
 ## Create the initial component
 
-Inside the `script` tags we added to `index.html`, create a function called `Title` _underneath_ the `root.render`:
-
-```js
-function Title() {
-    // TODO
-}
-```
-
-**Note:** Function components, and React components in general, must be captialized when rendered. The capitalization tells React to render this as a custom component and not as a native browser element (e.g. `Title` vs. `<title>`).
-
-Inside the `Title` component function, return a new `React.createElement`. We'll render an `h1` like the current `root.render`:
+Inside the `script` tags we added to `index.html`, create a function called `Title` _above_ the `root.render`:
 
 ```js
 function Title() {
     return React.createElement('h1');
 }
 ```
+
+Inside the `Title` component function, we are returning a new `React.createElement`, which in turn renders an `h1` like the current `root.render`.
+
+**Note:** Function components, and React components in general, must be captialized when rendered. The capitalization tells React to render this as a custom component and not as a native browser element (e.g. `Title` vs. `<title>`).
 
 ## Pass the component
 
