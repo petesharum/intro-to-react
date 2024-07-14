@@ -20,7 +20,7 @@ function Menu() {
         <main className="col-span-full flex flex-col gap-8">
           <Title>Menu</Title>
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">
-            {/* 👇 beginning of menu item */}
+            {/* 👋 beginning of menu item */}
             <div>
               <img
                 height="300"
@@ -31,7 +31,7 @@ function Menu() {
               <div className="text-lg font-bold">Cheeseburger</div>
               <div>$6.99</div>
             </div>
-            {/* 👆 end of menu item */}
+            {/* 👋 end of menu item */}
             <div>
               <img
                 height="300"
