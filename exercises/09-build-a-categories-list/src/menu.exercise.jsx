@@ -22,7 +22,7 @@ function Menu() {
       <div className="container pb-16 pt-8 lg:gap-x-16 lg:gap-y-8">
         <aside className="col-span-2 flex flex-col gap-4 pt-8">
           <div className="sticky top-32 flex flex-col gap-4">
-            {/* 👋 Replace this comment with the category filters */}
+            {/* 👋 Here's where we'll put the category filters */}
           </div>
         </aside>
         <main className="col-span-10 flex flex-col gap-8">
