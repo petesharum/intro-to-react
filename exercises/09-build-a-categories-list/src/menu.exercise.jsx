@@ -1,9 +1,6 @@
 import { Title } from './title';
 import { MenuItem, MenuItems, MenuItemsNoResults } from './menu-items';
-// eslint-disable-next-line no-unused-vars -- required for exercise
-import { items, categories } from './menu-data';
-// eslint-disable-next-line no-unused-vars -- required for exercise
-import { CategoryFilter, CategoryFilters } from './category-filters';
+import { items } from './menu-data';
 
 function Menu() {
   return (

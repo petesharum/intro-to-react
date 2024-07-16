@@ -1,10 +1,10 @@
-// eslint-disable-next-line no-unused-vars -- required for exercise
-function CategoryFilters({ children }) {
+function CategoryFilters() {
+  // 👋 implement the CategoryFilters component here
   return null;
 }
 
-// eslint-disable-next-line no-unused-vars -- required for exercise
-function CategoryFilter({ children }) {
+function CategoryFilter() {
+  // 👋 implement the CategoryFilter component here
   return null;
 }
 

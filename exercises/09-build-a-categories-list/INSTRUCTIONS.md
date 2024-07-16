@@ -7,8 +7,8 @@ With our menu list complete, we would now like to add some category filters to m
 - [`src/menu.exercise.jsx`](./src/menu.exercise.jsx)
 - [`src/menu-data.js`](./src/menu-data.js)
 
-1. In [`src/category-filters.exercise.jsx`](./src/category-filters.exercise.jsx), complete the `CategoryFilters` and `CategoryFilter` components. Use the markup [`src/category-filters.html`](./src/category-filters.html) as a guide.
-2. In [`src/menu.exercise.jsx`](./src/menu.exercise.jsx), locate the comment beginning with 👋 and replace it with a list that maps the `categories` array from [`src/menu-data.js`](./src/menu-data.js) to the category filter components.
-3. You will need to add the "All" filter manually, before the mapped list.
+1. In [`src/category-filters.exercise.jsx`](./src/category-filters.exercise.jsx), complete the `CategoryFilters` and `CategoryFilter` components. Use the markup [`src/category-filters.html`](./src/category-filters.html) as a guide. Remember to forward `children` as part of the returned markup.
+2. In [`src/menu.exercise.jsx`](./src/menu.exercise.jsx), import `categories` from `./menu-data`, and both filter components from `.category-filters`. Locate the comment beginning with 👋 and replace it with a list that maps the `categories` array from [`src/menu-data.js`](./src/menu-data.js) to the category filter components.
+3. Don't forget to add the "All" filter manually, before the mapped list.
 
 You should now see a list of all the categories. We will add the filter functionality in the next exercise.
