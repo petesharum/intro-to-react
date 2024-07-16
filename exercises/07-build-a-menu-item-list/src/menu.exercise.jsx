@@ -1,7 +1,5 @@
-import { MenuItem, MenuItems } from './menu-items';
 import { Title } from './title';
-// eslint-disable-next-line no-unused-vars -- required for exercise
-import { items } from './menu-data';
+import { MenuItem, MenuItems } from './menu-items';
 
 function Menu() {
   return (
