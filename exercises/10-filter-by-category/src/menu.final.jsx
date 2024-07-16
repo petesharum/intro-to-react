@@ -15,7 +15,7 @@ function Menu() {
     );
   }
 
-  function handleCategoryChange(event, nextCategory) {
+  function handleCategoryChange(event, nextCategory = '') {
     event.preventDefault();
     setCategoryId(nextCategory);
   }

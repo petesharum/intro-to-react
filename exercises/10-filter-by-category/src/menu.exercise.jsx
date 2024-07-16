@@ -1,6 +1,3 @@
-// eslint-disable-next-line no-unused-vars -- Hint: you'll need this
-import { useState } from 'react';
-
 import { Title } from './title';
 import { MenuItem, MenuItems, MenuItemsNoResults } from './menu-items';
 import { items, categories } from './menu-data';
@@ -8,9 +5,16 @@ import { CategoryFilter, CategoryFilters } from './category-filters';
 
 function Menu() {
   let filteredItems = items;
+  const categoryId = '';
+
+  if (categoryId) {
+    filteredItems = items.filter((item) =>
+      item.categories.includes(categoryId),
+    );
+  }
 
   // eslint-disable-next-line no-unused-vars -- required for exercise
-  function handleCategoryChange(event, nextCategory) {
+  function handleCategoryChange(event) {
     event.preventDefault();
     // TODO: implement
   }
