@@ -2,8 +2,6 @@
 
 At its core, React is a rendering library. The following exercise demonstrates that absolute minimum amount of work required to render a React app.
 
-For this exercise, you can drag the `index.html` file into a browser to render the result.
-
 ## Preview the finished result
 
 First run the exercise solution to see what you will be building. In your terminal:
@@ -28,7 +26,7 @@ npm run start
 
 You should now see a blank screen when you navigate to http://localhost:3000. Note you will need to refresh the page manually to see any changes.
 
-Open up `index.html`, then copy the following script elements and paste them inside the `<head>` tags:
+Open up [`index.html`](./index.html), then copy the following script elements and paste them inside the `<head>` tags:
 
 ```html
 <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
@@ -45,7 +43,7 @@ Note that `react` and `react-dom` are now both available in the global namespace
 
 Before React can render anything to the page, it needs a DOM node to attach to.
 
-In `index.html`, add the following inside the `body` element:
+In [`index.html`](./index.html), add the following inside the `body` element:
 
 ```html
 <div id="root"></div>

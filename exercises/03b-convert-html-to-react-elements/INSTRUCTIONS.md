@@ -4,9 +4,11 @@ This exercise is for those that want a little bit more practice writing React el
 
 ## Convert `app.html`
 
-- `src/app.html`
-- `src/app.js`
+- [`src/app.html`](./src/app.html)
+- [`src/app.js`](./src/app.js)
 
-Using `React.createElement`, recreate `app.html` as the returned markup of `App` in `src/app.js` using `React.createElement`.
+In [`src/app.js`](./src/app.js), recreate [`app.html`](./src/app.html) as the returned markup of `App` using `React.createElement`.
 
-If you get stuck, check out `app.final.js`.
+If you get stuck, check out [`final/src/app.js`](./final/src/app.js).
+
+Use `npm run start` and navigate to http://localhost:3000 to check your work.

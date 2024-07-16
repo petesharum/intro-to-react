@@ -4,11 +4,29 @@ Currently our app is rendering a simple `h1` element. React's strength is in its
 
 There are two ways of creating components in React: function components and class components. We will focus on function components, which are simply functions that contain rendering instructions. Let's move our `h1` render into a new function component.
 
-For this exercise, you can drag the `index.html` file into a browser to render the result.
+## Preview the finished result
+
+First run the exercise solution to see what you will be building. In your terminal:
+
+```bash
+npm run start:final
+```
+
+You should see a log that the application is served at http://localhost:3000. Open that link in your browser of choice to see what you will be building.
+
+Press `CMD` + `C` (`CTRL` + `C` on Windows) to stop the server.
 
 ## Create the initial component
 
-Inside the `script` tags we added to `index.html`, create a function called `Title` _above_ the `root.render`:
+Start the exercise server:
+
+```bash
+npm run start 
+```
+
+Navigate to http://localhost:3000. You will need to refresh the page to see any changes you make. If you need to stop the server, press `CMD` + `C` (`CTRL` + `C` on Windows).
+
+In [`index.html`](./index.html), create a function inside the `script` tags at the bottom of the page called `Title`, _above_ the `root.render`:
 
 ```js
 function Title() {
@@ -70,7 +88,7 @@ function Title(props) {
 }
 ```
 
-`children` exists as a key in `props`, so the above function is the equivalent of:
+`children` is passed as a field in `props`. The function above is the equivalent of:
 
 ```js
 function Title({children, ...props}) {

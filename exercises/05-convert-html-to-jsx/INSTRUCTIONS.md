@@ -10,16 +10,16 @@ Some things to note:
 
 1. We have added several resources in `public/`, which will be used in future exercises.
 2. In `src/`, we have restored our previous `app`, `menu`, and `title` files, but now they have a `.jsx` extension.
-3. We are using Tailwind, which uses predefined classes to add styles to elements.
+3. We are using [Tailwind CSS](https://tailwindcss.com), which uses predefined classes to add styles to elements.
 
 ## Convert to JSX
 
-- `src/title.exercise.jsx`
-- `src/menu.html`
-- `src/menu.exercise.jsx`
-- `src/app.exercise.jsx`
+- [`src/title.exercise.jsx`](./src/title.exercise.jsx)
+- [`src/menu.html`](./src/menu.html)
+- [`src/menu.exercise.jsx`](./src/menu.exercise.jsx)
+- [`src/app.exercise.jsx`](./src/app.exercise.jsx)
 
-1. In `src/title.exercise.jsx`, return a `<h1>` with the classes `text-4xl font-black uppercase tracking-wider`. Don't forget to pass the `children`.
-2. Next, we'll convert the HTML in `src/menu.html` to JSX and return that in `src/menu.exercise.jsx`. Remember to address the differences JSX vs. HTML.
-3. While still in `src/menu.exercise.jsx`, import the `Title` component from `./title` and replace the `<h1>` with it.
-4. Finally, in `src/app.exercise.jsx`, replace the returned `<Title />` component with `<Menu />`.
+1. In [`src/title.exercise.jsx`](./src/title.exercise.jsx), return a `<h1>` with the classes `text-4xl font-black uppercase tracking-wider`. Don't forget to pass the `children`.
+2. Next, we'll convert the HTML in [`src/menu.html`](./src/menu.html) to JSX and return that in [`src/menu.exercise.jsx`](./src/menu.exercise.jsx). Remember to address the differences JSX vs. HTML.
+3. While still in [`src/menu.exercise.jsx`](./src/menu.exercise.jsx), import the `Title` component from `./title` and replace the `<h1>` with it.
+4. Finally, in [`src/app.exercise.jsx`](./src/app.exercise.jsx), replace the returned `<Title />` component with `<Menu />`.

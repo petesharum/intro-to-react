@@ -16,35 +16,35 @@ Vite's React template provides several common features that enhance React's deve
 
 ## Explore the new and modified files
 
-Take a moment to explore all the new files that have been generated.
+After generating the project, take a moment to explore all the new files that have been generated.
 
-### `package.json`
+- [`package.json`](./package.json)
 
-Several new scripts have been added to the project:
+  Several new scripts have been added to the project:
 
-- `dev`: Runs the development server, allowing developers to easily view and interact with a local instance of their application.
+  - `dev`: Runs the development server, allowing developers to easily view and interact with a local instance of their application.
 
-- `build`: Bundles all project resources necessary for app deployment in an optimized format. Vite uses the bundler [Rollup](https://rollupjs.org/) under the hood to emit static files that can be deployed easily on any standard HTTP server.
+  - `build`: Bundles all project resources necessary for app deployment in an optimized format. Vite uses the bundler [Rollup](https://rollupjs.org/) under the hood to emit static files that can be deployed easily on any standard HTTP server.
 
-- `lint`: Lints the JavaScript using the `eslint` tool, ensuring certain coding practices are followed in this codebase. It is configured using the added `eslintrc` file.
+  - `lint`: Lints the JavaScript using the `eslint` tool, ensuring certain coding practices are followed in this codebase. It is configured using the added `eslintrc` file.
 
-    If you are using VS Code, you can add the [ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) to automatically identify any eslint issues as you develop using the project eslint config.
+      If you are using VS Code, you can add the [ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) to automatically identify any eslint issues as you develop using the project eslint config.
 
-- `preview`: Rarely used in development, builds the production bundle and runs React in production mode. This offers production parity at the cost of slower builds, and the developer must refresh the browser manually to see changes.
+  - `preview`: Rarely used in development, builds the production bundle and runs React in production mode. This offers production parity at the cost of slower builds, and the developer must refresh the browser manually to see changes.
 
-### `index.html`
+- [`index.html`](./index.html)
 
-There are no more scripts that reference the UMD version of React, and we now reference the newly-created `main.jsx` script. We'll discuss that new extension in the next exercise.
+  There are no more scripts that reference the UMD version of React, and we now reference the newly-created `main.jsx` script. We'll discuss that new extension in the next exercise.
 
-Vite uses all `<script type="module">` elements in `index.html` as entry points and will generate separate bundles for each during the `build` script.
+  Vite uses all `<script type="module">` elements in `index.html` as entry points and will generate separate bundles for each during the `build` script.
 
-### `vite.config.js`
+- [`vite.config.js`](./vite.config.js)
 
-This is where we configure Vite. In the field `plugins`, we are passing a `react` function. This is what configures Vite to use React.
+  This is where we configure Vite. In the field `plugins`, we are passing a `react` function. This is what configures Vite to use React.
 
 ## Specify a port
 
-In the `vite.config.js` file using the `defineConfig` function, replace everything starting with `export default defineConfig` with the following:
+In the [`vite.config.js`](./vite.config.js) file using the `defineConfig` function, replace everything starting with `export default defineConfig` with the following:
 
 ```js
 export default defineConfig({
