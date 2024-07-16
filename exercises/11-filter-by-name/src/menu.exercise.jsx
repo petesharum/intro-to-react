@@ -11,6 +11,7 @@ function Menu() {
   let filteredItems = items;
   const [categoryId, setCategoryId] = useState('');
   // 👋 Make these component state
+  // eslint-disable-next-line no-unused-vars -- You're gonna need this
   const q = '';
   const query = '';
 
@@ -33,13 +34,12 @@ function Menu() {
   }
 
   // eslint-disable-next-line no-unused-vars -- Useful for this exercise
-  function handleSearchChange(event) {
+  function handleSearchChange() {
     // 👋 Implement me
   }
 
-  function handleSearchSubmit(event) {
-    event.preventDefault();
-    setCategoryId('');
+  // eslint-disable-next-line no-unused-vars -- Useful for this exercise
+  function handleSearchSubmit() {
     // 👋 There's something you need to do here...
   }
 
@@ -59,14 +59,8 @@ function Menu() {
       <div className="container grid auto-rows-min grid-cols-12 gap-x-8 gap-y-4 pb-16 pt-8 lg:gap-x-16 lg:gap-y-8">
         <aside className="col-span-2 flex flex-col gap-4 pt-8">
           <div className="sticky top-32 flex flex-col gap-4">
-            <form onSubmit={handleSearchSubmit}>
-              <Input
-                name="q"
-                type="search"
-                placeholder="search"
-                onChange={handleSearchChange}
-                value={q}
-              />
+            <form>
+              <Input name="q" type="search" placeholder="search" />
             </form>
             <CategoryFilters>
               <CategoryFilter key="all" href="." onClick={handleCategoryChange}>
