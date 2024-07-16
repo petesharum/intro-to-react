@@ -12,12 +12,12 @@ Components hide the details of their logic, styling, and markup, while allowing 
    - Replace the item name with `name`
    - Replace the image url with ``` `/images/${image.url}` ```
    - Replace the image alt with `image.alt`
-   - Replace the price with `formatMoney(price)`
-5. In [`src/menu.exercise.jsx`](./src/menu.exercise.jsx), add an instance of `<MenuItem />` above the block you previously copied. Pass the data of the first menu item into `<MenuItem />`. 
+   - Import `formatMoney` from `./lib/format-money` and use it to format the price (`formatMoney(price)`).
+4. In [`src/menu.exercise.jsx`](./src/menu.exercise.jsx), import `MenuItem` from `./menu-items` and add an instance above the block you previously copied. Pass the data of the first menu item into `<MenuItem />`. 
    
    Keep in mind:
 
    - The `price` should be represented in cents (e.g. $1.00 is 100).
    - The `image` should look like `{alt: 'The alt of the image', url: 'base-image-url.jpg'}`.
    - The `name` can be passed unchanged.
-6. Repeat step 5 for the remaining menu items, then delete the hard-coded instances when you're done.
+5. Repeat step 5 for the remaining menu items, then delete the hard-coded instances when you're done.
