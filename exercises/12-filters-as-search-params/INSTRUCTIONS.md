@@ -1,6 +1,6 @@
 # Exercise 12: Filters as Search Params
 
-Our filters are a hit, but customers want to be able to bookmark their product searches (these are some *really* advanced customers...). We'll do this by lifting filter state into the URL, and in the process, make our logic *much* simpler.
+Our filters are a hit, but test users want to be able to bookmark their product searches (these are some *really* advanced test users...). We'll do this by lifting filter state into the URL, and in the process, make our logic *much* simpler.
 
 - [src/menu.exercise.jsx](./src/menu.exercise.jsx)
 - [`URLSearchParams` API](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams)

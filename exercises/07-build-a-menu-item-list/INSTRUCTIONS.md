@@ -1,6 +1,6 @@
 # Exercise 7: Build a Menu Item List
 
-In the previous exercise, we created a React component to represent a single menu item. Now, let's take it a step further by exploring how to render multiple menu items dynamically.
+Let's continue our menu page by exploring how to render multiple menu items dynamically.
 
 - [`src/menu.exercise.jsx`](./src/menu.exercise.jsx)
 - [`src/menu-items.jsx`](./src/menu-items.jsx) (review changes)

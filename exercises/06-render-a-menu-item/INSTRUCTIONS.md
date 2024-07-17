@@ -1,7 +1,6 @@
 # Exercise 6: Render a menu item
 
-Components hide the details of their logic, styling, and markup, while allowing customization via props. This allows them to simplify repeated patterns in UI with slightly different data. In this exercise, we will simplify the repeated menu item markup by creating a `MenuItem` component. 
-
+Right now our menu items are hard coded. This is not very scalable, nor maintainable. Let's fix this by first creating a `MenuItem` component.
 
 - [`src/menu-items.exercise.jsx`](./src/menu-items.exercise.jsx)
 - [`src/menu.exercise.jsx`](./src/menu.exercise.jsx)

@@ -1,6 +1,6 @@
 # Exercise 11: Filter by Name
 
-We've added category filters and users love them, but they want even more filter functionality. Specifically, we've been asked to add the ability to search directly by menu item name.
+We've added category filters and test users love them, but they want even more filter functionality. Specifically, we've been asked to add the ability to search directly by menu item name.
 
 To get us started, our UI team has added an `Input` component. Now we need to wire up more state to track what the user has typed.
 

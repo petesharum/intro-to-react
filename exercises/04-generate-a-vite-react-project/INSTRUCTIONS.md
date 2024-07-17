@@ -1,6 +1,8 @@
 # Exercise 4: Generate a Vite React Project
 
-Vite's React template provides several common features that enhance React's developer experience without introducing too much configuration. For this exercise, you will generate a new React Vite project.
+Congratulations! Your newly-acquired React experience has landed you a job at Yummy! Foods, an up-and-coming restaurant brand. For the rest of this course, you will, with the help of your teammates, build out the Yummy! Foods website.
+
+The first thing we need to do is set up our project. We will use Vite, along with Vite's React template.
 
 ## Generate the project
 

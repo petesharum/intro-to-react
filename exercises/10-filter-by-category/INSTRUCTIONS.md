@@ -1,8 +1,6 @@
 # Exercise 10: Filter by Category
 
-Last exercise, we began a feature that will allow users to filter by category. We created a dynamic list of categories based on our menu data, and in this exercise, we will add the filtering functionality.
-
-For the purposes of this exercise, we will use the `useState` hook to track filter state locally.
+We've created a dynamic list of categories based on our menu data. Now we will add the filtering functionality.
 
 - [`menu.exercise.jsx`](./src/menu.exercise.jsx)
 

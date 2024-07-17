@@ -1,16 +1,12 @@
 # Exercise 5: Convert HTML to JSX
 
-So far, we've been directly using React's `createElement` to create components. While it's technically possible to build React apps this way, using `createElement` becomes less convenient with more complex markup. JSX is meant to make creating and composing elements in React as easy as writing HTML.
+Building a restaurant website from scratch can be a daunting task. Luckily, our team has been hard at work:
 
-## Explore the project
+- Our media team has added several resources in `public/`, which will be great for future use.
+- Our previous exercise work has been added to the project. Who knew that would come in handy?
+- Our team has decided to use [Tailwind CSS](https://tailwindcss.com) for styling, which uses predefined utility classes to add styles to elements.
 
-Before beginning this exercise, take the time to explore the changes to our initial Vite project.
-
-Some things to note:
-
-1. We have added several resources in `public/`, which will be used in future exercises.
-2. In `src/`, we have restored our previous `app`, `menu`, and `title` files, but now they have a `.jsx` extension.
-3. We are using [Tailwind CSS](https://tailwindcss.com), which uses predefined classes to add styles to elements.
+Additionally, we have some predefined markup to get us started on a menu page. We'll need to convert all of that, along with our previous work, to JSX.
 
 ## Convert to JSX
 
