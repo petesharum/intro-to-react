@@ -48,11 +48,10 @@ function Menu() {
   const query = searchParams.get('q');
 
   const { data: items = [], status: itemsStatus } = useFetch(
-    `${window.location.origin}/api/menu?${searchParams.toString()}`,
+    `/api/menu?${searchParams.toString()}`,
   );
-  const { data: categories = [], status: categoriesStatus } = useFetch(
-    `${window.location.origin}/api/menu/categories`,
-  );
+  const { data: categories = [], status: categoriesStatus } =
+    useFetch(`/api/menu/categories`);
 
   const handleSubmit = (event) => {
     event.preventDefault();

@@ -31,7 +31,7 @@ function ProductDetail() {
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const { data: product = { name: '', description: '', image: {} }, status } =
-    useFetch(`${window.location.origin}/api/menu/${id}`);
+    useFetch(`/api/menu/${id}`);
   const isPending = status === Status.PENDING;
   const navigate = useNavigate();
   const { addToCart } = useCart();

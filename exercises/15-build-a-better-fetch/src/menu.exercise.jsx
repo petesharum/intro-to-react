@@ -22,7 +22,7 @@ function Menu() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    const apiUrl = `${window.location.origin}/api/menu${window.location.search}`;
+    const apiUrl = `/api/menu${window.location.search}`;
 
     fetch(apiUrl)
       .then((response) => response.json())
@@ -32,7 +32,7 @@ function Menu() {
   }, []);
 
   useEffect(() => {
-    const apiUrl = `${window.location.origin}/api/menu/categories`;
+    const apiUrl = `/api/menu/categories`;
 
     fetch(apiUrl)
       .then((response) => response.json())

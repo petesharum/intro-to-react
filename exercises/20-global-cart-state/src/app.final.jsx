@@ -27,7 +27,7 @@ function App() {
     [items],
   );
   const { data: summary = { subtotal: 0, tax: 0, total: 0 }, status } =
-    useFetch(`${window.location.origin}/api/order/summary`, fetchOptions);
+    useFetch(`/api/order/summary`, fetchOptions);
   const { subtotal, tax, total } = summary;
   const isPending = status === Status.PENDING;
 

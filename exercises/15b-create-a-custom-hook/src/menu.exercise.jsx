@@ -28,7 +28,7 @@ function Menu() {
 
   useEffect(() => {
     let ignore = false;
-    const apiUrl = `${window.location.origin}/api/menu${window.location.search}`;
+    const apiUrl = `/api/menu${window.location.search}`;
 
     setItemsStatus(Status.PENDING);
 
@@ -51,7 +51,7 @@ function Menu() {
 
   useEffect(() => {
     let ignore = false;
-    const apiUrl = `${window.location.origin}/api/menu/categories`;
+    const apiUrl = `/api/menu/categories`;
 
     setCategoriesStatus(Status.PENDING);
 

@@ -13,7 +13,7 @@ function Menu() {
   const categories = [];
 
   useEffect(() => {
-    const apiUrl = `${window.location.origin}/api/menu${window.location.search}`;
+    const apiUrl = `/api/menu${window.location.search}`;
 
     fetch(apiUrl)
       .then((response) => response.json())

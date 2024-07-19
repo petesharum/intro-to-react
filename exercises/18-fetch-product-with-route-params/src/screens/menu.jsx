@@ -15,11 +15,10 @@ function Menu() {
   const [searchParams] = useSearchParams();
 
   const { data: items = [], status: itemsStatus } = useFetch(
-    `${window.location.origin}/api/menu?${searchParams.toString()}`,
+    `/api/menu?${searchParams.toString()}`,
   );
-  const { data: categories = [], status: categoriesStatus } = useFetch(
-    `${window.location.origin}/api/menu/categories`,
-  );
+  const { data: categories = [], status: categoriesStatus } =
+    useFetch(`/api/menu/categories`);
 
   if (itemsStatus === Status.REJECTED || categoriesStatus === Status.REJECTED) {
     return (

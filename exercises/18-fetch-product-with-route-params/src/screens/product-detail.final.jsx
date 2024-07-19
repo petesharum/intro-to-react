@@ -17,7 +17,7 @@ import { useFetch, Status } from '@/lib/use-fetch';
 function ProductDetail() {
   const { id } = useParams();
   const { data: product = { name: '', description: '', image: {} }, status } =
-    useFetch(`${window.location.origin}/api/menu/${id}`);
+    useFetch(`/api/menu/${id}`);
   const isPending = status === Status.PENDING;
 
   return (

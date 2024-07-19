@@ -47,11 +47,10 @@ function Menu() {
   const query = searchParams.get('q');
 
   const { data: items = [], status: itemsStatus } = useFetch(
-    `${window.location.origin}/api/menu${window.location.search}`,
+    `/api/menu${window.location.search}`,
   );
-  const { data: categories = [], status: categoriesStatus } = useFetch(
-    `${window.location.origin}/api/menu/categories`,
-  );
+  const { data: categories = [], status: categoriesStatus } =
+    useFetch(`/api/menu/categories`);
 
   if (itemsStatus === Status.REJECTED || categoriesStatus === Status.REJECTED) {
     return (
