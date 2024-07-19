@@ -20,6 +20,7 @@ function Menu() {
   const [items, setItems] = useState([]);
   const categoriesStatus = Status.IDLE;
   const [categories, setCategories] = useState([]);
+  const hasErrors = false;
 
   useEffect(() => {
     const apiUrl = `/api/menu${window.location.search}`;
@@ -41,7 +42,7 @@ function Menu() {
       });
   }, []);
 
-  if (itemsStatus === Status.REJECTED || categoriesStatus === Status.REJECTED) {
+  if (hasErrors) {
     return (
       <div className="container py-8 text-center">
         <p className="text-red-600">

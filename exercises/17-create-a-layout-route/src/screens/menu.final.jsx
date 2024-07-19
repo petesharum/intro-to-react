@@ -19,8 +19,10 @@ function Menu() {
   );
   const { data: categories = [], status: categoriesStatus } =
     useFetch(`/api/menu/categories`);
+  const hasErrors =
+    itemsStatus === Status.REJECTED || categoriesStatus === Status.REJECTED;
 
-  if (itemsStatus === Status.REJECTED || categoriesStatus === Status.REJECTED) {
+  if (hasErrors) {
     return (
       <div className="col-span-full py-8 text-center">
         <p className="text-red-600">

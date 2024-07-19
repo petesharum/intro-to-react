@@ -52,6 +52,8 @@ function Menu() {
   );
   const { data: categories = [], status: categoriesStatus } =
     useFetch(`/api/menu/categories`);
+  const hasErrors =
+    itemsStatus === Status.REJECTED || categoriesStatus === Status.REJECTED;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -62,7 +64,7 @@ function Menu() {
     setSearchParams(search);
   };
 
-  if (itemsStatus === Status.REJECTED || categoriesStatus === Status.REJECTED) {
+  if (hasErrors) {
     return (
       <div className="container py-8 text-center">
         <p className="text-red-600">
