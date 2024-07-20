@@ -18,10 +18,7 @@ const Status = {
   REJECTED: 'rejected',
 };
 
-// eslint-disable-next-line no-unused-vars -- Required for exercise
-function useFetch(url) {
-  // 👋 Make me work!
-}
+// 👋 Let's put our useFetch here...
 
 function Menu() {
   const searchParams = new URLSearchParams(window.location.search);
