@@ -41,6 +41,14 @@ function MenuItemsNoResults() {
   );
 }
 
+function MenuError() {
+  return (
+    <div className="container py-8 text-center">
+      <p className="text-red-600">An error occurred. Please try again later.</p>
+    </div>
+  );
+}
+
 function MenuItem({ productId, name, price, image }) {
   return (
     <Link
@@ -64,4 +72,4 @@ function MenuItem({ productId, name, price, image }) {
   );
 }
 
-export { MenuItem, MenuItems, MenuItemsNoResults };
+export { MenuItem, MenuItems, MenuItemsNoResults, MenuError };

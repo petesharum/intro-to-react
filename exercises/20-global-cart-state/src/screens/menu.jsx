@@ -6,6 +6,7 @@ import {
   MenuItems,
   MenuItem,
   MenuItemsNoResults,
+  MenuError,
   CategoryFilters,
   CategoryFilter,
   SearchForm,
@@ -25,13 +26,7 @@ function Menu() {
     itemsStatus === Status.REJECTED || categoriesStatus === Status.REJECTED;
 
   if (hasErrors) {
-    return (
-      <div className="col-span-full py-8 text-center">
-        <p className="text-red-600">
-          An error occurred. Please try again later.
-        </p>
-      </div>
-    );
+    return <MenuError />;
   }
 
   return (

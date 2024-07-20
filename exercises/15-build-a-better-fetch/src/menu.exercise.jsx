@@ -16,11 +16,12 @@ const Status = {
 function Menu() {
   const searchParams = new URLSearchParams(window.location.search);
   const query = searchParams.get('q');
+  // eslint-disable-next-line no-unused-vars -- 👋 Convert this to component state
   const itemsStatus = Status.IDLE;
   const [items, setItems] = useState([]);
+  // eslint-disable-next-line no-unused-vars -- 👋 Convert this to component state
   const categoriesStatus = Status.IDLE;
   const [categories, setCategories] = useState([]);
-  const hasErrors = false;
 
   useEffect(() => {
     const apiUrl = `/api/menu${window.location.search}`;
@@ -41,16 +42,6 @@ function Menu() {
         setCategories(data);
       });
   }, []);
-
-  if (hasErrors) {
-    return (
-      <div className="container py-8 text-center">
-        <p className="text-red-600">
-          An error occurred. Please try again later.
-        </p>
-      </div>
-    );
-  }
 
   return (
     <div className="grid h-screen grid-rows-[auto_1fr_auto] gap-x-8">
@@ -76,7 +67,7 @@ function Menu() {
                 defaultValue={query}
               />
             </form>
-            <CategoryFilters isPending={categoriesStatus === Status.PENDING}>
+            <CategoryFilters>
               <CategoryFilter key="all" href=".">
                 All
               </CategoryFilter>
@@ -93,7 +84,7 @@ function Menu() {
         </aside>
         <main className="col-span-10 flex flex-col gap-8">
           <Title>Menu</Title>
-          <MenuItems isPending={itemsStatus === Status.PENDING}>
+          <MenuItems>
             {items.length === 0 ? (
               <MenuItemsNoResults />
             ) : (

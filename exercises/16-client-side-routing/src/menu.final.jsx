@@ -4,7 +4,12 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { Input } from '@/lib/ui/input';
 
 import { Title } from './title';
-import { MenuItem, MenuItems, MenuItemsNoResults } from './menu-items';
+import {
+  MenuItem,
+  MenuItems,
+  MenuItemsNoResults,
+  MenuError,
+} from './menu-items';
 import { CategoryFilter, CategoryFilters } from './category-filters';
 
 const Status = {
@@ -65,13 +70,7 @@ function Menu() {
   };
 
   if (hasErrors) {
-    return (
-      <div className="container py-8 text-center">
-        <p className="text-red-600">
-          An error occurred. Please try again later.
-        </p>
-      </div>
-    );
+    return <MenuError />;
   }
 
   return (

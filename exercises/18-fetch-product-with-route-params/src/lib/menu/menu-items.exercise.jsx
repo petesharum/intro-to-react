@@ -39,6 +39,14 @@ function MenuItemsNoResults() {
   );
 }
 
+function MenuError() {
+  return (
+    <div className="container py-8 text-center">
+      <p className="text-red-600">An error occurred. Please try again later.</p>
+    </div>
+  );
+}
+
 function MenuItem({ name, price, image }) {
   return (
     <div className="flex flex-col gap-2 [&:hover_img]:scale-110">
@@ -59,4 +67,4 @@ function MenuItem({ name, price, image }) {
   );
 }
 
-export { MenuItem, MenuItems, MenuItemsNoResults };
+export { MenuItem, MenuItems, MenuItemsNoResults, MenuError };
