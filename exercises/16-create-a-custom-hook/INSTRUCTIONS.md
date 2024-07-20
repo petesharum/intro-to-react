@@ -1,4 +1,4 @@
-# Exercise 15b: Create a Custom Hook
+# Exercise 16: Create a Custom Hook
 
 We've learned that repetitive logic in React components can be expressed as custom hooks, which in turn make logic easy to reuse and maintain.
 
