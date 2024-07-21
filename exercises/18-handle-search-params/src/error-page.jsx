@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { Title } from '@/lib/shared-components/title';
+import { Title } from './title';
 
 export default function ErrorPage({ message }) {
   return (

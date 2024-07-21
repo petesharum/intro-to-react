@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 import { Input } from '@/lib/ui/input';
 
@@ -49,11 +49,11 @@ function useFetch(url) {
 }
 
 function Menu() {
-  const searchParams = new URLSearchParams(window.location.search);
+  const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('q');
 
   const { data: items = [], status: itemsStatus } = useFetch(
-    `/api/menu?${window.location.search}`,
+    `/api/menu?${searchParams.toString()}`,
   );
   const { data: categories = [], status: categoriesStatus } =
     useFetch(`/api/menu/categories`);
@@ -62,6 +62,19 @@ function Menu() {
 
   if (hasErrors) {
     return <MenuError />;
+  }
+
+  function handleSearchSubmit(event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const q = formData.get('q');
+
+    if (q.trim()) {
+      setSearchParams({ q });
+    } else {
+      setSearchParams({});
+    }
   }
 
   return (
@@ -97,7 +110,7 @@ function Menu() {
       <div className="container grid auto-rows-min grid-cols-12 gap-x-8 gap-y-4 pb-16 pt-8 lg:gap-x-16 lg:gap-y-8">
         <aside className="col-span-2 flex flex-col gap-4 pt-8">
           <div className="sticky top-32 flex flex-col gap-4">
-            <form>
+            <form onSubmit={handleSearchSubmit}>
               <Input
                 name="q"
                 type="search"

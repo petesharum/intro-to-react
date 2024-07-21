@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { Menu } from './screens/menu';
-import { Home } from './screens/home';
-import { ErrorPage } from './screens/error-page';
+import { Menu } from './menu';
+import { Home } from './home';
+import { ErrorPage } from './error-page';
 
 function App() {
   return (

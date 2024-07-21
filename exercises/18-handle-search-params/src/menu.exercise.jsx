@@ -1,22 +1,59 @@
-import { useSearchParams, Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import { Title } from '@/lib/shared-components/title';
+import { Input } from '@/lib/ui/input';
+
+import { Title } from './title';
 import {
-  MenuItems,
   MenuItem,
+  MenuItems,
   MenuItemsNoResults,
   MenuError,
-  CategoryFilters,
-  CategoryFilter,
-  SearchForm,
-} from '@/lib/menu';
-import { useFetch, Status } from '@/lib/use-fetch';
+} from './menu-items';
+import { CategoryFilter, CategoryFilters } from './category-filters';
+
+const Status = {
+  IDLE: 'idle',
+  PENDING: 'pending',
+  RESOLVED: 'resolved',
+  REJECTED: 'rejected',
+};
+
+function useFetch(url) {
+  const [status, setStatus] = useState(Status.IDLE);
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    let ignore = false;
+
+    setStatus(Status.PENDING);
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        if (!ignore) {
+          setData(data);
+          setStatus(Status.RESOLVED);
+        }
+      })
+      .catch(() => {
+        setStatus(Status.REJECTED);
+      });
+
+    return () => {
+      ignore = true;
+    };
+  }, [url]);
+
+  return { data, status };
+}
 
 function Menu() {
-  const [searchParams] = useSearchParams();
+  const searchParams = new URLSearchParams(window.location.search);
+  const query = searchParams.get('q');
 
   const { data: items = [], status: itemsStatus } = useFetch(
-    `/api/menu?${searchParams.toString()}`,
+    `/api/menu?${window.location.search}`,
   );
   const { data: categories = [], status: categoriesStatus } =
     useFetch(`/api/menu/categories`);
@@ -49,7 +86,7 @@ function Menu() {
             <li>
               <Link
                 className="block font-black uppercase transition-transform hover:scale-110 hover:text-red-600"
-                to="menu"
+                to="/menu"
               >
                 Menu
               </Link>
@@ -60,7 +97,14 @@ function Menu() {
       <div className="container grid auto-rows-min grid-cols-12 gap-x-8 gap-y-4 pb-16 pt-8 lg:gap-x-16 lg:gap-y-8">
         <aside className="col-span-2 flex flex-col gap-4 pt-8">
           <div className="sticky top-32 flex flex-col gap-4">
-            <SearchForm />
+            <form>
+              <Input
+                name="q"
+                type="search"
+                placeholder="search"
+                defaultValue={query}
+              />
+            </form>
             <CategoryFilters isPending={categoriesStatus === Status.PENDING}>
               <CategoryFilter key="all" href=".">
                 All

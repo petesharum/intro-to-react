@@ -1,4 +1,4 @@
-import { formatMoney } from '@/lib/format-money';
+import { formatMoney } from './lib/format-money';
 import { Skeleton } from '@/lib/ui/skeleton';
 
 function MenuItemSkeleton() {
