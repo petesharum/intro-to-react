@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Input } from '@/lib/ui/input';
 
@@ -49,7 +49,7 @@ function useFetch(url) {
 }
 
 function Menu() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const searchParams = new URLSearchParams(window.location.search);
   const query = searchParams.get('q');
 
   const { data: items = [], status: itemsStatus } = useFetch(
@@ -59,15 +59,6 @@ function Menu() {
     useFetch(`/api/menu/categories`);
   const hasErrors =
     itemsStatus === Status.REJECTED || categoriesStatus === Status.REJECTED;
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-    const search = { q: formData.get('q') };
-
-    setSearchParams(search);
-  };
 
   if (hasErrors) {
     return <MenuError />;
@@ -95,7 +86,7 @@ function Menu() {
             <li>
               <Link
                 className="block font-black uppercase transition-transform hover:scale-110 hover:text-red-600"
-                to="menu"
+                to="/menu"
               >
                 Menu
               </Link>
@@ -106,7 +97,7 @@ function Menu() {
       <div className="container grid auto-rows-min grid-cols-12 gap-x-8 gap-y-4 pb-16 pt-8 lg:gap-x-16 lg:gap-y-8">
         <aside className="col-span-2 flex flex-col gap-4 pt-8">
           <div className="sticky top-32 flex flex-col gap-4">
-            <form onSubmit={handleSubmit}>
+            <form>
               <Input
                 name="q"
                 type="search"
