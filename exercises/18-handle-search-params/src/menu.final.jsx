@@ -60,10 +60,6 @@ function Menu() {
   const hasErrors =
     itemsStatus === Status.REJECTED || categoriesStatus === Status.REJECTED;
 
-  if (hasErrors) {
-    return <MenuError />;
-  }
-
   function handleSearchSubmit(event) {
     event.preventDefault();
 
@@ -75,6 +71,10 @@ function Menu() {
     } else {
       setSearchParams({});
     }
+  }
+
+  if (hasErrors) {
+    return <MenuError />;
   }
 
   return (
