@@ -34,5 +34,6 @@ To test out the routes:
 1. Open up [src/home.exercise.jsx](./src/home.exercise.jsx) and, at the top of the file, import `Link` from `react-router-dom`. `Link` is a decorated version of `<a>` that enables client side transitions from one page to another.
 2. In the `Home` component, replace the `<a>` around the main `<img>` with a `<Link>`. You'll also need to change the `href` prop name to `to`.
 3. Next, open up [src/menu.exercise.jsx](./src/menu.exercise.jsx). Insdie the `Menu` component, replace the two `<span>`s inside the `<nav>` with `<Link>`s. The image should link to `"/"`, and Menu should link to `"/menu"`.
+4. While you're here, update the "All" category filter `href` to `/menu` since the URL for this page has changed.
 
 You should now be able to transition between the home page and menu page without the browser reloading. Next we'll tackle the category filters.

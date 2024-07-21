@@ -99,7 +99,7 @@ function Menu() {
               />
             </form>
             <CategoryFilters isPending={categoriesStatus === Status.PENDING}>
-              <CategoryFilter key="all" href="/menu">
+              <CategoryFilter key="all" href=".">
                 All
               </CategoryFilter>
               {categories.map((category) => (
