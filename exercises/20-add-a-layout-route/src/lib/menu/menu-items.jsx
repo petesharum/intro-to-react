@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { formatMoney } from '@/lib/format-money';
 import { Skeleton } from '@/lib/ui/skeleton';
 
@@ -47,18 +49,26 @@ function MenuError() {
   );
 }
 
-function MenuItem({ name, price, image }) {
+function MenuItem({ productId, name, price, image }) {
   return (
-    <div className="flex flex-col gap-2">
-      <img
-        height="300"
-        width="300"
-        src={`/images/${image.url}`}
-        alt={image.alt}
-      />
-      <div className="text-lg font-bold leading-5">{name}</div>
-      <div>{formatMoney(price)}</div>
-    </div>
+    <Link
+      className="flex flex-col gap-2 [&:hover_img]:scale-110"
+      to={productId}
+    >
+      <div className="overflow-hidden rounded">
+        <img
+          className="transition-transform ease-out"
+          height="300"
+          width="300"
+          src={`/images/${image.url}`}
+          alt={image.alt}
+        />
+      </div>
+      <div>
+        <div className="text-lg font-bold leading-5">{name}</div>
+        <div>{formatMoney(price)}</div>
+      </div>
+    </Link>
   );
 }
 

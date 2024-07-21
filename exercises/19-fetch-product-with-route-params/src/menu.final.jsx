@@ -1,19 +1,20 @@
-import { useSearchParams, Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
+import { Input } from '@/lib/ui/input';
 import { Title } from '@/lib/shared-components/title';
-import {
-  MenuItems,
-  MenuItem,
-  MenuItemsNoResults,
-  MenuError,
-  CategoryFilters,
-  CategoryFilter,
-  SearchForm,
-} from '@/lib/menu';
 import { useFetch, Status } from '@/lib/use-fetch';
 
+import {
+  MenuItem,
+  MenuItems,
+  MenuItemsNoResults,
+  MenuError,
+} from './menu-items';
+import { CategoryFilter, CategoryFilters } from './category-filters';
+
 function Menu() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get('q');
 
   const { data: items = [], status: itemsStatus } = useFetch(
     `/api/menu?${searchParams.toString()}`,
@@ -25,6 +26,19 @@ function Menu() {
 
   if (hasErrors) {
     return <MenuError />;
+  }
+
+  function handleSearchSubmit(event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const q = formData.get('q');
+
+    if (q.trim()) {
+      setSearchParams({ q });
+    } else {
+      setSearchParams({});
+    }
   }
 
   return (
@@ -49,7 +63,7 @@ function Menu() {
             <li>
               <Link
                 className="block font-black uppercase transition-transform hover:scale-110 hover:text-red-600"
-                to="menu"
+                to="/menu"
               >
                 Menu
               </Link>
@@ -60,7 +74,14 @@ function Menu() {
       <div className="container grid auto-rows-min grid-cols-12 gap-x-8 gap-y-4 pb-16 pt-8 lg:gap-x-16 lg:gap-y-8">
         <aside className="col-span-2 flex flex-col gap-4 pt-8">
           <div className="sticky top-32 flex flex-col gap-4">
-            <SearchForm />
+            <form onSubmit={handleSearchSubmit}>
+              <Input
+                name="q"
+                type="search"
+                placeholder="search"
+                defaultValue={query}
+              />
+            </form>
             <CategoryFilters isPending={categoriesStatus === Status.PENDING}>
               <CategoryFilter key="all" href=".">
                 All
