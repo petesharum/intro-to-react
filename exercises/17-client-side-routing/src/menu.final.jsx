@@ -53,7 +53,7 @@ function Menu() {
   const query = searchParams.get('q');
 
   const { data: items = [], status: itemsStatus } = useFetch(
-    `/api/menu?${window.location.search}`,
+    `/api/menu${window.location.search}`,
   );
   const { data: categories = [], status: categoriesStatus } =
     useFetch(`/api/menu/categories`);
@@ -106,7 +106,7 @@ function Menu() {
               />
             </form>
             <CategoryFilters isPending={categoriesStatus === Status.PENDING}>
-              <CategoryFilter key="all" href=".">
+              <CategoryFilter key="all" href="/menu">
                 All
               </CategoryFilter>
               {categories.map((category) => (

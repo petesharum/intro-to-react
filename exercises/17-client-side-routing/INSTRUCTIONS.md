@@ -5,7 +5,6 @@ I don't know if you've noticed, but we've only worked on a single page so far. W
 Our UI team has been hard at work cranking out a new, inviting home page and a helpful error page (just in case our users get lost). All that's left is to stitch everything together using React Router.
 
 - [src/app.exercise.jsx](./src/app.exercise.jsx)
-- [src/category-filters.exercise.jsx](./src/category-filters.exercise.jsx)
 - [src/home.exercise.jsx](./src/home.exercise.jsx)
 - [src/menu.exercise.jsx](./src/menu.exercise.jsx)
 - [React Router v6 docs](https://reactrouter.com/)
@@ -32,10 +31,8 @@ To test out the routes:
 
 ## Add `Link`s
 
-1. Open up [src/category-filters.exercise.jsx](./src/category-filters.exercise.jsx), and, at the top of the file, import `Link` from `react-router-dom`. `Link` is a decorated version of `<a>` that enables client side transitions from one page to another.
-2. In the `CategoryFilter` component, replace the `a` instance with `Link`. You'll also need to change the `href` prop name to `to`.
-3. Next, open up [src/home.exercise.jsx](./src/home.exercise.jsx) and replace the `<a>` around the main `<img>` with a `<Link>`. Remember to change the `href` to `to`.
-4. Finally, open up [src/menu.exercise.jsx](./src/menu.exercise.jsx).
-5. Inside the `Menu` component, replace the two `<span>`s inside the `<nav>` with `<Link>`s. The image should link to `"/"`, and Menu should link to `"/menu"`.
+1. Open up [src/home.exercise.jsx](./src/home.exercise.jsx) and, at the top of the file, import `Link` from `react-router-dom`. `Link` is a decorated version of `<a>` that enables client side transitions from one page to another.
+2. In the `Home` component, replace the `<a>` around the main `<img>` with a `<Link>`. You'll also need to change the `href` prop name to `to`.
+3. Next, open up [src/menu.exercise.jsx](./src/menu.exercise.jsx). Insdie the `Menu` component, replace the two `<span>`s inside the `<nav>` with `<Link>`s. The image should link to `"/"`, and Menu should link to `"/menu"`.
 
-You should now be able to transition between the home page and menu page without the browser reloading.
+You should now be able to transition between the home page and menu page without the browser reloading. Next we'll tackle the category filters.
