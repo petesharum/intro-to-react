@@ -104,6 +104,7 @@ function Menu() {
               <MenuItemsNoResults />
             ) : (
               items.map((menuItem) => (
+                // 👋 Make sure you pass the `productId` here.
                 <MenuItem
                   key={menuItem.productId}
                   name={menuItem.name}

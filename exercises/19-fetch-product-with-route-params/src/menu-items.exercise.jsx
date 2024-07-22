@@ -49,6 +49,7 @@ function MenuError() {
 
 function MenuItem({ name, price, image }) {
   return (
+    // 👋 Replace this div with a Link...
     <div className="flex flex-col gap-2 [&:hover_img]:scale-110">
       <div className="overflow-hidden rounded">
         <img

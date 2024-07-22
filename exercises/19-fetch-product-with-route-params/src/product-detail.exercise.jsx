@@ -32,6 +32,7 @@ function BreadcrumbCurrent({ children }) {
 }
 
 function ProductDetail() {
+  // 👋 We need to get the `id` param here and fetch from `/api/menu/${id}`
   const product = { name: '', description: '', image: {} };
   const isPending = true;
 
