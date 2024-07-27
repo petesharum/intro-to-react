@@ -1,11 +1,11 @@
 # Exercise 18: Handle Search Params
 
-- [src/category-filters.exercise.jsx](./src/category-filters.exercise.jsx)
-- [src/menu.exercise.jsx](./src/menu.exercise.jsx)
+- [`src/category-filters.exercise.jsx`](./src/category-filters.exercise.jsx)
+- [`src/menu.exercise.jsx`](./src/menu.exercise.jsx)
 
 ## Add search params hook
 
-1. In [src/menu.exercise.jsx](./src/menu.exercise.jsx), import `useSearchParams` from `react-router-dom`.
+1. In [`src/menu.exercise.jsx`](./src/menu.exercise.jsx), import `useSearchParams` from `react-router-dom`.
 2. In the body of the `Menu` component, replace the `URLSearchParams` instantiation with a call to [`useSearchParams`](https://reactrouter.com/en/main/hooks/use-search-params). This hook returns a tuple of the current search params and a set function:
    
    ```javascript
@@ -31,7 +31,7 @@ Now the page should filter menu items by name without reloading the page. Test i
 
 ## Update category filters
 
-1. In [src/category-filters.exercise.jsx](./src/category-filters.exercise.jsx), convert the `<a>` in `MenuItem` to `<Link>`. Remember to change `href` to `to`.
-2. Back in [src/menu.exercise.jsx](./src/menu.exercise.jsx), change that "All" category filter `href` back to `"."`. This should work correctly now that we're using the relative `Link` component.
+1. In [`src/category-filters.exercise.jsx`](./src/category-filters.exercise.jsx), convert the `<a>` in `MenuItem` to `<Link>`. Remember to change `href` to `to`.
+2. Back in [`src/menu.exercise.jsx`](./src/menu.exercise.jsx), change that "All" category filter `href` back to `"."`. This should work correctly now that we're using the relative `Link` component.
 
 Now your category filters should work without reloading the page as well.

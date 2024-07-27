@@ -4,12 +4,12 @@ We've learned that repetitive logic in React components can be expressed as cust
 
 Let's create a custom hook for our fetch logic.
 
-- [src/menu.exercise.jsx](./src/menu.exercise.jsx)
+- [`src/menu.exercise.jsx`](./src/menu.exercise.jsx)
 - [Custom Hooks docs](https://react.dev/learn/reusing-logic-with-custom-hooks)
 
 ## Create the `useFetch` custom hook
 
-1. In [src/menu.exercise.jsx](./src/menu.exercise.jsx), create a function called `useFetch` somewhere outside of the `Menu` component.
+1. In [`src/menu.exercise.jsx`](./src/menu.exercise.jsx), create a function called `useFetch` somewhere outside of the `Menu` component.
 2. Inside this function, create a `status` state and set function with `useState`. Initialize this to `Status.IDLE`.
 3. Next, create a `data` state and setter. **DO NOT** initialize `useState` with a value. 
    

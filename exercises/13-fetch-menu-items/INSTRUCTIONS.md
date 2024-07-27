@@ -4,14 +4,14 @@ Development of our restaurant website has been going well so far, but we still h
 
 Let's celebrate by consuming this API in our `Menu` component 🎉.
 
-- [api/server.js](./api/server.js)
-- [src/menu.exercise.jsx](./src/menu.exercise.jsx)
+- [`api/server.js`](./api/server.js)
+- [`src/menu.exercise.jsx`](./src/menu.exercise.jsx)
 
-1. First, examine [api/server.js](./api/server.js).
+1. First, examine [`api/server.js`](./api/server.js).
 
     This file is where the API is defined. The API is a simple Express server with a handful of endpoints. You can refer to this file for API information going forward.
 
-2. In [src/menu.exercise.jsx](./src/menu.exercise.jsx), convert `items` to component state with `useState`. Initialize it to `[]`.
+2. In [`src/menu.exercise.jsx`](./src/menu.exercise.jsx), convert `items` to component state with `useState`. Initialize it to `[]`.
 3. Under the `items` state, add a `useEffect`. Don't forget to pass the dependency array to the `useEffect`, or else you'll have an infinite rendering loop on your hands by the end of this exercise.
 4. Within the `useEffect`, use [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch) to send a `GET` request to `/api/menu` to retrieve the menu items. You will need to forward any search params along with the API endpoint:
 

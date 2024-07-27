@@ -34,10 +34,10 @@ Lucky for us, React provides a way to directly access the underlying DOM with [`
 
 ## Adding an input ref
 
-- [src/lib/menu/search-form.exercise.jsx](./src/lib/menu/search-form.exercise.jsx)
+- [`src/lib/menu/search-form.exercise.jsx`](./src/lib/menu/search-form.exercise.jsx)
 - [`useRef` docs](https://react.dev/reference/react/useRef)
 
-1. Open [src/lib/menu/search-form.exercise.jsx](./src/lib/menu/search-form.exercise.jsx). Our menu search form has been conveniently moved to a lib in order to make it easier to work on.
+1. Open [`src/lib/menu/search-form.exercise.jsx`](./src/lib/menu/search-form.exercise.jsx). Our menu search form has been conveniently moved to a lib in order to make it easier to work on.
 2. Import `useRef` from `react`.
 3. Inside `SearchForm` create a new variable called `inputRef` and set it equal to `useRef(null)`. 
    

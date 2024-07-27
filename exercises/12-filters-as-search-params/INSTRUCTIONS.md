@@ -2,13 +2,13 @@
 
 Our filters are a hit, but test users want to be able to bookmark their product searches (these are some *really* advanced test users...). We'll do this by lifting filter state into the URL, and in the process, make our logic *much* simpler.
 
-- [src/menu.exercise.jsx](./src/menu.exercise.jsx)
+- [`src/menu.exercise.jsx`](./src/menu.exercise.jsx)
 - [`URLSearchParams` API](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams)
 - [`Location` API](https://developer.mozilla.org/en-US/docs/Web/API/Location)
 
 ## Get search params
 
-1. At the top of the `Menu` component in [src/menu.exercise.jsx](./src/menu.exercise.jsx), create a variable `searchParams` and assign a new `URLSearchParams` instance.
+1. At the top of the `Menu` component in [`src/menu.exercise.jsx`](./src/menu.exercise.jsx), create a variable `searchParams` and assign a new `URLSearchParams` instance.
 2. Pass `window.location.search` to the search params constructor. This will initialize the search params with what is currently in the URL.
 3. Delete the `categoryId` state at the top of the component and instead assign the variable `categoryId` to `searchParams.get('category')`.
 4. Delete the `q` and `query` state and assign the variable `query` to `searchParams.get('q')`.
