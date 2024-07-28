@@ -1,6 +1,4 @@
-// eslint-disable-next-line no-unused-vars -- required for exercise
-import { createContext } from 'react';
-
+// 👋 You'll need to create some context here...
 const CartContext = null;
 
 export { CartContext };
