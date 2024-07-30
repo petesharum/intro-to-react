@@ -4,7 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 
 import { submitOrder } from '@/lib/api';
-import { LineItems, LineItem } from '@/lib/checkout';
+import {
+  CheckoutForm,
+  CheckoutFormSubmit,
+  LineItems,
+  LineItem,
+} from '@/lib/checkout';
 import { pluralize } from '@/lib/pluralize';
 import {
   Field,
@@ -20,7 +25,6 @@ import {
   StickyCardContent,
   StickyCardFooter,
 } from '@/lib/shared-components/sticky-card';
-import { Button } from '@/lib/ui/button';
 import { Separator } from '@/lib/ui/separator';
 import { Title } from '@/lib/shared-components/title';
 import { useCart } from '@/lib/cart-context';
@@ -58,11 +62,7 @@ function Checkout() {
     <Grid>
       <GridColLeft>
         <Title>Checkout</Title>
-        <form
-          className="grid grid-cols-12 gap-x-4 gap-y-8"
-          id="payment-info"
-          onSubmit={handleSubmit}
-        >
+        <CheckoutForm onSubmit={handleSubmit}>
           <Field className="col-span-full">
             <FieldLabel htmlFor="fName">Name</FieldLabel>
             <FieldInput name="fName" id="fName" />
@@ -89,7 +89,7 @@ function Checkout() {
             <FieldLabel htmlFor="postalCode">Postal Code</FieldLabel>
             <FieldInput name="postalCode" id="postalCode" />
           </Field>
-        </form>
+        </CheckoutForm>
       </GridColLeft>
       <GridColRight>
         <StickyCard>
@@ -121,9 +121,9 @@ function Checkout() {
             </Summary>
           </StickyCardContent>
           <StickyCardFooter>
-            <Button form="payment-info" type="submit" isPending={isPending}>
+            <CheckoutFormSubmit isPending={isPending}>
               Place Order {formatMoney(total)}
-            </Button>
+            </CheckoutFormSubmit>
           </StickyCardFooter>
         </StickyCard>
       </GridColRight>
