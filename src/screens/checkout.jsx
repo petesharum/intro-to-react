@@ -30,6 +30,7 @@ import { Title } from '@/lib/shared-components/title';
 import { useCart } from '@/lib/cart-context';
 import { formatMoney } from '@/lib/format-money';
 import { Grid, GridColLeft, GridColRight } from '@/lib/shared-components/grid';
+import { serializeFormData } from '@/lib/serialize-form-data';
 
 function Checkout() {
   const { items, subtotal, tax, total, itemCount, resetCart } = useCart();
@@ -47,7 +48,7 @@ function Checkout() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const payment = Object.fromEntries(formData);
+    const payment = serializeFormData(formData);
 
     mutate({ payment, items });
   };

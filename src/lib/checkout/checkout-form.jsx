@@ -1,11 +1,6 @@
 import { Button } from '@/lib/ui/button';
 
-type CheckoutFormProps = Pick<
-  React.ComponentPropsWithoutRef<'form'>,
-  'children' | 'onSubmit'
->;
-
-function CheckoutForm({ children, onSubmit }: CheckoutFormProps) {
+function CheckoutForm({ children, onSubmit }) {
   return (
     <form
       className="grid grid-cols-12 gap-x-4 gap-y-8"
@@ -17,12 +12,7 @@ function CheckoutForm({ children, onSubmit }: CheckoutFormProps) {
   );
 }
 
-type CheckoutFormSubmitProps = {
-  isPending: boolean;
-  children: React.ReactNode;
-};
-
-function CheckoutFormSubmit({ isPending, children }: CheckoutFormSubmitProps) {
+function CheckoutFormSubmit({ isPending, children }) {
   return (
     <Button form="payment-info" type="submit" isPending={isPending}>
       {children}
