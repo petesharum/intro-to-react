@@ -1,4 +1,4 @@
-# Exercise 3: Modularize the app
+# Exercise 3: Modularize the App
 
 It's helpful to break up your applications into smaller files, or modules. Modules make your code easier to understand by narrowing the scope of concern. Let's break up this app into smaller modules.
 

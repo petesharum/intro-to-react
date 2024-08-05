@@ -1,4 +1,4 @@
-# Exercise 2: Create a component
+# Exercise 2: Create a Component
 
 Currently our app is rendering a simple `h1` element. React's strength is in its ability to group these elements, along with style and behavior, into components. If elements like `h1` are atoms, components can be thought of as molecules, and even sometimes complex organisms.
 

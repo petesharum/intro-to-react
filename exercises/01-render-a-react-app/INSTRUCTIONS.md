@@ -1,4 +1,4 @@
-# Exercise 1: Render a React app
+# Exercise 1: Render a React App
 
 At its core, React is a rendering library. The following exercise demonstrates that absolute minimum amount of work required to render a React app.
 
