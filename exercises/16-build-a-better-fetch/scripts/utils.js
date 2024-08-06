@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import path from 'node:path';
 import cp from 'node:child_process';
 import fs from 'node:fs';
