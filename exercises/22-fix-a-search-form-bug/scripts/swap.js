@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import fs from 'fs';
-import { spawnSync, getVariants, getExtraCreditTitles } from './utils';
+import { spawnSync, getVariants, getExtraCreditTitles } from './utils.js';
 
 const branch = spawnSync('git rev-parse --abbrev-ref HEAD');
 if (branch === 'main') {
