@@ -103,8 +103,6 @@ ${extrasLines}
     );
   }
 
-  console.log(variants);
-
   for (const [main, { final, exercise, extras }] of Object.entries(variants)) {
     const contents = getmainFileContents({ main, final, exercise, extras });
     fs.writeFileSync(main, contents);
