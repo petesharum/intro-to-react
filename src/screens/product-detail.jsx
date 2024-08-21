@@ -1,117 +1,51 @@
-import { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
 
-import { useCart } from '@/lib/cart-context';
 import {
   Breadcrumb,
   BreadcrumbCurrent,
   BreadcrumbSeparator,
   Breadcrumbs,
-  getProductQuery,
 } from '@/lib/product';
 import {
-  Grid,
-  GridColFull,
-  GridColLeft,
-  GridColRight,
-} from '@/lib/shared-components/grid';
-import {
   StickyCard,
-  StickyCardFooter,
   StickyCardHeader,
-  StickyCardContent,
 } from '@/lib/shared-components/sticky-card';
-import { Field, FieldInput, FieldLabel } from '@/lib/shared-components/field';
-import { formatMoney } from '@/lib/format-money';
 import { Title } from '@/lib/shared-components/title';
-import { Button } from '@/lib/ui/button';
 import { Skeleton } from '@/lib/ui/skeleton';
-
-function loader(queryClient) {
-  return async ({ params }) => {
-    try {
-      const product = await queryClient.ensureQueryData(
-        getProductQuery(params.id, queryClient),
-      );
-
-      return product;
-    } catch (error) {
-      throw new Response(error.message, { status: 500 });
-    }
-  };
-}
+import { useFetch, Status } from '@/lib/use-fetch';
 
 function ProductDetail() {
-  const queryClient = useQueryClient();
   const { id } = useParams();
-  const [quantity, setQuantity] = useState(1);
-  const { data: product } = useQuery(getProductQuery(id, queryClient));
-  const { addToCart } = useCart();
-  const navigate = useNavigate();
-
-  const handleAddToCart = (event) => {
-    event.preventDefault();
-    addToCart({ product, quantity });
-    navigate('/menu');
-  };
-
-  const handleQuantityChange = (event) => {
-    setQuantity(+event.target.value);
-  };
+  const { data: product = { name: '', description: '', image: {} }, status } =
+    useFetch(`/api/menu/${id}`);
+  const isPending = status === Status.PENDING;
 
   return (
-    <Grid>
-      <GridColFull>
+    <div className="container grid auto-rows-min grid-cols-12 gap-x-8 gap-y-4 pb-16 pt-8 lg:gap-x-16 lg:gap-y-8">
+      <div className="col-span-12 lg:col-span-10 lg:col-start-2">
         <Breadcrumbs>
           <Breadcrumb href="/menu">Menu</Breadcrumb>
           <BreadcrumbSeparator />
-          <BreadcrumbCurrent>{product?.name}</BreadcrumbCurrent>
+          <BreadcrumbCurrent>{product.name}</BreadcrumbCurrent>
         </Breadcrumbs>
-      </GridColFull>
-      <GridColLeft>
-        {!product ? (
+      </div>
+      <div className="col-span-7 lg:col-span-6 lg:col-start-2">
+        {isPending ? (
           <Skeleton className="aspect-square w-full" />
         ) : (
           <img src={`/images/${product.image.url}`} alt={product.image.alt} />
         )}
-      </GridColLeft>
-      <GridColRight>
-        <StickyCard isPending={!product}>
+      </div>
+      <div className="col-span-5 lg:col-span-4 lg:col-start-8">
+        <StickyCard isPending={isPending}>
           <StickyCardHeader>
             <Title>{product.name}</Title>
             <p>{product.description}</p>
           </StickyCardHeader>
-          <StickyCardContent>
-            <form id="add-to-cart" onSubmit={handleAddToCart}>
-              <Field>
-                <FieldLabel htmlFor="quantity">Quantity</FieldLabel>
-                <FieldInput
-                  name="quantity"
-                  id="quantity"
-                  type="number"
-                  step="1"
-                  min="1"
-                  value={quantity}
-                  onChange={handleQuantityChange}
-                />
-              </Field>
-            </form>
-          </StickyCardContent>
-          <StickyCardFooter>
-            <Button
-              className="bg-red-600 py-4 text-base font-bold hover:bg-red-700"
-              type="submit"
-              form="add-to-cart"
-            >
-              Add to Cart {formatMoney(quantity * product.price)}
-            </Button>
-          </StickyCardFooter>
         </StickyCard>
-      </GridColRight>
-    </Grid>
+      </div>
+    </div>
   );
 }
-ProductDetail.loader = loader;
 
 export { ProductDetail };
