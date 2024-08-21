@@ -1,8 +1,5 @@
 import { Link, Outlet } from 'react-router-dom';
 
-import { Toaster } from '@/lib/ui/sonner';
-import { useCart } from '@/lib/cart-context';
-
 function CartIcon({ className }) {
   return (
     <svg
@@ -16,9 +13,7 @@ function CartIcon({ className }) {
   );
 }
 
-function GlobalLayout() {
-  const { itemCount } = useCart();
-
+function GlobalLayout({ itemCount = 0 }) {
   return (
     <div className="grid h-screen grid-rows-[auto_1fr_auto] gap-x-8">
       <header className="sticky top-0 border-b-4 border-foreground bg-white">
@@ -68,7 +63,6 @@ function GlobalLayout() {
           Copyright © Yummy! Foods 2024
         </div>
       </footer>
-      <Toaster position="top-right" />
     </div>
   );
 }

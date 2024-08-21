@@ -1,14 +1,11 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { useCart } from '@/lib/cart-context';
 import {
   Breadcrumb,
   BreadcrumbCurrent,
   BreadcrumbSeparator,
   Breadcrumbs,
-  getProductQuery,
 } from '@/lib/product';
 import {
   Grid,
@@ -27,27 +24,14 @@ import { formatMoney } from '@/lib/format-money';
 import { Title } from '@/lib/shared-components/title';
 import { Button } from '@/lib/ui/button';
 import { Skeleton } from '@/lib/ui/skeleton';
+import { useFetch, Status } from '@/lib/use-fetch';
 
-function loader(queryClient) {
-  return async ({ params }) => {
-    try {
-      const product = await queryClient.ensureQueryData(
-        getProductQuery(params.id, queryClient),
-      );
-
-      return product;
-    } catch (error) {
-      throw new Response(error.message, { status: 500 });
-    }
-  };
-}
-
-function ProductDetail() {
-  const queryClient = useQueryClient();
+function ProductDetail({ addToCart }) {
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
-  const { data: product } = useQuery(getProductQuery(id, queryClient));
-  const { addToCart } = useCart();
+  const { data: product = { name: '', description: '', image: {} }, status } =
+    useFetch(`/api/menu/${id}`);
+  const isPending = status === Status.PENDING;
   const navigate = useNavigate();
 
   const handleAddToCart = (event) => {
@@ -66,18 +50,18 @@ function ProductDetail() {
         <Breadcrumbs>
           <Breadcrumb href="/menu">Menu</Breadcrumb>
           <BreadcrumbSeparator />
-          <BreadcrumbCurrent>{product?.name}</BreadcrumbCurrent>
+          <BreadcrumbCurrent>{product.name}</BreadcrumbCurrent>
         </Breadcrumbs>
       </GridColFull>
       <GridColLeft>
-        {!product ? (
+        {isPending ? (
           <Skeleton className="aspect-square w-full" />
         ) : (
           <img src={`/images/${product.image.url}`} alt={product.image.alt} />
         )}
       </GridColLeft>
       <GridColRight>
-        <StickyCard isPending={!product}>
+        <StickyCard isPending={isPending}>
           <StickyCardHeader>
             <Title>{product.name}</Title>
             <p>{product.description}</p>
@@ -112,6 +96,5 @@ function ProductDetail() {
     </Grid>
   );
 }
-ProductDetail.loader = loader;
 
 export { ProductDetail };
